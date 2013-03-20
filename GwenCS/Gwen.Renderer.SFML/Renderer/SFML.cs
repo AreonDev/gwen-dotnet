@@ -43,7 +43,7 @@ namespace Gwen.Renderer
         {
             base.Begin();
             var port = m_Target.GetViewport(m_Target.GetView());
-            var scaled = m_Target.ConvertCoords(new Vector2i(port.Width, port.Height));
+            var scaled = m_Target.MapPixelToCoords(new Vector2i(port.Width, port.Height));
             m_ViewScale.X = (port.Width/scaled.X)*Scale;
             m_ViewScale.Y = (port.Height/scaled.Y)*Scale;
         }

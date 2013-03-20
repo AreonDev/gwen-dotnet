@@ -134,7 +134,7 @@ namespace Gwen.Input
 
                 if (m_Target != null)
                 {
-                    Vector2f coord = m_Target.ConvertCoords(new Vector2i(ev.X, ev.Y));
+                    Vector2f coord = m_Target.MapPixelToCoords(new Vector2i(ev.X, ev.Y));
                     ev.X = (int)Math.Floor(coord.X);
                     ev.Y = (int)Math.Floor(coord.Y);
                 }

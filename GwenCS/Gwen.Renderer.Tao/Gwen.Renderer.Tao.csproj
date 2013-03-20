@@ -52,8 +52,8 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
-    <Reference Include="Tao.OpenGl">
-      <HintPath>..\..\SFML2\bindings\dotnet\lib\x86\Tao.OpenGl.dll</HintPath>
+    <Reference Include="Tao.OpenGl, Version=2.1.0.12, Culture=neutral, PublicKeyToken=1ca010269a4501ef, processorArchitecture=MSIL">
+      <HintPath>..\lib\Tao\Tao.OpenGl.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
