@@ -102,7 +102,8 @@ namespace Gwen.UnitTest
             height.ValueChanged += HeightChanged;
             Align.PlaceRightBottom(height, l_height);
 
-            Control.RadioButtonGroup dock = new RadioButtonGroup(gb, "Dock");
+            Control.RadioButtonGroup dock = new RadioButtonGroup(gb);
+			dock.Text = "Dock";
             dock.UserData = subject; // store control that we are controlling
             dock.AddOption("Left");
             dock.AddOption("Top");

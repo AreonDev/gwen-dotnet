@@ -80,8 +80,7 @@ namespace Gwen.Control.Layout
         /// <param name="width">Column width.</param>
         public void SetColumnWidth(int column, int width)
         {
-            if (m_ColumnWidth[column] == width) 
-                return;
+            if (m_ColumnWidth[column] == width) return;
             m_ColumnWidth[column] = width;
             Invalidate();
         }

@@ -100,7 +100,7 @@ namespace Gwen.Control
         /// <summary>
         /// Disables resizing.
         /// </summary>
-        public void DisableResizing()
+        public virtual void DisableResizing()
         {
             for (int i = 0; i < 10; i++)
             {

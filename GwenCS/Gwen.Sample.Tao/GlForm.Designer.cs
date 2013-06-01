@@ -29,40 +29,44 @@ namespace Gwen.Sample.Tao
         /// </summary>
         private void InitializeComponent()
         {
-            this.glControl = new global::Tao.Platform.Windows.SimpleOpenGlControl();
-            this.SuspendLayout();
-            // 
-            // glControl
-            // 
-            this.glControl.AccumBits = ((byte)(0));
-            this.glControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.glControl.AutoCheckErrors = false;
-            this.glControl.AutoFinish = false;
-            this.glControl.AutoMakeCurrent = true;
-            this.glControl.AutoSwapBuffers = true;
-            this.glControl.BackColor = System.Drawing.Color.Black;
-            this.glControl.ColorBits = ((byte)(32));
-            this.glControl.DepthBits = ((byte)(16));
-            this.glControl.Location = new System.Drawing.Point(2, -1);
-            this.glControl.Name = "glControl";
-            this.glControl.Size = new System.Drawing.Size(1024, 768);
-            this.glControl.StencilBits = ((byte)(0));
-            this.glControl.TabIndex = 0;
-            this.glControl.Paint += new System.Windows.Forms.PaintEventHandler(this.glControl_Paint);
-            // 
-            // GlForm
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(763, 527);
-            this.Controls.Add(this.glControl);
-            this.Name = "GlForm";
-            this.Text = "GWEN.NET - Tao.OpenGL renderer";
-            this.Load += new System.EventHandler(this.GlForm_Load);
-            this.Resize += new System.EventHandler(this.GlForm_Resize);
-            this.ResumeLayout(false);
+			this.glControl = new global::Tao.Platform.Windows.SimpleOpenGlControl();
+			this.SuspendLayout();
+			// 
+			// glControl
+			// 
+			this.glControl.AccumBits = ((byte)(0));
+			this.glControl.AutoCheckErrors = false;
+			this.glControl.AutoFinish = false;
+			this.glControl.AutoMakeCurrent = true;
+			this.glControl.AutoSwapBuffers = true;
+			this.glControl.BackColor = System.Drawing.Color.Black;
+			this.glControl.ColorBits = ((byte)(32));
+			this.glControl.DepthBits = ((byte)(16));
+			this.glControl.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.glControl.Location = new System.Drawing.Point(0, 0);
+			this.glControl.Name = "glControl";
+			this.glControl.Size = new System.Drawing.Size(763, 527);
+			this.glControl.StencilBits = ((byte)(0));
+			this.glControl.TabIndex = 0;
+			this.glControl.Paint += new System.Windows.Forms.PaintEventHandler(this.glControl_Paint);
+			this.glControl.KeyDown += new System.Windows.Forms.KeyEventHandler(this.glControl_KeyDown);
+			this.glControl.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.glControl_KeyPress);
+			this.glControl.KeyUp += new System.Windows.Forms.KeyEventHandler(this.glControl_KeyUp);
+			this.glControl.MouseDown += new System.Windows.Forms.MouseEventHandler(this.glControl_MouseDown);
+			this.glControl.MouseMove += new System.Windows.Forms.MouseEventHandler(this.glControl_MouseMove);
+			this.glControl.MouseUp += new System.Windows.Forms.MouseEventHandler(this.glControl_MouseUp);
+			// 
+			// GlForm
+			// 
+			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.ClientSize = new System.Drawing.Size(763, 527);
+			this.Controls.Add(this.glControl);
+			this.Name = "GlForm";
+			this.Text = "GWEN.NET - Tao.OpenGL renderer";
+			this.Load += new System.EventHandler(this.GlForm_Load);
+			this.Resize += new System.EventHandler(this.GlForm_Resize);
+			this.ResumeLayout(false);
 
         }
 

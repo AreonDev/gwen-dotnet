@@ -28,7 +28,7 @@ namespace Gwen.UnitTest
         void OpenWindow(Base control)
         {
             Control.WindowControl window = new Control.WindowControl(GetCanvas());
-            window.Caption = String.Format("Window {0}", m_WindowCount);
+            window.Title = String.Format("Window {0}", m_WindowCount);
             window.SetSize(rand.Next(200, 400), rand.Next(200, 400));
             window.SetPosition(rand.Next(700), rand.Next(400));
 

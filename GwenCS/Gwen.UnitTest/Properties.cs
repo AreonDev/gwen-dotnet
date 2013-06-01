@@ -44,7 +44,7 @@ namespace Gwen.UnitTest
                     props.Add("More Items");
                     props.Add("Bacon", new Control.Property.Check(props), "1");
                     props.Add("To Fill");
-                    props.Add("Colour", new Control.Property.Color(props), "255 0 0");
+                    props.Add("Color", new Control.Property.Color(props), "255 0 0");
                     props.Add("Out Here");
                 }
 

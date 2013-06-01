@@ -129,6 +129,75 @@ namespace Gwen.UnitTest
 
                 table.SizeToContents(0);
             }
+
+			/* Selecting Rows in Code */
+			{
+				Control.ListBox ctrl = new Control.ListBox(this);
+				ctrl.SetPosition(10, 320);
+
+				ListBoxRow Row = ctrl.AddRow("Row");
+				ctrl.AddRow("Text");
+				ctrl.AddRow("InternalName", "Name");
+				ctrl.AddRow("UserData", "Internal", 12);
+
+				ctrl.SizeToContents();
+
+				Control.CheckBox Multiline = new Control.CheckBox(this);
+				Multiline.SetPosition(10, 405);
+				Multiline.CheckChanged += delegate(Base sender) {
+					ctrl.AllowMultiSelect = Multiline.IsChecked;
+				};
+
+				Control.Label lblml = new Control.Label(this);
+				lblml.Text = "Enable MultiSelect";
+				lblml.AutoSizeToContents = true;
+				lblml.SetPosition(30, 405);
+				
+
+				//Select by Menu Item
+				{
+					Control.Button TriangleButton = new Control.Button(this);
+					TriangleButton.SetPosition(100, 320);
+					TriangleButton.Text = "Row";
+					TriangleButton.Width = 100;
+					TriangleButton.Clicked += delegate(Base sender) {
+						ctrl.SelectedRow = Row;
+					};
+				}
+
+				//Select by Text
+				{
+					Control.Button TestBtn = new Control.Button(this);
+					TestBtn.SetPosition(100, 340);
+					TestBtn.Text = "Text";
+					TestBtn.Width = 100;
+					TestBtn.Clicked += delegate(Base sender) {
+						ctrl.SelectByText("Text");
+					};
+				}
+
+				//Select by Name
+				{
+					Control.Button TestBtn = new Control.Button(this);
+					TestBtn.SetPosition(100, 360);
+					TestBtn.Text = "Name";
+					TestBtn.Width = 100;
+					TestBtn.Clicked += delegate(Base sender) {
+						ctrl.SelectByName("Name");
+					};
+				}
+
+				//Select by UserData
+				{
+					Control.Button TestBtn = new Control.Button(this);
+					TestBtn.SetPosition(100, 380);
+					TestBtn.Text = "UserData";
+					TestBtn.Width = 100;
+					TestBtn.Clicked += delegate(Base sender) {
+						ctrl.SelectByUserData(12);
+					};
+				}
+			}
         }
 
         void RowSelected(Base control)

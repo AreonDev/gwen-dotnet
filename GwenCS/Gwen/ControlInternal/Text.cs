@@ -169,17 +169,37 @@ namespace Gwen.ControlInternal
         /// </summary>
         /// <param name="index">Character index.</param>
         /// <returns>Character position in local coordinates.</returns>
-        public Point GetCharacterPosition(int index)
+        public Point GetCharacterPosition(int index, bool Multiline = false)
         {
             if (Length == 0 || index == 0)
             {
                 return new Point(0, 0);
             }
 
-            String sub = (TextOverride ?? String).Substring(0, index);
-            Point p = Skin.Renderer.MeasureText(Font, sub);
+			if(!Multiline) {
+				String sub = (TextOverride ?? String).Substring(0, index);
+				Point p = Skin.Renderer.MeasureText(Font, sub);
 
-            return p;
+				//if(p.Y >= Font.Size)
+				//	p = new Point(p.X, p.Y - Font.Size);
+				p.Y = 0;
+
+				return p;
+			} else {
+				String str = (TextOverride ?? String).Substring(0, index);
+				int curr_line_begin = str.LastIndexOf('\n');
+				if(curr_line_begin == -1) {
+					curr_line_begin = 0;
+				}
+				int sizeofl = Skin.Renderer.MeasureText(Font, "l").X;
+				Point p = Skin.Renderer.MeasureText(Font, (str + "l").Substring(curr_line_begin, index - curr_line_begin));
+				//p.X -= sizeofl;
+
+				int numberofnewlines = str.Length - str.Replace("\n", "").Length;
+				p.Y = (Font.Size * (numberofnewlines));
+
+				return new Point(p.X, p.Y);
+			}
         }
 
         /// <summary>
@@ -195,7 +215,7 @@ namespace Gwen.ControlInternal
             for (int i = 0; i < String.Length + 1; i++)
             {
                 Point cp = GetCharacterPosition(i);
-                int dist = Math.Abs(cp.X - p.X); // TODO: handle multiline
+                int dist = Math.Abs(cp.X - p.X) + Math.Abs(cp.Y - p.Y); // this isn't proper // [omeg] todo: sqrt
 
                 if (dist > distance) 
                     continue;

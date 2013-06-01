@@ -40,12 +40,11 @@ namespace Gwen.Control
         /// </summary>
         /// <param name="parent">Parent control.</param>
         /// <param name="label">Label for the outlining GroupBox.</param>
-        public RadioButtonGroup(Base parent, String label)
-            : base(parent)
+        public RadioButtonGroup(Base parent) : base(parent)
         {
             IsTabable = false;
             KeyboardInputEnabled = true;
-            Text = label;
+            Text = String.Empty;
             AutoSizeToContents = true;
         }
 

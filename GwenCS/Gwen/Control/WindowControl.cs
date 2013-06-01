@@ -11,7 +11,7 @@ namespace Gwen.Control
     public class WindowControl : ResizableControl
     {
         private readonly Dragger m_TitleBar;
-        private readonly Label m_Caption;
+        private readonly Label m_Title;
         private readonly CloseButton m_CloseButton;
         private bool m_DeleteOnClose;
         private Modal m_Modal;
@@ -19,7 +19,7 @@ namespace Gwen.Control
         /// <summary>
         /// Window caption.
         /// </summary>
-        public String Caption { get { return m_Caption.Text; } set { m_Caption.Text = value; } }
+        public String Title { get { return m_Title.Text; } set { m_Title.Text = value; } }
 
         /// <summary>
         /// Determines whether the window has close button.
@@ -45,13 +45,17 @@ namespace Gwen.Control
             }
         }
 
+		public void ToggleHidden() {
+			IsHidden = !IsHidden;
+		}
+
         /// <summary>
         /// Initializes a new instance of the <see cref="WindowControl"/> class.
         /// </summary>
         /// <param name="parent">Parent control.</param>
         /// <param name="caption">Window caption.</param>
         /// <param name="modal">Determines whether the window should be modal.</param>
-        public WindowControl(Base parent, String caption = "", bool modal = false)
+        public WindowControl(Base parent, String title = "", bool modal = false)
             : base(parent)
         {
             m_TitleBar = new Dragger(this);
@@ -61,15 +65,14 @@ namespace Gwen.Control
             m_TitleBar.Target = this;
             m_TitleBar.Dock = Pos.Top;
 
-            m_Caption = new Label(m_TitleBar);
-            m_Caption.Alignment = Pos.Left | Pos.CenterV;
-            m_Caption.Text = caption;
-            m_Caption.Dock = Pos.Fill;
-            m_Caption.Padding = new Padding(8, 0, 0, 0);
-            m_Caption.TextColor = Skin.Colors.Window.TitleInactive;
+            m_Title = new Label(m_TitleBar);
+			m_Title.Alignment = Pos.Left | Pos.CenterV;
+			m_Title.Text = title;
+			m_Title.Dock = Pos.Fill;
+			m_Title.Padding = new Padding(8, 4, 0, 0);
+			m_Title.TextColor = Skin.Colors.Window.TitleInactive;
 
             m_CloseButton = new CloseButton(m_TitleBar, this);
-            //m_CloseButton.Text = String.Empty;
             m_CloseButton.SetSize(24, 24);
             m_CloseButton.Dock = Pos.Right;
             m_CloseButton.Clicked += CloseButtonPressed;
@@ -90,6 +93,15 @@ namespace Gwen.Control
             if (modal)
                 MakeModal();
         }
+
+		public override void DisableResizing() {
+			base.DisableResizing();
+			Padding = new Padding(6, 0, 6, 0);
+		}
+
+		public void Close() {
+			CloseButtonPressed(this);
+		}
 
         protected virtual void CloseButtonPressed(Base control)
         {
@@ -142,9 +154,9 @@ namespace Gwen.Control
             bool hasFocus = IsOnTop;
 
             if (hasFocus)
-                m_Caption.TextColor = Skin.Colors.Window.TitleActive;
+				m_Title.TextColor = Skin.Colors.Window.TitleActive;
             else
-                m_Caption.TextColor = Skin.Colors.Window.TitleInactive;
+				m_Title.TextColor = Skin.Colors.Window.TitleInactive;
 
             skin.DrawWindow(this, m_TitleBar.Bottom, hasFocus);
         }

@@ -98,6 +98,7 @@ namespace Gwen.Renderer
             if (m_RestoreRenderState)
             {
                 GL.BindTexture(TextureTarget.Texture2D, 0);
+				m_LastTextureID = 0;
 
                 // Restore the previous parameter values.
                 GL.BlendFunc((BlendingFactorSrc)m_PrevBlendSrc, (BlendingFactorDest)m_PrevBlendDst);
@@ -462,7 +463,10 @@ namespace Gwen.Renderer
 
             // Create the opengl texture
             GL.GenTextures(1, out glTex);
+
             GL.BindTexture(TextureTarget.Texture2D, glTex);
+			m_LastTextureID = glTex;
+
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.Nearest);
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Nearest);
 
@@ -484,8 +488,6 @@ namespace Gwen.Renderer
             }
 
             bmp.UnlockBits(data);
-
-            m_LastTextureID = glTex;
         }
 
         public override void LoadTexture(Texture t)
@@ -524,41 +526,44 @@ namespace Gwen.Renderer
 
         public override void LoadTextureRaw(Texture t, byte[] pixelData)
         {
-            Bitmap bmp;
-            try
-            {
-                unsafe
-                {
-                    fixed (byte* ptr = &pixelData[0])
-                        bmp = new Bitmap(t.Width, t.Height, 4 * t.Width, PixelFormat.Format32bppArgb, (IntPtr)ptr);
-                }
-            }
-            catch (Exception)
-            {
-                t.Failed = true;
-                return;
-            }
+			Bitmap bmp;
+			try {
+				unsafe {
+					fixed (byte* ptr = &pixelData[0])
+						bmp = new Bitmap(t.Width, t.Height, 4 * t.Width, PixelFormat.Format32bppArgb, (IntPtr)ptr);
+				}
+			} catch (Exception) {
+				t.Failed = true;
+				return;
+			}
 
-            int glTex;
+			int glTex;
 
-            // Create the opengl texture
-            GL.GenTextures(1, out glTex);
-            GL.BindTexture(TextureTarget.Texture2D, glTex);
-            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMagFilter.Nearest);
-            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Nearest);
+			// Create the opengl texture
+			GL.GenTextures(1, out glTex);
 
-            // Sort out our GWEN texture
-            t.RendererData = glTex;
+			GL.BindTexture(TextureTarget.Texture2D, glTex);
 
-            var data = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.ReadOnly,
-                PixelFormat.Format32bppArgb);
+			GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMagFilter.Nearest);
+			GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Nearest);
 
-            GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba, t.Width, t.Height, 0, global::OpenTK.Graphics.OpenGL.PixelFormat.Rgba, PixelType.UnsignedByte, data.Scan0);
+			// Sort out our GWEN texture
+			t.RendererData = glTex;
 
-            m_LastTextureID = glTex;
+			var data = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.ReadOnly,
+				PixelFormat.Format32bppArgb);
 
-            bmp.UnlockBits(data);
-            bmp.Dispose();
+			GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba, t.Width, t.Height, 0, global::OpenTK.Graphics.OpenGL.PixelFormat.Rgba, PixelType.UnsignedByte, data.Scan0);
+
+			bmp.UnlockBits(data);
+			bmp.Dispose();
+
+			//Must rebind previous texture, to ensure creating a texture doesn't mess with the render flow.
+			// Setting m_LastTextureID isn't working, for some reason (even if you always rebind the texture,
+			// even if the previous one was the same), we are probably making draw calls where we shouldn't be?
+			// Eventually the bug needs to be fixed (color picker in a window causes graphical errors), but for now,
+			// this is fine.  - halfofastaple
+			GL.BindTexture(TextureTarget.Texture2D, m_LastTextureID);
         }
 
         public override void FreeTexture(Texture t)
@@ -582,7 +587,10 @@ namespace Gwen.Renderer
                 return defaultColor;
 
             Color pixel;
+
             GL.BindTexture(TextureTarget.Texture2D, tex);
+			m_LastTextureID = tex;
+
             long offset = 4 * (x + y * texture.Width);
             byte[] data = new byte[4 * texture.Width * texture.Height];
             fixed (byte* ptr = &data[0])
@@ -590,10 +598,16 @@ namespace Gwen.Renderer
                 GL.GetTexImage(TextureTarget.Texture2D, 0, global::OpenTK.Graphics.OpenGL.PixelFormat.Rgba, PixelType.UnsignedByte, (IntPtr)ptr);
                 pixel = Color.FromArgb(data[offset + 3], data[offset + 0], data[offset + 1], data[offset + 2]);
             }
-            // Retrieving the entire texture for a single pixel read
+
+            //Retrieving the entire texture for a single pixel read
             // is kind of a waste - maybe cache this pointer in the texture
             // data and then release later on? It's never called during runtime
             // - only during initialization.
+
+			//RE: It's not really a waste if it's only done once on load.
+			// Despite, it's worth looking into, just in case a user
+			// wishes to hack their code together and use this function at
+			// runtime - halfofastaple
             return pixel;
         }
     }

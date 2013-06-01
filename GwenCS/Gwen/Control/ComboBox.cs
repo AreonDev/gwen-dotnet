@@ -51,7 +51,15 @@ namespace Gwen.Control
         /// Selected item.
         /// </summary>
         /// <remarks>Not just String property, because items also have internal names.</remarks>
-        public Label SelectedItem { get { return m_SelectedItem; } }
+        public MenuItem SelectedItem { 
+			get { return m_SelectedItem; }
+			set {
+				if (value != null && value.Parent == m_Menu) {
+					m_SelectedItem = value;
+					OnItemSelected(m_SelectedItem);
+				}
+			}
+		}
 
         internal override bool IsMenuComponent
         {
@@ -64,11 +72,12 @@ namespace Gwen.Control
         /// <param name="label">Item label (displayed).</param>
         /// <param name="name">Item name.</param>
         /// <returns>Newly created control.</returns>
-        public virtual MenuItem AddItem(String label, String name = "")
+        public virtual MenuItem AddItem(String label, String name = "", object UserData = null)
         {
             MenuItem item = m_Menu.AddItem(label, String.Empty);
             item.Name = name;
             item.Selected += OnItemSelected;
+			item.UserData = UserData;
 
             if (m_SelectedItem == null)
                 OnItemSelected(item);
@@ -84,6 +93,11 @@ namespace Gwen.Control
         {
             skin.DrawComboBox(this, IsDepressed, IsOpen);
         }
+
+		public override void Disable() {
+			base.Disable();
+			GetCanvas().CloseMenus();
+		}
 
         /// <summary>
         /// Internal Pressed implementation.
@@ -121,19 +135,21 @@ namespace Gwen.Control
         /// <param name="control">Event source.</param>
         protected virtual void OnItemSelected(Base control)
         {
-            //Convert selected to a menu item
-            MenuItem item = control as MenuItem;
-            if (null == item) return;
+			if(!IsDisabled) {
+				//Convert selected to a menu item
+				MenuItem item = control as MenuItem;
+				if(null == item) return;
 
-            m_SelectedItem = item;
-            Text = m_SelectedItem.Text;
-            m_Menu.IsHidden = true;
+				m_SelectedItem = item;
+				Text = m_SelectedItem.Text;
+				m_Menu.IsHidden = true;
 
-            if (ItemSelected != null)
-                ItemSelected.Invoke(this);
+				if(ItemSelected != null)
+					ItemSelected.Invoke(this);
 
-            Focus();
-            Invalidate();
+				Focus();
+				Invalidate();
+			}
         }
 
         /// <summary>
@@ -168,15 +184,17 @@ namespace Gwen.Control
         /// </summary>
         public virtual void Open()
         {
-            if (null == m_Menu) return;
+			if(!IsDisabled) {
+				if(null == m_Menu) return;
 
-            m_Menu.Parent = GetCanvas();
-            m_Menu.IsHidden = false;
-            m_Menu.BringToFront();
+				m_Menu.Parent = GetCanvas();
+				m_Menu.IsHidden = false;
+				m_Menu.BringToFront();
 
-            Point p = LocalPosToCanvas(Point.Empty);
+				Point p = LocalPosToCanvas(Point.Empty);
 
-            m_Menu.SetBounds(new Rectangle(p.X, p.Y + Height, Width, m_Menu.Height));
+				m_Menu.SetBounds(new Rectangle(p.X, p.Y + Height, Width, m_Menu.Height));
+			}
         }
 
         /// <summary>
@@ -230,9 +248,56 @@ namespace Gwen.Control
         /// Renders the focus overlay.
         /// </summary>
         /// <param name="skin">Skin to use.</param>
-        protected override void RenderFocus(Skin.Base skin)
-        {
-            
-        }
-    }
+		protected override void RenderFocus(Skin.Base skin) {
+
+		}		
+
+		/// <summary>
+		/// Selects the first menu item with the given text it finds. 
+		/// If a menu item can not be found that matches input, nothing happens.
+		/// </summary>
+		/// <param name="label">The label to look for, this is what is shown to the user.</param>
+		public void SelectByText(string text) {
+			foreach (MenuItem item in m_Menu.Children) {
+				if (item.Text == text) {
+					SelectedItem = item;
+					return;
+				}
+			}
+		}
+
+		/// <summary>
+		/// Selects the first menu item with the given internal name it finds.
+		/// If a menu item can not be found that matches input, nothing happens.
+		/// </summary>
+		/// <param name="name">The internal name to look for. To select by what is displayed to the user, use "SelectByText".</param>
+		public void SelectByName(string name) {
+			foreach (MenuItem item in m_Menu.Children) {
+				if (item.Name == name) {
+					SelectedItem = item;
+					return;
+				}
+			}
+		}
+
+		/// <summary>
+		/// Selects the first menu item with the given user data it finds.
+		/// If a menu item can not be found that matches input, nothing happens.
+		/// </summary>
+		/// <param name="userdata">The UserData to look for. The equivalency check uses "param.Equals(item.UserData)".
+		/// If null is passed in, it will look for null/unset UserData.</param>
+		public void SelectByUserData(object userdata) {
+			foreach (MenuItem item in m_Menu.Children) {
+				if (userdata == null) {
+					if (item.UserData == null){
+						SelectedItem = item;
+						return;
+					}
+				} else if (userdata.Equals(item.UserData)) {
+					SelectedItem = item;
+					return;
+				}
+			}
+		}
+	}
 }

@@ -12,6 +12,24 @@ namespace Gwen.Control
         private bool m_CanScrollV;
         private bool m_AutoHideBars;
 
+		public int VerticalScroll {
+			get {
+				return m_InnerPanel.Y;
+			}
+		}
+
+		public int HorizontalScroll {
+			get {
+				return m_InnerPanel.X;
+			}
+		}
+
+		public Base InnerPanel{
+			get {
+				return m_InnerPanel;
+			}
+		}
+
         private readonly ScrollBar m_VerticalScrollBar;
         private readonly ScrollBar m_HorizontalScrollBar;
 
@@ -195,7 +213,7 @@ namespace Gwen.Control
 
         public virtual void UpdateScrollBars()
         {
-            if (null == m_InnerPanel)
+            if (m_InnerPanel == null)
                 return;
 
             //Get the max size of all our children together

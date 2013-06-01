@@ -144,7 +144,12 @@ namespace Gwen.Control
 
         private void UpdateControls(Color color)
         {
-            // What in the FUCK
+			// Don't say fuck in open source code, people find it (like me) - halfofastaple
+
+			// TODO: Make this code safer.
+			// This code SHOULD (in theory) never crash/not work as intended, but referencing children by their name is unsafe.
+			// Instead, a direct reference to their objects should be maintained. Worst case scenario, we grab the wrong "RedBox".
+			// - halfofastaple
 
             TextBoxNumeric redBox = FindChildByName("RedBox", false) as TextBoxNumeric;
             if (redBox != null)

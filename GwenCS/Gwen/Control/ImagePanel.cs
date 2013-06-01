@@ -22,7 +22,7 @@ namespace Gwen.Control
             m_uv = new float[4];
             m_Texture = new Texture(Skin.Renderer);
             SetUV(0, 0, 1, 1);
-            MouseInputEnabled = false;
+            MouseInputEnabled = true;
             m_DrawColor = Color.White;
         }
 
@@ -73,5 +73,68 @@ namespace Gwen.Control
         {
             SetSize(m_Texture.Width, m_Texture.Height);
         }
+
+		/// <summary>
+		/// Invoked when the Image Panel is released.
+		/// </summary>
+		public event GwenEventHandler Clicked;
+
+		/// <summary>
+		/// "Clicks" the button.
+		/// </summary>
+		public virtual void Press(Base control = null) {
+			OnClicked();
+		}
+
+		/// <summary>
+		/// Handler invoked on mouse click (left) event.
+		/// </summary>
+		/// <param name="x">X coordinate.</param>
+		/// <param name="y">Y coordinate.</param>
+		/// <param name="down">If set to <c>true</c> mouse button is down.</param>
+		protected override void OnMouseClickedLeft(int x, int y, bool down) {
+			//base.OnMouseClickedLeft(x, y, down);
+			if (IsHovered && down) {
+				OnClicked();
+			}
+
+			Redraw();
+		}
+
+		/// <summary>
+		/// Internal OnPressed implementation.
+		/// </summary>
+		protected virtual void OnClicked() {
+			if (Clicked != null)
+				Clicked.Invoke(this);
+		}
+
+		/// <summary>
+		/// Control has been clicked - invoked by input system. Windows use it to propagate activation.
+		/// </summary>
+		public override void Touch() {
+			base.Touch();
+			OnClicked();
+		}
+
+		/// <summary>
+		/// Handler for Space keyboard event.
+		/// </summary>
+		/// <param name="down">Indicates whether the key was pressed or released.</param>
+		/// <returns>
+		/// True if handled.
+		/// </returns>
+		protected override bool OnKeySpace(bool down) {
+			if (down)
+				OnClicked();
+			return true;
+		}
+
+		/// <summary>
+		/// Default accelerator handler.
+		/// </summary>
+		protected override void OnAccelerator() {
+			OnClicked();
+		}
     }
 }

@@ -527,7 +527,7 @@ namespace Gwen.Control
         /// <summary>
         /// Disables the control.
         /// </summary>
-        public void Disable()
+        public virtual void Disable()
         {
             IsDisabled = true;
         }
@@ -2120,5 +2120,17 @@ namespace Gwen.Control
         {
             Animation.Add(this, new Anim.Size.Height(Height, 0, length, hide, delay, ease));
         }
+
+		public void FitChildrenToSize() {
+			foreach(Base child in Children) {
+				//push them back into view if they are outside it
+				child.X = Math.Min(Bounds.Width, child.X + child.Width) - child.Width;
+				child.Y = Math.Min(Bounds.Height, child.Y + child.Height) - child.Height;
+
+				//Non-negative has priority, so do it second.
+				child.X = Math.Max(0, child.X);
+				child.Y = Math.Max(0, child.Y);
+			}
+		}
     }
 }

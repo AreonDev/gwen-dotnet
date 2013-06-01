@@ -23,14 +23,14 @@ namespace Gwen.UnitTest
             }
 
             {
-                // Empty..
+                // Empty
                 Control.ComboBox combo = new Control.ComboBox(this);
                 combo.SetPosition(50, 80);
                 combo.Width = 200;
             }
 
             {
-                // Empty..
+				// Lots of things
                 Control.ComboBox combo = new Control.ComboBox(this);
                 combo.SetPosition(50, 110);
                 combo.Width = 200;
@@ -40,6 +40,64 @@ namespace Gwen.UnitTest
 
                 combo.ItemSelected += OnComboSelect;
             }
+
+			{
+				// In-Code Item Change
+				Control.ComboBox combo = new Control.ComboBox(this);
+				combo.SetPosition(50, 140);
+				combo.Width = 200;
+
+				MenuItem Triangle = combo.AddItem("Triangle");
+				combo.AddItem("Red", "color");
+				combo.AddItem("Apple", "fruit");
+				combo.AddItem("Blue", "color");
+				combo.AddItem("Green", "color", 12);
+				combo.ItemSelected += OnComboSelect;
+
+				//Select by Menu Item
+				{
+					Control.Button TriangleButton = new Control.Button(this);
+					TriangleButton.SetPosition(255, 140);
+					TriangleButton.Text = "Triangle";
+					TriangleButton.Width = 100;
+					TriangleButton.Clicked += delegate(Base sender) {
+						combo.SelectedItem = Triangle;
+					};
+				}
+
+				//Select by Text
+				{
+					Control.Button TestBtn = new Control.Button(this);
+					TestBtn.SetPosition(360, 140);
+					TestBtn.Text = "Red";
+					TestBtn.Width = 100;
+					TestBtn.Clicked += delegate(Base sender) {
+						combo.SelectByText("Red");
+					};
+				}
+
+				//Select by Name
+				{
+					Control.Button TestBtn = new Control.Button(this);
+					TestBtn.SetPosition(465, 140);
+					TestBtn.Text = "Apple";
+					TestBtn.Width = 100;
+					TestBtn.Clicked += delegate(Base sender) {
+						combo.SelectByName("fruit");
+					};
+				}
+
+				//Select by UserData
+				{
+					Control.Button TestBtn = new Control.Button(this);
+					TestBtn.SetPosition(570, 140);
+					TestBtn.Text = "Green";
+					TestBtn.Width = 100;
+					TestBtn.Clicked += delegate(Base sender) {
+						combo.SelectByUserData(12);
+					};
+				}
+			}
         }
 
         void OnComboSelect(Base control)

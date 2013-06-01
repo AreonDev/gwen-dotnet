@@ -187,7 +187,6 @@ namespace Gwen.Input
             }
 
             throw new ArgumentException("Invalid event args", "args");
-            return false;
         }
     }
 }

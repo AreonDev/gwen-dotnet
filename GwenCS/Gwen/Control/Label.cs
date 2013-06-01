@@ -9,7 +9,7 @@ namespace Gwen.Control
     /// </summary>
     public class Label : Base
     {
-        private readonly Text m_Text;
+        protected readonly Text m_Text;
         private Pos m_Align;
         private Padding m_TextPadding;
         private bool m_AutoSizeToContents;
@@ -194,9 +194,9 @@ namespace Gwen.Control
         /// </summary>
         /// <param name="index">Character index.</param>
         /// <returns>Character coordinates (local).</returns>
-        public virtual Point GetCharacterPosition(int index)
+        public virtual Point GetCharacterPosition(int index, bool Multiline = false)
         {
-            Point p = m_Text.GetCharacterPosition(index);
+            Point p = m_Text.GetCharacterPosition(index, Multiline);
             return new Point(p.X + m_Text.X, p.Y + m_Text.Y);
         }
 
