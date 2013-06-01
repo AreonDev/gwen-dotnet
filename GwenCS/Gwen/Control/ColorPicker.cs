@@ -46,7 +46,8 @@ namespace Gwen.Control
         /// Initializes a new instance of the <see cref="ColorPicker"/> class.
         /// </summary>
         /// <param name="parent">Parent control.</param>
-        public ColorPicker(Base parent) : base(parent)
+        public ColorPicker(Base parent)
+            : base(parent)
         {
             MouseInputEnabled = true;
 
@@ -93,7 +94,7 @@ namespace Gwen.Control
             if (box.Text == string.Empty)
                 return;
 
-            int textValue = (int) box.Value;
+            int textValue = (int)box.Value;
             if (textValue < 0) textValue = 0;
             if (textValue > 255) textValue = 255;
 
@@ -119,15 +120,15 @@ namespace Gwen.Control
 
             CreateColorControl("Red", startY);
             CreateColorControl("Green", startY + height);
-            CreateColorControl("Blue", startY + height*2);
-            CreateColorControl("Alpha", startY + height*3);
+            CreateColorControl("Blue", startY + height * 2);
+            CreateColorControl("Alpha", startY + height * 3);
 
             GroupBox finalGroup = new GroupBox(this);
             finalGroup.SetPosition(180, 40);
             finalGroup.SetSize(60, 60);
             finalGroup.SetText("Result");
             finalGroup.Name = "ResultGroupBox";
-            
+
             ColorDisplay disp = new ColorDisplay(finalGroup);
             disp.Name = "Result";
             disp.SetBounds(0, 10, 32, 32);

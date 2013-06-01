@@ -60,7 +60,7 @@ namespace Gwen.Input
         /// Indicates whether the right mouse button is down.
         /// </summary>
         public static bool IsRightMouseDown { get { return m_KeyData.RightMouseDown; } }
-        
+
         /// <summary>
         /// Current mouse position.
         /// </summary>
@@ -169,7 +169,7 @@ namespace Gwen.Input
         /// <param name="dy"></param>
         public static void OnMouseMoved(Base canvas, int x, int y, int dx, int dy)
         {
-            // Send input to canvas for study		
+            // Send input to canvas for study
             MousePosition.X = x;
             MousePosition.Y = y;
 
@@ -240,9 +240,9 @@ namespace Gwen.Input
             if (mouseButton > MaxMouseButtons)
                 return false;
 
-            if (mouseButton == 0) 
+            if (mouseButton == 0)
                 m_KeyData.LeftMouseDown = down;
-            else if (mouseButton == 1) 
+            else if (mouseButton == 1)
                 m_KeyData.RightMouseDown = down;
 
             // Double click.

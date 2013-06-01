@@ -20,7 +20,7 @@ namespace Gwen.UnitTest
 
                     {
                         Control.RadioButtonGroup radio = new Control.RadioButtonGroup(page);
-						radio.Text = "Tab position";
+                        radio.Text = "Tab position";
                         radio.SetPosition(10, 10);
 
                         radio.AddOption("Top").Select();

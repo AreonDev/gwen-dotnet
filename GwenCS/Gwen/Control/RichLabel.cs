@@ -176,7 +176,7 @@ namespace Gwen.Control
             label.SizeToContents();
             label.SetPosition(x, y);
 
-            //lineheight = (lineheight + pLabel.Height()) / 2;			
+            //lineheight = (lineheight + pLabel.Height()) / 2;
 
             x += label.Width;
 

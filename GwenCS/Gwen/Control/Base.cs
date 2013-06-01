@@ -318,7 +318,7 @@ namespace Gwen.Control
         /// Control's size and position relative to the parent.
         /// </summary>
         public Rectangle Bounds { get { return m_Bounds; } }
-        
+
         /// <summary>
         /// Bounds for the renderer.
         /// </summary>
@@ -751,7 +751,7 @@ namespace Gwen.Control
 
             m_Children.Remove(child);
             OnChildRemoved(child);
-            
+
             if (dispose)
                 child.DelayedDelete();
         }
@@ -1212,7 +1212,7 @@ namespace Gwen.Control
         /// </summary>
         internal void InputMouseMoved(int x, int y, int dx, int dy)
         {
-            OnMouseMoved(x, y, dx,  dy);
+            OnMouseMoved(x, y, dx, dy);
         }
 
         /// <summary>
@@ -1816,7 +1816,7 @@ namespace Gwen.Control
         /// </remarks>
         public virtual void UpdateColors()
         {
-            
+
         }
 
         /// <summary>
@@ -2121,16 +2121,18 @@ namespace Gwen.Control
             Animation.Add(this, new Anim.Size.Height(Height, 0, length, hide, delay, ease));
         }
 
-		public void FitChildrenToSize() {
-			foreach(Base child in Children) {
-				//push them back into view if they are outside it
-				child.X = Math.Min(Bounds.Width, child.X + child.Width) - child.Width;
-				child.Y = Math.Min(Bounds.Height, child.Y + child.Height) - child.Height;
+        public void FitChildrenToSize()
+        {
+            foreach (Base child in Children)
+            {
+                //push them back into view if they are outside it
+                child.X = Math.Min(Bounds.Width, child.X + child.Width) - child.Width;
+                child.Y = Math.Min(Bounds.Height, child.Y + child.Height) - child.Height;
 
-				//Non-negative has priority, so do it second.
-				child.X = Math.Max(0, child.X);
-				child.Y = Math.Max(0, child.Y);
-			}
-		}
+                //Non-negative has priority, so do it second.
+                child.X = Math.Max(0, child.X);
+                child.Y = Math.Max(0, child.Y);
+            }
+        }
     }
 }

@@ -9,7 +9,7 @@ namespace Gwen.UnitTest
             : base(parent)
         {
             Control.RadioButtonGroup rbg = new Control.RadioButtonGroup(this);
-			rbg.Text = "Sample radio group";
+            rbg.Text = "Sample radio group";
             rbg.SetPosition(10, 10);
 
             rbg.AddOption("Option 1");

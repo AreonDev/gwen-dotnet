@@ -97,7 +97,7 @@ namespace Gwen.ControlInternal
 
             skin.Renderer.RenderText(Font, Point.Empty, TextOverride ?? String);
 
-            #if DEBUG_TEXT_MEASURE
+#if DEBUG_TEXT_MEASURE
             {
                 Point lastPos = Point.Empty;
 
@@ -115,7 +115,7 @@ namespace Gwen.ControlInternal
                     lastPos = new Point(rect.Right, 0);
                 }
             }
-            #endif
+#endif
         }
 
         /// <summary>
@@ -176,30 +176,34 @@ namespace Gwen.ControlInternal
                 return new Point(0, 0);
             }
 
-			if(!Multiline) {
-				String sub = (TextOverride ?? String).Substring(0, index);
-				Point p = Skin.Renderer.MeasureText(Font, sub);
+            if (!Multiline)
+            {
+                String sub = (TextOverride ?? String).Substring(0, index);
+                Point p = Skin.Renderer.MeasureText(Font, sub);
 
-				//if(p.Y >= Font.Size)
-				//	p = new Point(p.X, p.Y - Font.Size);
-				p.Y = 0;
+                //if(p.Y >= Font.Size)
+                //	p = new Point(p.X, p.Y - Font.Size);
+                p.Y = 0;
 
-				return p;
-			} else {
-				String str = (TextOverride ?? String).Substring(0, index);
-				int curr_line_begin = str.LastIndexOf('\n');
-				if(curr_line_begin == -1) {
-					curr_line_begin = 0;
-				}
-				int sizeofl = Skin.Renderer.MeasureText(Font, "l").X;
-				Point p = Skin.Renderer.MeasureText(Font, (str + "l").Substring(curr_line_begin, index - curr_line_begin));
-				//p.X -= sizeofl;
+                return p;
+            }
+            else
+            {
+                String str = (TextOverride ?? String).Substring(0, index);
+                int curr_line_begin = str.LastIndexOf('\n');
+                if (curr_line_begin == -1)
+                {
+                    curr_line_begin = 0;
+                }
+                int sizeofl = Skin.Renderer.MeasureText(Font, "l").X;
+                Point p = Skin.Renderer.MeasureText(Font, (str + "l").Substring(curr_line_begin, index - curr_line_begin));
+                //p.X -= sizeofl;
 
-				int numberofnewlines = str.Length - str.Replace("\n", "").Length;
-				p.Y = (Font.Size * (numberofnewlines));
+                int numberofnewlines = str.Length - str.Replace("\n", "").Length;
+                p.Y = (Font.Size * (numberofnewlines));
 
-				return new Point(p.X, p.Y);
-			}
+                return new Point(p.X, p.Y);
+            }
         }
 
         /// <summary>
@@ -217,7 +221,7 @@ namespace Gwen.ControlInternal
                 Point cp = GetCharacterPosition(i);
                 int dist = Math.Abs(cp.X - p.X) + Math.Abs(cp.Y - p.Y); // this isn't proper // [omeg] todo: sqrt
 
-                if (dist > distance) 
+                if (dist > distance)
                     continue;
 
                 distance = dist;

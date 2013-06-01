@@ -27,7 +27,7 @@ namespace Gwen.Renderer
             if (CTT != null)
                 CTT.Initialize();
         }
-        
+
         /// <summary>
         /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
         /// </summary>
@@ -50,14 +50,14 @@ namespace Gwen.Renderer
         /// <summary>
         /// Starts rendering.
         /// </summary>
-        public virtual void Begin() 
-        {}
+        public virtual void Begin()
+        { }
 
         /// <summary>
         /// Stops rendering.
         /// </summary>
-        public virtual void End() 
-        {}
+        public virtual void End()
+        { }
 
         /// <summary>
         /// Gets or sets the current drawing color.
@@ -96,33 +96,33 @@ namespace Gwen.Renderer
         /// <param name="a"></param>
         /// <param name="b"></param>
         public virtual void DrawLine(int x, int y, int a, int b)
-        {}
+        { }
 
         /// <summary>
         /// Draws a solid filled rectangle.
         /// </summary>
         /// <param name="rect"></param>
         public virtual void DrawFilledRect(Rectangle rect)
-        {}
+        { }
 
         /// <summary>
         /// Starts clipping to the current clipping rectangle.
         /// </summary>
         public virtual void StartClip()
-        {}
+        { }
 
         /// <summary>
         /// Stops clipping.
         /// </summary>
         public virtual void EndClip()
-        {}
+        { }
 
         /// <summary>
         /// Loads the specified texture.
         /// </summary>
         /// <param name="t"></param>
         public virtual void LoadTexture(Texture t)
-        {}
+        { }
 
         /// <summary>
         /// Initializes texture from raw pixel data.
@@ -130,7 +130,7 @@ namespace Gwen.Renderer
         /// <param name="t">Texture to initialize. Dimensions need to be set.</param>
         /// <param name="pixelData">Pixel data in RGBA format.</param>
         public virtual void LoadTextureRaw(Texture t, byte[] pixelData)
-        {}
+        { }
 
         /// <summary>
         /// Initializes texture from image file data.
@@ -138,14 +138,14 @@ namespace Gwen.Renderer
         /// <param name="t">Texture to initialize.</param>
         /// <param name="data">Image file as stream.</param>
         public virtual void LoadTextureStream(Texture t, Stream data)
-        {}
+        { }
 
         /// <summary>
         /// Frees the specified texture.
         /// </summary>
         /// <param name="t">Texture to free.</param>
         public virtual void FreeTexture(Texture t)
-        {}
+        { }
 
         /// <summary>
         /// Draws textured rectangle.
@@ -156,8 +156,8 @@ namespace Gwen.Renderer
         /// <param name="v1">Texture coordinate v1.</param>
         /// <param name="u2">Texture coordinate u2.</param>
         /// <param name="v2">Texture coordinate v2.</param>
-        public virtual void DrawTexturedRect(Texture t, Rectangle targetRect, float u1=0, float v1=0, float u2=1, float v2=1)
-        {}
+        public virtual void DrawTexturedRect(Texture t, Rectangle targetRect, float u1 = 0, float v1 = 0, float u2 = 1, float v2 = 1)
+        { }
 
         /// <summary>
         /// Draws "missing image" default texture.
@@ -190,7 +190,7 @@ namespace Gwen.Renderer
         /// </summary>
         /// <param name="font">Font to free.</param>
         public virtual void FreeFont(Font font)
-        {}
+        { }
 
         /// <summary>
         /// Returns dimensions of the text using specified font.
@@ -215,11 +215,11 @@ namespace Gwen.Renderer
         {
             float size = font.Size * Scale;
 
-            for ( int i=0; i<text.Length; i++ )
+            for (int i = 0; i < text.Length; i++)
             {
                 char chr = text[i];
 
-                if ( chr == ' ' ) 
+                if (chr == ' ')
                     continue;
 
                 Rectangle r = Util.FloatRect(position.X + i * size * 0.4f, position.Y, size * 0.4f - 1, size);
@@ -228,33 +228,33 @@ namespace Gwen.Renderer
                     This isn't important, it's just me messing around changing the
                     shape of the rect based on the letter.. just for fun.
                 */
-                if ( chr == 'l' || chr == 'i' || chr == '!' || chr == 't' )
+                if (chr == 'l' || chr == 'i' || chr == '!' || chr == 't')
                 {
                     r.Width = 1;
                 }
-                else if ( chr >= 'a' && chr <= 'z' )
+                else if (chr >= 'a' && chr <= 'z')
                 {
                     r.Y = (int)(r.Y + size * 0.5f);
                     r.Height = (int)(r.Height - size * 0.4f);
                 }
-                else if ( chr == '.' || chr == ',' )
+                else if (chr == '.' || chr == ',')
                 {
                     r.X += 2;
                     r.Y += r.Height - 2;
                     r.Width = 2;
                     r.Height = 2;
                 }
-                else if ( chr == '\'' || chr == '`'  || chr == '"' )
+                else if (chr == '\'' || chr == '`' || chr == '"')
                 {
                     r.X += 3;
                     r.Width = 2;
                     r.Height = 2;
                 }
 
-                if ( chr == 'o' || chr == 'O' || chr == '0' )
-                    DrawLinedRect( r );	
+                if (chr == 'o' || chr == 'O' || chr == '0')
+                    DrawLinedRect(r);
                 else
-                    DrawFilledRect( r );
+                    DrawFilledRect(r);
             }
         }
 

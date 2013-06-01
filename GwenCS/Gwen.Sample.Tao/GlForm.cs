@@ -25,7 +25,7 @@ namespace Gwen.Sample.Tao
         {
             ftime = new List<long>();
             stopwatch = new Stopwatch();
-            
+
             InitializeComponent();
 
             Width = 1024;
@@ -48,8 +48,8 @@ namespace Gwen.Sample.Tao
             canvas.SetSize(glControl.Width, glControl.Height);
             canvas.ShouldDrawBackground = true;
             canvas.BackgroundColor = Color.FromArgb(255, 150, 170, 170);
-			canvas.KeyboardInputEnabled = true;
-			canvas.MouseInputEnabled = true;
+            canvas.KeyboardInputEnabled = true;
+            canvas.MouseInputEnabled = true;
 
             test = new UnitTest.UnitTest(canvas);
 
@@ -85,108 +85,122 @@ namespace Gwen.Sample.Tao
             canvas.RenderCanvas();
         }
 
-		private void glControl_MouseDown(object sender, MouseEventArgs e) {
-			int btn = -1;
-			if (e.Button == MouseButtons.Left){
-				btn = 0;
-			} else if (e.Button == MouseButtons.Right){
-				btn = 1;
-			}
-			canvas.Input_MouseButton(btn, true);
+        private void glControl_MouseDown(object sender, MouseEventArgs e)
+        {
+            int btn = -1;
+            if (e.Button == MouseButtons.Left)
+            {
+                btn = 0;
+            }
+            else if (e.Button == MouseButtons.Right)
+            {
+                btn = 1;
+            }
+            canvas.Input_MouseButton(btn, true);
 
-			glControl.Invalidate();
-		}
+            glControl.Invalidate();
+        }
 
-		private void glControl_MouseUp(object sender, MouseEventArgs e) {
-			int btn = -1;
-			if (e.Button == MouseButtons.Left) {
-				btn = 0;
-			} else if (e.Button == MouseButtons.Right) {
-				btn = 1;
-			}
-			canvas.Input_MouseButton(btn, false);
-			glControl.Invalidate();
-		}
+        private void glControl_MouseUp(object sender, MouseEventArgs e)
+        {
+            int btn = -1;
+            if (e.Button == MouseButtons.Left)
+            {
+                btn = 0;
+            }
+            else if (e.Button == MouseButtons.Right)
+            {
+                btn = 1;
+            }
+            canvas.Input_MouseButton(btn, false);
+            glControl.Invalidate();
+        }
 
-		int prevX = -1;
-		int prevY = -1;
-		private void glControl_MouseMove(object sender, MouseEventArgs e) {
-			canvas.Input_MouseMoved(e.X, e.Y, e.X - prevX, e.Y - prevY);
-			prevX = e.X;
-			prevY = e.Y;
-			glControl.Invalidate();
-		}
+        int prevX = -1;
+        int prevY = -1;
+        private void glControl_MouseMove(object sender, MouseEventArgs e)
+        {
+            canvas.Input_MouseMoved(e.X, e.Y, e.X - prevX, e.Y - prevY);
+            prevX = e.X;
+            prevY = e.Y;
+            glControl.Invalidate();
+        }
 
-		private void glControl_KeyDown(object sender, KeyEventArgs e) {
-			canvas.Input_Key(ConvertKeysToGwenKey(e.KeyCode), true);
-			glControl.Invalidate();
-		}
+        private void glControl_KeyDown(object sender, KeyEventArgs e)
+        {
+            canvas.Input_Key(ConvertKeysToGwenKey(e.KeyCode), true);
+            glControl.Invalidate();
+        }
 
-		private void glControl_KeyUp(object sender, KeyEventArgs e) {
-			canvas.Input_Key(ConvertKeysToGwenKey(e.KeyCode), false);
-			glControl.Invalidate();
-		}
+        private void glControl_KeyUp(object sender, KeyEventArgs e)
+        {
+            canvas.Input_Key(ConvertKeysToGwenKey(e.KeyCode), false);
+            glControl.Invalidate();
+        }
 
-		private Key ConvertKeysToGwenKey(Keys keys) {
-			switch (keys) {
-				case Keys.Alt:
-					return Key.Alt;
+        private Key ConvertKeysToGwenKey(Keys keys)
+        {
+            switch (keys)
+            {
+                case Keys.Alt:
+                    return Key.Alt;
 
-				case Keys.Back:
-					return Key.Backspace;
+                case Keys.Back:
+                    return Key.Backspace;
 
-				case Keys.Control:
-				case Keys.LControlKey:
-				case Keys.RControlKey:
-					return Key.Control;
+                case Keys.Control:
+                case Keys.LControlKey:
+                case Keys.RControlKey:
+                    return Key.Control;
 
-				case Keys.Delete:
-					return Key.Delete;
+                case Keys.Delete:
+                    return Key.Delete;
 
-				case Keys.Down:
-					return Key.Down;
+                case Keys.Down:
+                    return Key.Down;
 
-				case Keys.End:
-					return Key.End;
+                case Keys.End:
+                    return Key.End;
 
-				case Keys.Escape:
-					return Key.Escape;
+                case Keys.Escape:
+                    return Key.Escape;
 
-				case Keys.Home:
-					return Key.Home;
+                case Keys.Home:
+                    return Key.Home;
 
-				case Keys.Left:
-					return Key.Left;
+                case Keys.Left:
+                    return Key.Left;
 
-				case Keys.Return:
-					return Key.Return;
+                case Keys.Return:
+                    return Key.Return;
 
-				case Keys.Right:
-					return Key.Right;
+                case Keys.Right:
+                    return Key.Right;
 
-				case Keys.Shift:
-				case Keys.LShiftKey:
-				case Keys.RShiftKey:
-					return Key.Shift;
+                case Keys.Shift:
+                case Keys.LShiftKey:
+                case Keys.RShiftKey:
+                    return Key.Shift;
 
-				case Keys.Space:
-					return Key.Space;
+                case Keys.Space:
+                    return Key.Space;
 
-				case Keys.Tab:
-					return Key.Tab;
+                case Keys.Tab:
+                    return Key.Tab;
 
-				case Keys.Up:
-					return Key.Up;
+                case Keys.Up:
+                    return Key.Up;
 
-				default:
-					return Key.Invalid;
-			}
-		}
+                default:
+                    return Key.Invalid;
+            }
+        }
 
-		private void glControl_KeyPress(object sender, KeyPressEventArgs e) {
-			canvas.Input_Character(e.KeyChar);
-			glControl.Invalidate();
-		}
+        private void glControl_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            canvas.Input_Character(e.KeyChar);
+            glControl.Invalidate();
+        }
 
         /*
         private void GlForm_FormClosed(object sender, FormClosedEventArgs e)

@@ -12,23 +12,29 @@ namespace Gwen.Control
         private bool m_CanScrollV;
         private bool m_AutoHideBars;
 
-		public int VerticalScroll {
-			get {
-				return m_InnerPanel.Y;
-			}
-		}
+        public int VerticalScroll
+        {
+            get
+            {
+                return m_InnerPanel.Y;
+            }
+        }
 
-		public int HorizontalScroll {
-			get {
-				return m_InnerPanel.X;
-			}
-		}
+        public int HorizontalScroll
+        {
+            get
+            {
+                return m_InnerPanel.X;
+            }
+        }
 
-		public Base InnerPanel{
-			get {
-				return m_InnerPanel;
-			}
-		}
+        public Base InnerPanel
+        {
+            get
+            {
+                return m_InnerPanel;
+            }
+        }
 
         private readonly ScrollBar m_VerticalScrollBar;
         private readonly ScrollBar m_HorizontalScrollBar;
@@ -222,7 +228,7 @@ namespace Gwen.Control
 
             if (m_CanScrollH)
             {
-                m_InnerPanel.SetSize(Math.Max(Width, childrenWidth), Math.Max(Height, childrenHeight));  
+                m_InnerPanel.SetSize(Math.Max(Width, childrenWidth), Math.Max(Height, childrenHeight));
             }
             else
             {
@@ -230,9 +236,9 @@ namespace Gwen.Control
                                      Math.Max(Height, childrenHeight));
             }
 
-            float wPercent = Width/
-                             (float) (childrenWidth + (m_VerticalScrollBar.IsHidden ? 0 : m_VerticalScrollBar.Width));
-            float hPercent = Height/
+            float wPercent = Width /
+                             (float)(childrenWidth + (m_VerticalScrollBar.IsHidden ? 0 : m_VerticalScrollBar.Width));
+            float hPercent = Height /
                              (float)
                              (childrenHeight + (m_HorizontalScrollBar.IsHidden ? 0 : m_HorizontalScrollBar.Height));
 
@@ -261,14 +267,14 @@ namespace Gwen.Control
             {
                 newInnerPanelPosY =
                     (int)(
-                        -((m_InnerPanel.Height) - Height + (m_HorizontalScrollBar.IsHidden ? 0 : m_HorizontalScrollBar.Height))*
+                        -((m_InnerPanel.Height) - Height + (m_HorizontalScrollBar.IsHidden ? 0 : m_HorizontalScrollBar.Height)) *
                         m_VerticalScrollBar.ScrollAmount);
             }
             if (CanScrollH && !m_HorizontalScrollBar.IsHidden)
             {
                 newInnerPanelPosX =
                     (int)(
-                        -((m_InnerPanel.Width) - Width + (m_VerticalScrollBar.IsHidden ? 0 : m_VerticalScrollBar.Width))*
+                        -((m_InnerPanel.Width) - Width + (m_VerticalScrollBar.IsHidden ? 0 : m_VerticalScrollBar.Width)) *
                         m_HorizontalScrollBar.ScrollAmount);
             }
 

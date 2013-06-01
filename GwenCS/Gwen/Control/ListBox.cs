@@ -13,7 +13,7 @@ namespace Gwen.Control
     public class ListBox : ScrollControl
     {
         private readonly Table m_Table;
-		private readonly List<ListBoxRow> m_SelectedRows;
+        private readonly List<ListBoxRow> m_SelectedRows;
 
         private bool m_MultiSelect;
         private bool m_IsToggle;
@@ -28,7 +28,7 @@ namespace Gwen.Control
             get { return m_MultiSelect; }
             set
             {
-                m_MultiSelect = value; 
+                m_MultiSelect = value;
                 if (value)
                     IsToggle = true;
             }
@@ -59,24 +59,28 @@ namespace Gwen.Control
         /// <summary>
         /// First selected row (and only if list is not multiselectable).
         /// </summary>
-		public ListBoxRow SelectedRow
+        public ListBoxRow SelectedRow
         {
             get
             {
-                if (m_SelectedRows.Count == 0) 
+                if (m_SelectedRows.Count == 0)
                     return null;
                 return m_SelectedRows[0];
             }
-			set 
-			{
-				if (m_Table.Children.Contains(value)) {
-					if (AllowMultiSelect) {
-						SelectRow(value, false);
-					} else {
-						SelectRow(value, true);
-					}
-				}
-			}
+            set
+            {
+                if (m_Table.Children.Contains(value))
+                {
+                    if (AllowMultiSelect)
+                    {
+                        SelectRow(value, false);
+                    }
+                    else
+                    {
+                        SelectRow(value, true);
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -91,9 +95,10 @@ namespace Gwen.Control
                     return -1;
                 return m_Table.GetRowIndex(selected);
             }
-			set {
-				SelectRow(value);
-			}
+            set
+            {
+                SelectRow(value);
+            }
         }
 
         /// <summary>
@@ -118,7 +123,7 @@ namespace Gwen.Control
         public ListBox(Base parent)
             : base(parent)
         {
-			m_SelectedRows = new List<ListBoxRow>();
+            m_SelectedRows = new List<ListBoxRow>();
 
             EnableScroll(false, true);
             AutoHideBars = true;
@@ -168,7 +173,7 @@ namespace Gwen.Control
         /// <param name="clearOthers">Determines whether to deselect previously selected rows.</param>
         public void SelectRowsByRegex(String pattern, RegexOptions regexOptions = RegexOptions.None, bool clearOthers = false)
         {
-            var rows = m_Table.Children.OfType<ListBoxRow>().Where(x => Regex.IsMatch(x.Text, pattern) );
+            var rows = m_Table.Children.OfType<ListBoxRow>().Where(x => Regex.IsMatch(x.Text, pattern));
             foreach (ListBoxRow row in rows)
             {
                 SelectRow(row, clearOthers);
@@ -196,13 +201,14 @@ namespace Gwen.Control
                 RowSelected.Invoke(this);
         }
 
-		/// <summary>
-		/// Removes the all rows from the ListBox
-		/// </summary>
-		/// <param name="idx">Row index.</param>
-		public void RemoveAllRows() {
-			m_Table.DeleteAllChildren();
-		}
+        /// <summary>
+        /// Removes the all rows from the ListBox
+        /// </summary>
+        /// <param name="idx">Row index.</param>
+        public void RemoveAllRows()
+        {
+            m_Table.DeleteAllChildren();
+        }
 
         /// <summary>
         /// Removes the specified row by index.
@@ -218,7 +224,7 @@ namespace Gwen.Control
         /// </summary>
         /// <param name="label">Row text.</param>
         /// <returns>Newly created control.</returns>
-		public ListBoxRow AddRow(String label)
+        public ListBoxRow AddRow(String label)
         {
             return AddRow(label, String.Empty);
         }
@@ -229,32 +235,33 @@ namespace Gwen.Control
         /// <param name="label">Row text.</param>
         /// <param name="name">Internal control name.</param>
         /// <returns>Newly created control.</returns>
-		public ListBoxRow AddRow(String label, String name)
+        public ListBoxRow AddRow(String label, String name)
         {
-			return AddRow(label, name, null);
+            return AddRow(label, name, null);
         }
 
-		/// <summary>
-		/// Adds a new row.
-		/// </summary>
-		/// <param name="label">Row text.</param>
-		/// <param name="name">Internal control name.</param>
-		/// <param name="UserData">User data for newly created row</param>
-		/// <returns>Newly created control.</returns>
-		public ListBoxRow AddRow(String label, String name, Object UserData) {
-			ListBoxRow row = new ListBoxRow(this);
-			m_Table.AddRow(row);
+        /// <summary>
+        /// Adds a new row.
+        /// </summary>
+        /// <param name="label">Row text.</param>
+        /// <param name="name">Internal control name.</param>
+        /// <param name="UserData">User data for newly created row</param>
+        /// <returns>Newly created control.</returns>
+        public ListBoxRow AddRow(String label, String name, Object UserData)
+        {
+            ListBoxRow row = new ListBoxRow(this);
+            m_Table.AddRow(row);
 
-			row.SetCellText(0, label);
-			row.Name = name;
-			row.UserData = UserData;
+            row.SetCellText(0, label);
+            row.Name = name;
+            row.UserData = UserData;
 
-			row.Selected += OnRowSelected;
+            row.Selected += OnRowSelected;
 
-			m_Table.SizeToContents(Width);
+            m_Table.SizeToContents(Width);
 
-			return row;
-		}
+            return row;
+        }
 
         /// <summary>
         /// Sets the column width (in pixels).
@@ -314,7 +321,7 @@ namespace Gwen.Control
             ListBoxRow row = control as ListBoxRow;
             if (row == null)
                 return;
-            
+
             if (row.IsSelected)
             {
                 if (IsToggle)
@@ -334,7 +341,7 @@ namespace Gwen.Control
             UnselectAll();
             m_Table.RemoveAll();
         }
-        
+
         public void SizeToContents()
         {
             m_SizeToContents = true;
@@ -355,52 +362,64 @@ namespace Gwen.Control
             }
         }
 
-		/// <summary>
-		/// Selects the first menu item with the given text it finds. 
-		/// If a menu item can not be found that matches input, nothing happens.
-		/// </summary>
-		/// <param name="label">The label to look for, this is what is shown to the user.</param>
-		public void SelectByText(string text) {
-			foreach (ListBoxRow item in m_Table.Children) {
-				if (item.Text == text) {
-					SelectedRow = item;
-					return;
-				}
-			}
-		}
+        /// <summary>
+        /// Selects the first menu item with the given text it finds. 
+        /// If a menu item can not be found that matches input, nothing happens.
+        /// </summary>
+        /// <param name="label">The label to look for, this is what is shown to the user.</param>
+        public void SelectByText(string text)
+        {
+            foreach (ListBoxRow item in m_Table.Children)
+            {
+                if (item.Text == text)
+                {
+                    SelectedRow = item;
+                    return;
+                }
+            }
+        }
 
-		/// <summary>
-		/// Selects the first menu item with the given internal name it finds.
-		/// If a menu item can not be found that matches input, nothing happens.
-		/// </summary>
-		/// <param name="name">The internal name to look for. To select by what is displayed to the user, use "SelectByText".</param>
-		public void SelectByName(string name) {
-			foreach (ListBoxRow item in m_Table.Children) {
-				if (item.Name == name) {
-					SelectedRow = item;
-					return;
-				}
-			}
-		}
+        /// <summary>
+        /// Selects the first menu item with the given internal name it finds.
+        /// If a menu item can not be found that matches input, nothing happens.
+        /// </summary>
+        /// <param name="name">The internal name to look for. To select by what is displayed to the user, use "SelectByText".</param>
+        public void SelectByName(string name)
+        {
+            foreach (ListBoxRow item in m_Table.Children)
+            {
+                if (item.Name == name)
+                {
+                    SelectedRow = item;
+                    return;
+                }
+            }
+        }
 
-		/// <summary>
-		/// Selects the first menu item with the given user data it finds.
-		/// If a menu item can not be found that matches input, nothing happens.
-		/// </summary>
-		/// <param name="userdata">The UserData to look for. The equivalency check uses "param.Equals(item.UserData)".
-		/// If null is passed in, it will look for null/unset UserData.</param>
-		public void SelectByUserData(object userdata) {
-			foreach (ListBoxRow item in m_Table.Children) {
-				if (userdata == null) {
-					if (item.UserData == null) {
-						SelectedRow = item;
-						return;
-					}
-				} else if (userdata.Equals(item.UserData)) {
-					SelectedRow = item;
-					return;
-				}
-			}
-		}
+        /// <summary>
+        /// Selects the first menu item with the given user data it finds.
+        /// If a menu item can not be found that matches input, nothing happens.
+        /// </summary>
+        /// <param name="userdata">The UserData to look for. The equivalency check uses "param.Equals(item.UserData)".
+        /// If null is passed in, it will look for null/unset UserData.</param>
+        public void SelectByUserData(object userdata)
+        {
+            foreach (ListBoxRow item in m_Table.Children)
+            {
+                if (userdata == null)
+                {
+                    if (item.UserData == null)
+                    {
+                        SelectedRow = item;
+                        return;
+                    }
+                }
+                else if (userdata.Equals(item.UserData))
+                {
+                    SelectedRow = item;
+                    return;
+                }
+            }
+        }
     }
 }
