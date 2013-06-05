@@ -9,8 +9,7 @@ namespace Gwen.Platform
     /// </summary>
     public static class Neutral
     {
-        private static DateTime m_LastTime;
-        private static float m_CurrentTime;
+        private static DateTime m_FirstTime = DateTime.Now;
 
         /// <summary>
         /// Changes the mouse cursor.
@@ -79,19 +78,19 @@ namespace Gwen.Platform
         }
 
         /// <summary>
-        /// Gets time since last measurement.
+        /// Gets elapsed time since this class was initalized.
         /// </summary>
         /// <returns>Time interval in seconds.</returns>
         public static float GetTimeInSeconds()
         {
-            var time = DateTime.UtcNow;
-            var diff = time - m_LastTime;
-            var seconds = diff.TotalSeconds;
-            if (seconds > 0.1)
-                seconds = 0.1;
-            m_CurrentTime += (float)seconds;
-            m_LastTime = time;
-            return m_CurrentTime;
+            //Note:
+            //  After 3.8 months, the difference in value will be greater than a second,
+            //  which isn't a problem for most people (who will run this that long?), but
+            //  if it is, we can convert this (and all timestamps that rely on this) to a double, 
+            //  which will grow stale (time difference > 1s) after ~3,168,888 years 
+            //  (that's gotta be good enough, right?) - halfofastaple
+            //P.S. someone fix those numbers if I'm wrong.
+            return (float)((DateTime.Now - m_FirstTime).TotalSeconds);
         }
 
         /// <summary>

@@ -14,21 +14,37 @@ namespace Gwen.UnitTest
 
                 ctrl.AddNode("Node One");
                 Control.TreeNode node = ctrl.AddNode("Node Two");
+                {
                     node.AddNode("Node Two Inside");
 
                     node.AddNode("Eyes");
+                    {
                         node.AddNode("Brown").AddNode("Node Two Inside").AddNode("Eyes").AddNode("Brown");
-                   
+                    }
+
                     Control.TreeNode imgnode = node.AddNode("Image");
                     imgnode.SetImage("test16.png");
 
                     imgnode = node.AddNode("Image_Kids");
                     imgnode.SetImage("test16.png");
+                    {
                         imgnode.AddNode("Kid1");
                         imgnode.AddNode("Kid2");
+                    }
 
                     node.AddNode("Nodes");
+                }
                 ctrl.AddNode("Node Three");
+
+                node = ctrl.AddNode("Clickables");
+                {
+                    Control.TreeNode click = node.AddNode("Single Click");
+                    click.Clicked += NodeClicked;
+
+                    click = node.AddNode("Double Click");
+                    click.DoubleClicked += NodeDoubleClicked;
+                }
+
 
                 ctrl.SetBounds(30, 30, 200, 200);
                 ctrl.ExpandAll();
@@ -84,6 +100,16 @@ namespace Gwen.UnitTest
         {
             TreeNode node = control as TreeNode;
             UnitPrint(String.Format("Node selected: {0}", node.Text));
+        }
+
+        void NodeClicked(Base control) {
+            TreeNode node = control as TreeNode;
+            UnitPrint(String.Format("Node clicked: {0}", node.Text));
+        }
+
+        void NodeDoubleClicked(Base control) {
+            TreeNode node = control as TreeNode;
+            UnitPrint(String.Format("Node double clicked: {0}", node.Text));
         }
     }
 }

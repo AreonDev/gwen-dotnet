@@ -331,8 +331,29 @@ namespace Gwen.Control
             IsSelected = !IsSelected;
         }
 
-        public void SetImage(string textureName) {
+        public void SetImage(string textureName) 
+        {
             m_Title.SetImage(textureName);
+        }
+
+        public event GwenEventHandler Clicked
+        { 
+            add {
+                m_Title.Clicked += delegate(Base sender) { value(this); };
+            }
+            remove {
+                m_Title.Clicked -= delegate(Base sender) { value(this); };
+            }
+        }
+
+        public event GwenEventHandler DoubleClicked 
+        { 
+            add {
+                m_Title.DoubleClickedLeft += delegate(Base sender) { value(this); };
+            }
+            remove {
+                m_Title.DoubleClickedLeft -= delegate(Base sender) { value(this); };
+            }
         }
     }
 }
