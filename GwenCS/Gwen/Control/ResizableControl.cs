@@ -156,5 +156,19 @@ namespace Gwen.Control
 
             return base.SetBounds(x, y, width, height);
         }
+
+        /// <summary>
+        /// Sets the control size.
+        /// </summary>
+        /// <param name="width">New width.</param>
+        /// <param name="height">New height.</param>
+        /// <returns>True if bounds changed.</returns>
+        public override bool SetSize(int width, int height) {
+            bool Changed = base.SetSize(width, height);
+            if (Changed) {
+                OnResized(this);
+            }
+            return Changed;
+        }
     }
 }
