@@ -14,11 +14,20 @@ namespace Gwen.UnitTest
 
                 ctrl.AddNode("Node One");
                 Control.TreeNode node = ctrl.AddNode("Node Two");
-                node.AddNode("Node Two Inside");
-                node.AddNode("Eyes");
-                node.AddNode("Brown").AddNode("Node Two Inside").AddNode("Eyes").AddNode("Brown");
-                node.AddNode("More");
-                node.AddNode("Nodes");
+                    node.AddNode("Node Two Inside");
+
+                    node.AddNode("Eyes");
+                        node.AddNode("Brown").AddNode("Node Two Inside").AddNode("Eyes").AddNode("Brown");
+                   
+                    Control.TreeNode imgnode = node.AddNode("Image");
+                    imgnode.SetImage("test16.png");
+
+                    imgnode = node.AddNode("Image_Kids");
+                    imgnode.SetImage("test16.png");
+                        imgnode.AddNode("Kid1");
+                        imgnode.AddNode("Kid2");
+
+                    node.AddNode("Nodes");
                 ctrl.AddNode("Node Three");
 
                 ctrl.SetBounds(30, 30, 200, 200);

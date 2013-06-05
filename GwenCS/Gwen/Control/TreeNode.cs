@@ -330,5 +330,9 @@ namespace Gwen.Control
                 LabelPressed.Invoke(this);
             IsSelected = !IsSelected;
         }
+
+        public void SetImage(string textureName) {
+            m_Title.SetImage(textureName);
+        }
     }
 }
