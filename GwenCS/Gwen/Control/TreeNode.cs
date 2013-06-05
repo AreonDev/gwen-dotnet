@@ -154,6 +154,14 @@ namespace Gwen.Control
 
             skin.DrawTreeNode(this, m_InnerPanel.IsVisible, IsSelected, m_Title.Height, m_Title.TextRight,
                 (int)(m_ToggleButton.Y + m_ToggleButton.Height * 0.5f), bottom, m_TreeControl == Parent); // IsRoot
+
+            //HACK - The treenodes are taking two passes until their height is set correctly,
+            //  this means that the height is being read incorrectly by the parent, causing
+            //  the TreeNode bug where nodes get hidden when expanding and collapsing.
+            //  The hack is to constantly invalide TreeNodes, which isn't bad, but there is
+            //  definitely a better solution (possibly: Make it set the height from childmost
+            //  first and work it's way up?) that invalidates and draws properly in 1 loop. -halfofastaple
+            this.Invalidate();
         }
 
         /// <summary>

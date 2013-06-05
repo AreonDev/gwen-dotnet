@@ -8,6 +8,7 @@ namespace Gwen.UnitTest
         public TreeControl(Base parent)
             : base(parent)
         {
+            /* Simple Tree Control */
             {
                 Control.TreeControl ctrl = new Control.TreeControl(this);
 
@@ -28,6 +29,7 @@ namespace Gwen.UnitTest
                 ctrl.Collapsed += NodeCollapsed;
             }
 
+            /* Scrollable Tree Control */
             {
                 Control.TreeControl ctrl = new Control.TreeControl(this);
 
