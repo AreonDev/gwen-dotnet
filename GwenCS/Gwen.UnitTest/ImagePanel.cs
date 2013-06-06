@@ -8,21 +8,34 @@ namespace Gwen.UnitTest
         public ImagePanel(Base parent)
             : base(parent)
         {
-            // Normal
+            /* Normal */
             {
                 Control.ImagePanel img = new Control.ImagePanel(this);
                 img.ImageName = "gwen.png";
                 img.SetPosition(10, 10);
-                img.SetBounds(10, 10, 100, 100);
+				img.SetSize(100, 100);
             }
 
-            // Missing
+            /* Missing */
             {
                 Control.ImagePanel img = new Control.ImagePanel(this);
                 img.ImageName = "missingimage.png";
                 img.SetPosition(120, 10);
-                img.SetBounds(120, 10, 100, 100);
+				img.SetSize(100, 100);
             }
+
+			/* Clicked */
+			{
+				Control.ImagePanel img = new Control.ImagePanel(this);
+				img.ImageName = "gwen.png";
+				img.SetPosition(10, 120);
+				img.SetSize(100, 100);
+				img.Clicked += Image_Clicked;
+			}
         }
+
+		void Image_Clicked(Base control) {
+			UnitPrint("Image: Clicked");
+		}
     }
 }

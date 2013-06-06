@@ -119,7 +119,6 @@ namespace Gwen.Control
         public override void Touch()
         {
             base.Touch();
-            OnClicked();
         }
 
         /// <summary>
