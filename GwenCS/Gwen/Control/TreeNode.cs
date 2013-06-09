@@ -349,10 +349,12 @@ namespace Gwen.Control
         public event GwenEventHandler DoubleClicked 
         { 
             add {
-                m_Title.DoubleClickedLeft += delegate(Base sender) { value(this); };
+				if (value != null) {
+					m_Title.DoubleClickedLeft += delegate(Base sender) { value(this); };
+				}
             }
             remove {
-                m_Title.DoubleClickedLeft -= delegate(Base sender) { value(this); };
+				m_Title.DoubleClickedLeft -= delegate(Base sender) { value(this); };
             }
         }
     }
