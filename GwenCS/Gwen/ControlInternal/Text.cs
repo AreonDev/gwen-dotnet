@@ -11,7 +11,7 @@ namespace Gwen.ControlInternal
     /// </summary>
     public class Text : Base
     {
-        private String m_String;
+        private string m_String;
         private Font m_Font;
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace Gwen.ControlInternal
         /// <summary>
         /// Text to display.
         /// </summary>
-        public String String
+        public string String
         {
             get { return m_String; }
             set
@@ -66,7 +66,7 @@ namespace Gwen.ControlInternal
         /// <summary>
         /// Text override - used to display different string.
         /// </summary>
-        public String TextOverride { get; set; }
+        public string TextOverride { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Text"/> class.
@@ -76,7 +76,7 @@ namespace Gwen.ControlInternal
             : base(parent)
         {
             m_Font = Skin.DefaultFont;
-            m_String = string.Empty;
+            m_String = String.Empty;
             TextColor = Skin.Colors.Label.Default;
             MouseInputEnabled = false;
             TextColorOverride = Color.FromArgb(0, 255, 255, 255); // A==0, override disabled
@@ -178,7 +178,7 @@ namespace Gwen.ControlInternal
 
             if (!Multiline)
             {
-                String sub = (TextOverride ?? String).Substring(0, index);
+                string sub = (TextOverride ?? String).Substring(0, index);
                 Point p = Skin.Renderer.MeasureText(Font, sub);
 
                 //if(p.Y >= Font.Size)
@@ -189,7 +189,7 @@ namespace Gwen.ControlInternal
             }
             else
             {
-                String str = (TextOverride ?? String).Substring(0, index);
+                string str = (TextOverride ?? String).Substring(0, index);
                 int curr_line_begin = str.LastIndexOf('\n');
                 if (curr_line_begin == -1)
                 {

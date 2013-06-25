@@ -10,7 +10,7 @@ namespace Gwen
         /// <summary>
         /// Font face name. Exact meaning depends on renderer.
         /// </summary>
-        public String FaceName { get; set; }
+        public string FaceName { get; set; }
 
         /// <summary>
         /// Font size.
@@ -52,7 +52,7 @@ namespace Gwen
         /// <param name="renderer">Renderer to use.</param>
         /// <param name="faceName">Face name.</param>
         /// <param name="size">Font size.</param>
-        public Font(Renderer.Base renderer, String faceName, int size = 10)
+        public Font(Renderer.Base renderer, string faceName, int size = 10)
         {
             m_Renderer = renderer;
             FaceName = faceName;

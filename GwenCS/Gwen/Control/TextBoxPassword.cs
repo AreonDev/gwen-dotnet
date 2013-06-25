@@ -10,7 +10,7 @@ namespace Gwen.Control
     /// </remarks>
     public class TextBoxPassword : TextBox
     {
-        private String m_Mask;
+        private string m_Mask;
         private char m_MaskCharacter;
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace Gwen.Control
         /// </summary>
         protected override void OnTextChanged()
         {
-            m_Mask = new string(MaskCharacter, Text.Length);
+            m_Mask = new String(MaskCharacter, Text.Length);
             TextOverride = m_Mask;
             base.OnTextChanged();
         }

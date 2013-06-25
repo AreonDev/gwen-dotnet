@@ -26,7 +26,7 @@ namespace Gwen.Control
         /// <summary>
         /// Property value.
         /// </summary>
-        public String Value { get { return m_Property.Value; } set { m_Property.Value = value; } }
+        public string Value { get { return m_Property.Value; } set { m_Property.Value = value; } }
 
         /// <summary>
         /// Indicates whether the control is hovered by mouse pointer.
@@ -42,7 +42,7 @@ namespace Gwen.Control
         /// <summary>
         /// Property name.
         /// </summary>
-        public String Label { get { return m_Label.Text; } set { m_Label.Text = value; } }
+        public string Label { get { return m_Label.Text; } set { m_Label.Text = value; } }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PropertyRow"/> class.

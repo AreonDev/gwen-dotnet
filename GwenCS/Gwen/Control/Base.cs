@@ -48,7 +48,7 @@ namespace Gwen.Control
         private Padding m_Padding;
         private Margin m_Margin;
 
-        private String m_Name;
+        private string m_Name;
 
         private bool m_RestrictToParent;
         private bool m_Disabled;
@@ -96,7 +96,7 @@ namespace Gwen.Control
         /// <summary>
         /// Accelerator map.
         /// </summary>
-        private readonly Dictionary<String, GwenEventHandler> m_Accelerators;
+        private readonly Dictionary<string, GwenEventHandler> m_Accelerators;
 
         public const int MaxCoord = 4096; // added here from various places in code
 
@@ -312,7 +312,7 @@ namespace Gwen.Control
         /// <summary>
         /// Gets or sets the control's internal name.
         /// </summary>
-        public String Name { get { return m_Name; } set { m_Name = value; } }
+        public string Name { get { return m_Name; } set { m_Name = value; } }
 
         /// <summary>
         /// Control's size and position relative to the parent.
@@ -569,7 +569,7 @@ namespace Gwen.Control
         /// Creates a tooltip for the control.
         /// </summary>
         /// <param name="text">Tooltip text.</param>
-        public virtual void SetToolTipText(String text)
+        public virtual void SetToolTipText(string text)
         {
             Label tooltip = new Label(this);
             tooltip.AutoSizeToContents = true;
@@ -687,7 +687,7 @@ namespace Gwen.Control
         /// <param name="name">Child name.</param>
         /// <param name="recursive">Determines whether the search should be recursive.</param>
         /// <returns>Found control or null.</returns>
-        public virtual Base FindChildByName(String name, bool recursive = false)
+        public virtual Base FindChildByName(string name, bool recursive = false)
         {
             Base b = m_Children.Find(x => x.m_Name == name);
             if (b != null)
@@ -1653,7 +1653,7 @@ namespace Gwen.Control
         }
 
         // giver
-        public virtual void DragAndDrop_SetPackage(bool draggable, String name = "", object userData = null)
+        public virtual void DragAndDrop_SetPackage(bool draggable, string name = "", object userData = null)
         {
             if (m_DragAndDrop_Package == null)
             {
@@ -1754,7 +1754,7 @@ namespace Gwen.Control
         /// </summary>
         /// <param name="accelerator">Accelerator text.</param>
         /// <returns>True if handled.</returns>
-        internal virtual bool HandleAccelerator(String accelerator)
+        internal virtual bool HandleAccelerator(string accelerator)
         {
             if (InputHandler.KeyboardFocus == this || !AccelOnlyFocus)
             {
@@ -1773,7 +1773,7 @@ namespace Gwen.Control
         /// </summary>
         /// <param name="accelerator">Accelerator text.</param>
         /// <param name="handler">Handler.</param>
-        public void AddAccelerator(String accelerator, GwenEventHandler handler)
+        public void AddAccelerator(string accelerator, GwenEventHandler handler)
         {
             accelerator = accelerator.Trim().ToUpperInvariant();
             m_Accelerators[accelerator] = handler;
@@ -1783,7 +1783,7 @@ namespace Gwen.Control
         /// Adds keyboard accelerator with a default handler.
         /// </summary>
         /// <param name="accelerator">Accelerator text.</param>
-        public void AddAccelerator(String accelerator)
+        public void AddAccelerator(string accelerator)
         {
             m_Accelerators[accelerator] = DefaultAcceleratorHandler;
         }

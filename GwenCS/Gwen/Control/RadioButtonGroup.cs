@@ -18,12 +18,12 @@ namespace Gwen.Control
         /// <summary>
         /// Internal name of the selected radio button.
         /// </summary>
-        public String SelectedName { get { return m_Selected.Name; } }
+        public string SelectedName { get { return m_Selected.Name; } }
 
         /// <summary>
         /// Text of the selected radio button.
         /// </summary>
-        public String SelectedLabel { get { return m_Selected.Text; } }
+        public string SelectedLabel { get { return m_Selected.Text; } }
 
         /// <summary>
         /// Index of the selected radio button.
@@ -53,7 +53,7 @@ namespace Gwen.Control
         /// </summary>
         /// <param name="text">Option text.</param>
         /// <returns>Newly created control.</returns>
-        public virtual LabeledRadioButton AddOption(String text)
+        public virtual LabeledRadioButton AddOption(string text)
         {
             return AddOption(text, String.Empty);
         }
@@ -64,7 +64,7 @@ namespace Gwen.Control
         /// <param name="text">Option text.</param>
         /// <param name="optionName">Internal name.</param>
         /// <returns>Newly created control.</returns>
-        public virtual LabeledRadioButton AddOption(String text, String optionName)
+        public virtual LabeledRadioButton AddOption(string text, string optionName)
         {
             LabeledRadioButton lrb = new LabeledRadioButton(this);
             lrb.Name = optionName;

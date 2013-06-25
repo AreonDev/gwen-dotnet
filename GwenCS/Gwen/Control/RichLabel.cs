@@ -12,7 +12,7 @@ namespace Gwen.Control
         protected struct TextBlock
         {
             public BlockType Type;
-            public String Text;
+            public string Text;
             public Color Color;
             public Font Font;
         }
@@ -25,7 +25,7 @@ namespace Gwen.Control
 
         private bool m_NeedsRebuild;
         private readonly List<TextBlock> m_TextBlocks;
-        private readonly String[] newline;
+        private readonly string[] newline;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RichLabel"/> class.
@@ -53,7 +53,7 @@ namespace Gwen.Control
         /// <param name="text">Text to add.</param>
         /// <param name="color">Text color.</param>
         /// <param name="font">Font to use.</param>
-        public void AddText(String text, Color color, Font font = null)
+        public void AddText(string text, Color color, Font font = null)
         {
             if (String.IsNullOrEmpty(text))
                 return;
@@ -86,14 +86,14 @@ namespace Gwen.Control
             return base.SizeToChildren(width, height);
         }
 
-        protected void SplitLabel(String text, Font font, TextBlock block, ref int x, ref int y, ref int lineHeight)
+        protected void SplitLabel(string text, Font font, TextBlock block, ref int x, ref int y, ref int lineHeight)
         {
             var spaced = Util.SplitAndKeep(text, " ");
             if (spaced.Length == 0)
                 return;
 
             int spaceLeft = Width - x;
-            String leftOver;
+            string leftOver;
 
             // Does the whole word fit in?
             Point stringSize = Skin.Renderer.MeasureText(font, text);
@@ -116,7 +116,7 @@ namespace Gwen.Control
                 return;
             }
 
-            String newString = String.Empty;
+            string newString = String.Empty;
             for (int i = 0; i < spaced.Length; i++)
             {
                 wordSize = Skin.Renderer.MeasureText(font, newString + spaced[i]);
@@ -139,7 +139,7 @@ namespace Gwen.Control
             }
         }
 
-        protected void CreateLabel(String text, TextBlock block, ref int x, ref int y, ref int lineHeight, bool noSplit)
+        protected void CreateLabel(string text, TextBlock block, ref int x, ref int y, ref int lineHeight, bool noSplit)
         {
             // Use default font or is one set?
             Font font = Skin.DefaultFont;

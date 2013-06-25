@@ -49,7 +49,7 @@ namespace Gwen.Control
         /// <summary>
         /// Texture name.
         /// </summary>
-        public String ImageName
+        public string ImageName
         {
             get { return m_Texture.Name; }
             set { m_Texture.Load(value); }

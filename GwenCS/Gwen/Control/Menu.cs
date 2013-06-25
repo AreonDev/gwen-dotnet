@@ -95,7 +95,7 @@ namespace Gwen.Control
         /// </summary>
         /// <param name="text">Item text.</param>
         /// <returns>Newly created control.</returns>
-        public virtual MenuItem AddItem(String text)
+        public virtual MenuItem AddItem(string text)
         {
             return AddItem(text, String.Empty);
         }
@@ -107,7 +107,7 @@ namespace Gwen.Control
         /// <param name="iconName">Icon texture name.</param>
         /// <param name="accelerator">Accelerator for this item.</param>
         /// <returns>Newly created control.</returns>
-        public virtual MenuItem AddItem(String text, String iconName, String accelerator = "")
+        public virtual MenuItem AddItem(string text, string iconName, string accelerator = "")
         {
             MenuItem item = new MenuItem(this);
             item.Padding = Padding.Four;

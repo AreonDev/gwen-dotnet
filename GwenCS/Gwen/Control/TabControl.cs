@@ -81,7 +81,7 @@ namespace Gwen.Control
         /// <param name="label">Tab label.</param>
         /// <param name="page">Page contents.</param>
         /// <returns>Newly created control.</returns>
-        public TabButton AddPage(String label, Base page = null)
+        public TabButton AddPage(string label, Base page = null)
         {
             if (null == page)
             {

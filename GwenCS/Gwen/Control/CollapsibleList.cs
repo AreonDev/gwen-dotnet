@@ -68,7 +68,7 @@ namespace Gwen.Control
         /// </summary>
         /// <param name="categoryName">Name of the category.</param>
         /// <returns>Newly created control.</returns>
-        public virtual CollapsibleCategory Add(String categoryName)
+        public virtual CollapsibleCategory Add(string categoryName)
         {
             CollapsibleCategory cat = new CollapsibleCategory(this);
             cat.Text = categoryName;

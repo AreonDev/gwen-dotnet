@@ -190,7 +190,7 @@ namespace Gwen.Sample.SFML
                 {
                     MessageBox.Show("Failed to capture window");
                 }
-                String path = String.Format("screenshot-{0:D2}{1:D2}{2:D2}.png", DateTime.Now.Hour, DateTime.Now.Minute,
+                string path = String.Format("screenshot-{0:D2}{1:D2}{2:D2}.png", DateTime.Now.Hour, DateTime.Now.Minute,
                                             DateTime.Now.Second);
                 if (!img.SaveToFile(path))
                     MessageBox.Show(path, "Failed to save screenshot");

@@ -14,7 +14,7 @@ namespace Gwen.Control
         /// <summary>
         /// Header text.
         /// </summary>
-        public String Text { get { return m_HeaderButton.Text; } set { m_HeaderButton.Text = value; } }
+        public string Text { get { return m_HeaderButton.Text; } set { m_HeaderButton.Text = value; } }
 
         /// <summary>
         /// Determines whether the category is collapsed (closed).
@@ -106,7 +106,7 @@ namespace Gwen.Control
         /// </summary>
         /// <param name="name">Entry name (displayed).</param>
         /// <returns>Newly created control.</returns>
-        public Button Add(String name)
+        public Button Add(string name)
         {
             CategoryButton button = new CategoryButton(this);
             button.Text = name;

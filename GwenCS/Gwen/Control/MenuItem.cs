@@ -233,7 +233,7 @@ namespace Gwen.Control
             return this;
         }
 
-        public void SetAccelerator(String acc)
+        public void SetAccelerator(string acc)
         {
             if (m_Accelerator != null)
             {
@@ -241,7 +241,7 @@ namespace Gwen.Control
                 m_Accelerator = null;
             }
 
-            if (acc == string.Empty)
+            if (acc == String.Empty)
                 return;
 
             m_Accelerator = new Label(this);

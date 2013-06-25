@@ -7,7 +7,7 @@ using Gwen.Input;
 
 namespace Gwen.Control
 {
-    public class TextBoxMultiline : TextBox
+    public class MultilineTextBox : TextBox
     {
         private readonly ScrollControl m_ScrollControl;
 
@@ -34,7 +34,7 @@ namespace Gwen.Control
         /// Initializes a new instance of the <see cref="TextBox"/> class.
         /// </summary>
         /// <param name="parent">Parent control.</param>
-        public TextBoxMultiline(Base parent)
+        public MultilineTextBox(Base parent)
             : base(parent)
         {
             AutoSizeToContents = false;

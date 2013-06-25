@@ -39,7 +39,7 @@ namespace Gwen.Control.Property
             picker.Dock = Pos.Fill;
             picker.SetSize(256, 128);
 
-            String[] split = m_TextBox.Text.Split(' ');
+            string[] split = m_TextBox.Text.Split(' ');
 
             picker.SetColor(GetColorFromText(), false, true);
             picker.ColorChanged += OnColorChanged;
@@ -92,7 +92,7 @@ namespace Gwen.Control.Property
 
         private System.Drawing.Color GetColorFromText()
         {
-            String[] split = m_TextBox.Text.Split(' ');
+            string[] split = m_TextBox.Text.Split(' ');
 
             byte red = 0;
             byte green = 0;

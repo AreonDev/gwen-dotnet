@@ -24,10 +24,10 @@ namespace Gwen.Platform
         /// Gets text from clipboard.
         /// </summary>
         /// <returns>Clipboard text.</returns>
-        public static String GetClipboardText()
+        public static string GetClipboardText()
         {
             // code from http://forums.getpaint.net/index.php?/topic/13712-trouble-accessing-the-clipboard/page__view__findpost__p__226140
-            String ret = String.Empty;
+            string ret = String.Empty;
             Thread staThread = new Thread(
                 () =>
                 {
@@ -54,7 +54,7 @@ namespace Gwen.Platform
         /// </summary>
         /// <param name="text">Text to set.</param>
         /// <returns>True if succeeded.</returns>
-        public static bool SetClipboardText(String text)
+        public static bool SetClipboardText(string text)
         {
             bool ret = false;
             Thread staThread = new Thread(
@@ -101,7 +101,7 @@ namespace Gwen.Platform
         /// <param name="extension">File extension filter.</param>
         /// <param name="callback">Callback that is executed after the dialog completes.</param>
         /// <returns>True if succeeded.</returns>
-        public static bool FileOpen(String title, String startPath, String extension, Action<String> callback)
+        public static bool FileOpen(string title, string startPath, string extension, Action<string> callback)
         {
             var dialog = new OpenFileDialog
                              {
@@ -139,7 +139,7 @@ namespace Gwen.Platform
         /// <param name="extension">File extension filter.</param>
         /// <param name="callback">Callback that is executed after the dialog completes.</param>
         /// <returns>True if succeeded.</returns>
-        public static bool FileSave(String title, String startPath, String extension, Action<String> callback)
+        public static bool FileSave(string title, string startPath, string extension, Action<string> callback)
         {
             var dialog = new SaveFileDialog
             {

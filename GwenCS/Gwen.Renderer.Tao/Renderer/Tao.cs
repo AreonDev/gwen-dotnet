@@ -24,7 +24,7 @@ namespace Gwen.Renderer
         private readonly Vertex[] m_Vertices;
         private readonly int m_VertexSize;
 
-        private readonly Dictionary<Tuple<String, Font>, TextRenderer> m_StringCache;
+        private readonly Dictionary<Tuple<string, Font>, TextRenderer> m_StringCache;
         private readonly Graphics m_Graphics; // only used for text measurement
 
         public Tao()
@@ -389,7 +389,7 @@ namespace Gwen.Renderer
                 sysFont = font.RendererData as System.Drawing.Font;
             }
             
-            var key = new Tuple<String, Font>(text, font);
+            var key = new Tuple<string, Font>(text, font);
             if (m_StringCache.ContainsKey(key))
             {
                 var tex = m_StringCache[key].Texture;
@@ -412,7 +412,7 @@ namespace Gwen.Renderer
                 sysFont = font.RendererData as System.Drawing.Font;
             }
 
-            var key = new Tuple<String, Font>(text, font);
+            var key = new Tuple<string, Font>(text, font);
             if (!m_StringCache.ContainsKey(key))
             {
                 // not cached - create text renderer

@@ -14,7 +14,7 @@ namespace Gwen.Control
         /// <summary>
         /// Label text.
         /// </summary>
-        public String Text { get { return m_Label.Text; } set { m_Label.Text = value; } }
+        public string Text { get { return m_Label.Text; } set { m_Label.Text = value; } }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="LabeledRadioButton"/> class.

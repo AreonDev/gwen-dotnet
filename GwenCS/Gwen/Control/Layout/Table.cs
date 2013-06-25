@@ -125,7 +125,7 @@ namespace Gwen.Control.Layout
         /// </summary>
         /// <param name="text">Text to add.</param>
         /// <returns>New row.</returns>
-        public TableRow AddRow(String text)
+        public TableRow AddRow(string text)
         {
             var row = AddRow();
             row.SetCellText(0, text);

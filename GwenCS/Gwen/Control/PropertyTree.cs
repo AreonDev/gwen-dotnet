@@ -23,7 +23,7 @@ namespace Gwen.Control
         /// </summary>
         /// <param name="label">Node label.</param>
         /// <returns>Newly created control</returns>
-        public Properties Add(String label)
+        public Properties Add(string label)
         {
             TreeNode node = new PropertyTreeNode(this);
             node.Text = label;

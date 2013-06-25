@@ -67,7 +67,7 @@ namespace Gwen.UnitTest
             //DrawDebugOutlines = true;
         }
 
-        Base CreateControls(Control.Base subject, int dock_idx, String name, int x, int y)
+        Base CreateControls(Control.Base subject, int dock_idx, string name, int x, int y)
         {
             Control.GroupBox gb = new Control.GroupBox(this);
             gb.SetBounds(x, y, 200, 150);

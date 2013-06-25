@@ -22,7 +22,7 @@ namespace Gwen.Control
         /// <summary>
         /// Text.
         /// </summary>
-        public String Text { get { return m_Text.String; } set { SetText(value); } }
+        public string Text { get { return m_Text.String; } set { SetText(value); } }
 
         /// <summary>
         /// Font.
@@ -52,7 +52,7 @@ namespace Gwen.Control
         /// <summary>
         /// Text override - used to display different string.
         /// </summary>
-        public String TextOverride { get { return m_Text.TextOverride; } set { m_Text.TextOverride = value; } }
+        public string TextOverride { get { return m_Text.TextOverride; } set { m_Text.TextOverride = value; } }
         
         /// <summary>
         /// Width of the text (in pixels).
@@ -164,7 +164,7 @@ namespace Gwen.Control
         /// </summary>
         /// <param name="str">Text to set.</param>
         /// <param name="doEvents">Determines whether to invoke "text changed" event.</param>
-        public virtual void SetText(String str, bool doEvents = true)
+        public virtual void SetText(string str, bool doEvents = true)
         {
             if (Text == str)
                 return;

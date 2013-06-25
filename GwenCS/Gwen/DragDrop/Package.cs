@@ -6,7 +6,7 @@ namespace Gwen.DragDrop
 {
     public class Package
     {
-        public String Name;
+        public string Name;
         public object UserData;
         public bool IsDraggable;
         public Base DrawControl;

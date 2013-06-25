@@ -15,7 +15,7 @@ namespace Gwen.UnitTest
         private readonly Control.LabeledCheckBox m_DebugCheck;
 
         public double Fps; // set this in your rendering loop
-        public String Note; // additional text to display in status bar
+        public string Note; // additional text to display in status bar
 
         public UnitTest(Base parent) : base(parent)
         {
@@ -118,7 +118,7 @@ namespace Gwen.UnitTest
             PrintText("Unit Test started!");
         }
 
-        public void RegisterUnitTest(String name, CollapsibleCategory cat, GUnit test)
+        public void RegisterUnitTest(string name, CollapsibleCategory cat, GUnit test)
         {
             Control.Button btn = cat.Add(name);
             test.Dock = Pos.Fill;
@@ -148,7 +148,7 @@ namespace Gwen.UnitTest
             m_LastControl = test;
         }
 
-        public void PrintText(String str)
+        public void PrintText(string str)
         {
             m_TextOutput.AddRow(str);
             m_TextOutput.ScrollToBottom();

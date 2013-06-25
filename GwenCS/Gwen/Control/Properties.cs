@@ -66,7 +66,7 @@ namespace Gwen.Control
         /// <param name="label">Property name.</param>
         /// <param name="value">Initial value.</param>
         /// <returns>Newly created row.</returns>
-        public PropertyRow Add(String label, String value="")
+        public PropertyRow Add(string label, string value="")
         {
             return Add(label, new Property.Text(this), value);
         }
@@ -78,7 +78,7 @@ namespace Gwen.Control
         /// <param name="prop">Property control.</param>
         /// <param name="value">Initial value.</param>
         /// <returns>Newly created row.</returns>
-        public PropertyRow Add(String label, Property.Base prop, String value="")
+        public PropertyRow Add(string label, Property.Base prop, string value="")
         {
             PropertyRow row = new PropertyRow(this, prop);
             row.Dock = Pos.Top;

@@ -11,153 +11,163 @@ namespace Gwen.UnitTest
         private readonly Font m_Font3;
 
         public TextBox(Base parent)
-            : base(parent)
-        {
-            int row = 0;
+            : base(parent) {
+			int row = 0;
 
-            m_Font1 = new Font(Skin.Renderer, "Consolas", 14); // fixed width font!
-            m_Font2 = new Font(Skin.Renderer, "Impact", 50);
-            m_Font3 = new Font(Skin.Renderer, "Arial", 14);
+			m_Font1 = new Font(Skin.Renderer, "Consolas", 14); // fixed width font!
+			m_Font2 = new Font(Skin.Renderer, "Impact", 50);
+			m_Font3 = new Font(Skin.Renderer, "Arial", 14);
 
-            {
-                Control.TextBox label = new Control.TextBox(this);
-                label.SetText("Type something here");
-                label.SetPosition(10, 10 + 25 * row);
-                label.TextChanged += OnEdit;
-                label.SubmitPressed += OnSubmit;
-                row++;
-            }
+			/* Vanilla Textbox */
+			{
+				Control.TextBox textbox = new Control.TextBox(this);
+				textbox.SetText("Type something here");
+				textbox.SetPosition(10, 10 + 25 * row);
+				textbox.TextChanged += OnEdit;
+				textbox.SubmitPressed += OnSubmit;
+				row++;
+			}
 
-            {
-                Control.TextBoxPassword label = new Control.TextBoxPassword(this);
-                //label.MaskCharacter = '@';
-                label.SetText("secret");
-                label.TextChanged += OnEdit;
-                label.SetPosition(10, 10 + 25 * row);
-                row++;
-            }
+			/* Multiline Textbox */
+			{
+				Control.MultilineTextBox textbox = new Control.MultilineTextBox(this);
+				textbox.SetText("Type something here");
+				textbox.SetPosition(220, 10);
+				textbox.SetSize(400, 150);
+				textbox.TextChanged += OnEdit;
+				textbox.SubmitPressed += OnSubmit;
+			}
 
-            {
-                Control.TextBox label = new Control.TextBox(this);
-                label.SetText("Select All Text On Focus");
-                label.SetPosition(10, 10 + 25 * row);
-                label.SelectAllOnFocus = true;
-                row++;
-            }
+			{
+				Control.TextBoxPassword textbox = new Control.TextBoxPassword(this);
+				//textbox.MaskCharacter = '@';
+				textbox.SetText("secret");
+				textbox.TextChanged += OnEdit;
+				textbox.SetPosition(10, 10 + 25 * row);
+				row++;
+			}
 
-            {
-                Control.TextBox label = new Control.TextBox(this);
-                label.SetText("Different Coloured Text, for some reason");
-                label.TextColor = Color.ForestGreen;
-                label.SetPosition(10, 10 + 25 * row);
-                row++;
-            }
+			{
+				Control.TextBox textbox = new Control.TextBox(this);
+				textbox.SetText("Select All Text On Focus");
+				textbox.SetPosition(10, 10 + 25 * row);
+				textbox.SelectAllOnFocus = true;
+				row++;
+			}
 
-            {
-                Control.TextBox label = new Control.TextBoxNumeric(this);
-                label.SetText("200456698");
-                label.TextColor = Color.LightCoral;
-                label.SetPosition(10, 10 + 25 * row);
-                row++;
-            }
+			{
+				Control.TextBox textbox = new Control.TextBox(this);
+				textbox.SetText("Different Coloured Text, for some reason");
+				textbox.TextColor = Color.ForestGreen;
+				textbox.SetPosition(10, 10 + 25 * row);
+				row++;
+			}
 
-            row++;
+			{
+				Control.TextBox textbox = new Control.TextBoxNumeric(this);
+				textbox.SetText("200456698");
+				textbox.TextColor = Color.LightCoral;
+				textbox.SetPosition(10, 10 + 25 * row);
+				row++;
+			}
 
-            {
-                Control.TextBox label = new Control.TextBox(this);
-                label.SetText("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
-                label.TextColor = Color.Black;
-                label.SetPosition(10, 10 + 28 * row);
-                label.Font = m_Font3;
-                label.SizeToContents();
-                row++;
-            }
+			row++;
 
-            {
-                Control.TextBox label = new Control.TextBox(this);
-                label.SetText("..............................................................");
-                label.TextColor = Color.Black;
-                label.SetPosition(10, 10 + 28 * row);
-                label.Font = m_Font3;
-                label.SizeToContents();
-                row++;
-            }
+			{
+				Control.TextBox textbox = new Control.TextBox(this);
+				textbox.SetText("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+				textbox.TextColor = Color.Black;
+				textbox.SetPosition(10, 10 + 28 * row);
+				textbox.Font = m_Font3;
+				textbox.SizeToContents();
+				row++;
+			}
 
-            {
-                Control.TextBox label = new Control.TextBox(this);
-                label.SetText("public override void SetText(string str, bool doEvents = true)");
-                label.TextColor = Color.Black;
-                label.SetPosition(10, 10 + 28 * row);
-                label.Font = m_Font3;
-                label.SizeToContents();
-                row++;
-            }
+			{
+				Control.TextBox textbox = new Control.TextBox(this);
+				textbox.SetText("..............................................................");
+				textbox.TextColor = Color.Black;
+				textbox.SetPosition(10, 10 + 28 * row);
+				textbox.Font = m_Font3;
+				textbox.SizeToContents();
+				row++;
+			}
 
-            {
-                Control.TextBox label = new Control.TextBox(this);
-                label.SetText("あおい　うみから　やってきた");
-                label.TextColor = Color.Black;
-                label.SetPosition(10, 10 + 28 * row);
-                label.Font = m_Font3;
-                label.SizeToContents();
-                row++;
-            }
+			{
+				Control.TextBox textbox = new Control.TextBox(this);
+				textbox.SetText("public override void SetText(string str, bool doEvents = true)");
+				textbox.TextColor = Color.Black;
+				textbox.SetPosition(10, 10 + 28 * row);
+				textbox.Font = m_Font3;
+				textbox.SizeToContents();
+				row++;
+			}
 
-            row++;
+			{
+				Control.TextBox textbox = new Control.TextBox(this);
+				textbox.SetText("あおい　うみから　やってきた");
+				textbox.TextColor = Color.Black;
+				textbox.SetPosition(10, 10 + 28 * row);
+				textbox.Font = m_Font3;
+				textbox.SizeToContents();
+				row++;
+			}
 
-            {
-                Control.TextBox label = new Control.TextBox(this);
-                label.SetText("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
-                label.TextColor = Color.Black;
-                label.SetPosition(10, 10 + 28 * row);
-                label.Font = m_Font1;
-                label.SizeToContents();
-                row++;
-            }
+			row++;
 
-            {
-                Control.TextBox label = new Control.TextBox(this);
-                label.SetText("..............................................................");
-                label.TextColor = Color.Black;
-                label.SetPosition(10, 10 + 28 * row);
-                label.Font = m_Font1;
-                label.SizeToContents();
-                row++;
-            }
+			{
+				Control.TextBox textbox = new Control.TextBox(this);
+				textbox.SetText("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+				textbox.TextColor = Color.Black;
+				textbox.SetPosition(10, 10 + 28 * row);
+				textbox.Font = m_Font1;
+				textbox.SizeToContents();
+				row++;
+			}
 
-            {
-                Control.TextBox label = new Control.TextBox(this);
-                label.SetText("public override void SetText(string str, bool doEvents = true)");
-                label.TextColor = Color.Black;
-                label.SetPosition(10, 10 + 28 * row);
-                label.Font = m_Font1;
-                label.SizeToContents();
-                row++;
-            }
+			{
+				Control.TextBox textbox = new Control.TextBox(this);
+				textbox.SetText("..............................................................");
+				textbox.TextColor = Color.Black;
+				textbox.SetPosition(10, 10 + 28 * row);
+				textbox.Font = m_Font1;
+				textbox.SizeToContents();
+				row++;
+			}
 
-            {
-                Control.TextBox label = new Control.TextBox(this);
-                label.SetText("あおい　うみから　やってきた");
-                label.TextColor = Color.Black;
-                label.SetPosition(10, 10 + 28 * row);
-                label.Font = m_Font1;
-                label.SizeToContents();
-                row++;
-            }
+			{
+				Control.TextBox textbox = new Control.TextBox(this);
+				textbox.SetText("public override void SetText(string str, bool doEvents = true)");
+				textbox.TextColor = Color.Black;
+				textbox.SetPosition(10, 10 + 28 * row);
+				textbox.Font = m_Font1;
+				textbox.SizeToContents();
+				row++;
+			}
 
-            row++;
+			{
+				Control.TextBox textbox = new Control.TextBox(this);
+				textbox.SetText("あおい　うみから　やってきた");
+				textbox.TextColor = Color.Black;
+				textbox.SetPosition(10, 10 + 28 * row);
+				textbox.Font = m_Font1;
+				textbox.SizeToContents();
+				row++;
+			}
 
-            {
+			row++;
 
-                Control.TextBox label = new Control.TextBox(this);
-                label.SetText("Different Font (autosized)");
-                label.SetPosition(10, 10 + 28 * row);
-                label.Font = m_Font2;
-                label.SizeToContents();
+			{
 
-                row += 2;
-            }
-        }
+				Control.TextBox textbox = new Control.TextBox(this);
+				textbox.SetText("Different Font (autosized)");
+				textbox.SetPosition(10, 10 + 28 * row);
+				textbox.Font = m_Font2;
+				textbox.SizeToContents();
+
+				row += 2;
+			}
+		}
 
         public override void Dispose()
         {

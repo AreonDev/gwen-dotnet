@@ -116,7 +116,7 @@ namespace Gwen.Renderer
             catch (LoadingFailedException)
             {
                 // try to load windows font by this name
-                String path = Platform.Windows.GetFontPath(font.FaceName);
+                string path = Platform.Windows.GetFontPath(font.FaceName);
                 if (path != null)
                 {
                     try
@@ -174,7 +174,7 @@ namespace Gwen.Renderer
         /// <returns>
         /// Width and height of the rendered text.
         /// </returns>
-        public override Point MeasureText(Font font, String text)
+        public override Point MeasureText(Font font, string text)
         {
             // todo: cache results, this is slow
             global::SFML.Graphics.Font sfFont = font.RendererData as global::SFML.Graphics.Font;

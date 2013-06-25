@@ -75,7 +75,7 @@ namespace Gwen.Control
         /// <param name="text">Text to check.</param>
         /// <param name="position">Cursor position.</param>
         /// <returns>True if allowed.</returns>
-        protected virtual bool IsTextAllowed(String text, int position)
+        protected virtual bool IsTextAllowed(string text, int position)
         {
             return true;
         }
@@ -153,7 +153,7 @@ namespace Gwen.Control
         /// Inserts text at current cursor position, erasing selection if any.
         /// </summary>
         /// <param name="text">Text to insert.</param>
-        protected void InsertText(String text)
+        protected void InsertText(string text)
         {
             // TODO: Make sure fits (implement maxlength)
 
@@ -168,7 +168,7 @@ namespace Gwen.Control
             if (!IsTextAllowed(text, m_CursorPos))
                 return;
 
-            String str = Text;
+            string str = Text;
             str = str.Insert(m_CursorPos, text);
             SetText(str);
 
@@ -459,14 +459,14 @@ namespace Gwen.Control
         /// Returns currently selected text.
         /// </summary>
         /// <returns>Current selection.</returns>
-        public String GetSelection()
+        public string GetSelection()
         {
             if (!HasSelection) return String.Empty;
 
             int start = Math.Min(m_CursorPos, m_CursorEnd);
             int end = Math.Max(m_CursorPos, m_CursorEnd);
 
-            String str = Text;
+            string str = Text;
             return str.Substring(start, end - start);
         }
 
@@ -477,7 +477,7 @@ namespace Gwen.Control
         /// <param name="length">Length in characters.</param>
         public virtual void DeleteText(int startPos, int length)
         {
-            String str = Text;
+            string str = Text;
             str = str.Remove(startPos, length);
             SetText(str);
 

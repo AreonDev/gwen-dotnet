@@ -143,7 +143,7 @@ namespace Gwen.Input
             // [omeg] todo: alt?
 
             accelString.Append(chr);
-            String acc = accelString.ToString();
+            string acc = accelString.ToString();
 
             //Debug::Msg("Accelerator string :%S\n", accelString.c_str());)
 

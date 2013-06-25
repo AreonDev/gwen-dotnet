@@ -38,7 +38,7 @@ namespace Gwen.Control.Layout
         /// <summary>
         /// Text of the first column.
         /// </summary>
-        public String Text { get { return GetText(0); } set { SetCellText(0, value); } }
+        public string Text { get { return GetText(0); } set { SetCellText(0, value); } }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TableRow"/> class.
@@ -113,7 +113,7 @@ namespace Gwen.Control.Layout
         /// </summary>
         /// <param name="column">Column number.</param>
         /// <param name="text">Text to set.</param>
-        public void SetCellText(int column, String text)
+        public void SetCellText(int column, string text)
         {
             if (null == m_Columns[column]) 
                 return;
@@ -204,7 +204,7 @@ namespace Gwen.Control.Layout
         /// </summary>
         /// <param name="column">Column index.</param>
         /// <returns>Column cell text.</returns>
-        public String GetText(int column = 0)
+        public string GetText(int column = 0)
         {
             return m_Columns[column].Text;
         }

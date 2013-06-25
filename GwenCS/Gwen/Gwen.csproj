@@ -75,7 +75,7 @@
     <Compile Include="Control\CollapsibleList.cs" />
     <Compile Include="Control\DockBase.cs" />
     <Compile Include="Control\DockedTabControl.cs" />
-    <Compile Include="Control\TextBoxMultiline.cs" />
+    <Compile Include="Control\MultilineTextBox.cs" />
     <Compile Include="Control\VerticalSplitter.cs" />
     <Compile Include="Control\Layout\Positioner.cs" />
     <Compile Include="Control\MessageBox.cs" />

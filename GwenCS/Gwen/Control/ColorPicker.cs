@@ -56,7 +56,7 @@ namespace Gwen.Control
             SelectedColor = Color.FromArgb(255, 50, 60, 70);
         }
 
-        private void CreateColorControl(String name, int y)
+        private void CreateColorControl(string name, int y)
         {
             const int colorSize = 12;
 
@@ -137,7 +137,7 @@ namespace Gwen.Control
             //UpdateControls();
         }
 
-        private void UpdateColorControls(String name, Color col, int sliderVal)
+        private void UpdateColorControls(string name, Color col, int sliderVal)
         {
             ColorDisplay disp = FindChildByName(name, true) as ColorDisplay;
             disp.Color = col;
@@ -198,7 +198,7 @@ namespace Gwen.Control
             //UpdateControls(); // this spams events continuously every tick
         }
 
-        private int GetColorByName(String colorName)
+        private int GetColorByName(string colorName)
         {
             if (colorName == "Red")
                 return SelectedColor.R;
@@ -211,7 +211,7 @@ namespace Gwen.Control
             return 0;
         }
 
-        private static String GetColorFromName(String name)
+        private static string GetColorFromName(string name)
         {
             if (name.Contains("Red"))
                 return "Red";
@@ -224,7 +224,7 @@ namespace Gwen.Control
             return String.Empty;
         }
 
-        private void SetColorByName(String colorName, int colorValue)
+        private void SetColorByName(string colorName, int colorValue)
         {
             if (colorName == "Red")
                 R = colorValue;

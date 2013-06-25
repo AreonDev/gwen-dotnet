@@ -22,7 +22,7 @@ namespace Gwen.Control
             SetText("0", false);
         }
 
-        protected virtual bool IsTextAllowed(String str)
+        protected virtual bool IsTextAllowed(string str)
         {
             if (str == "" || str == "-")
                 return true; // annoying if single - is not allowed
@@ -36,9 +36,9 @@ namespace Gwen.Control
         /// <param name="text">Text to check.</param>
         /// <param name="position">Cursor position.</param>
         /// <returns>True if allowed.</returns>
-        protected override bool IsTextAllowed(String text, int position)
+        protected override bool IsTextAllowed(string text, int position)
         {
-            String newText = Text.Insert(position, text);
+            string newText = Text.Insert(position, text);
             return IsTextAllowed(newText);
         }
 

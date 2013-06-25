@@ -281,7 +281,7 @@ namespace Gwen.Skin
         /// </summary>
         /// <param name="renderer">Renderer to use.</param>
         /// <param name="textureName">Name of the skin texture map.</param>
-        public TexturedBase(Renderer.Base renderer, String textureName)
+        public TexturedBase(Renderer.Base renderer, string textureName)
             : base(renderer)
         {
             m_Texture = new Texture(Renderer);

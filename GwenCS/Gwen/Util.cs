@@ -138,7 +138,7 @@ namespace Gwen
         /// <param name="text">String to split.</param>
         /// <param name="separators">Separator characters.</param>
         /// <returns>Split strings.</returns>
-        public static String[] SplitAndKeep(String text, String separators)
+        public static string[] SplitAndKeep(string text, string separators)
         {
             return Regex.Split(text, @"(?=[" + separators + "])");
         }

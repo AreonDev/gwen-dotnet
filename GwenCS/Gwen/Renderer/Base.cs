@@ -198,7 +198,7 @@ namespace Gwen.Renderer
         /// <param name="font">Font to use.</param>
         /// <param name="text">Text to measure.</param>
         /// <returns>Width and height of the rendered text.</returns>
-        public virtual Point MeasureText(Font font, String text)
+        public virtual Point MeasureText(Font font, string text)
         {
             Point p = new Point((int)(font.Size * Scale * text.Length * 0.4f), (int)(font.Size * Scale));
 
@@ -211,7 +211,7 @@ namespace Gwen.Renderer
         /// <param name="font">Font to use.</param>
         /// <param name="position">Top-left corner of the text.</param>
         /// <param name="text">Text to render.</param>
-        public virtual void RenderText(Font font, Point position, String text)
+        public virtual void RenderText(Font font, Point position, string text)
         {
             float size = font.Size * Scale;
 

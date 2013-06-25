@@ -21,7 +21,7 @@ namespace Gwen.Control
         /// <param name="parent">Parent control.</param>
         /// <param name="text">Message to display.</param>
         /// <param name="caption">Window caption.</param>
-        public MessageBox(Base parent, String text, String caption = "") 
+        public MessageBox(Base parent, string text, string caption = "") 
             : base(parent, caption, true)
         {
             DeleteOnClose = true;

@@ -12,7 +12,7 @@ namespace Gwen.UnitTest
             
         }
 
-        public void UnitPrint(String str)
+        public void UnitPrint(string str)
         {
             if (UnitTest != null)
                 UnitTest.PrintText(str);

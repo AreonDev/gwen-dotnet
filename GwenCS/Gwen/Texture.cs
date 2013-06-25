@@ -11,7 +11,7 @@ namespace Gwen
         /// <summary>
         /// Texture name. Usually file name, but exact meaning depends on renderer.
         /// </summary>
-        public String Name { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// Renderer data.
@@ -51,7 +51,7 @@ namespace Gwen
         /// Loads the specified texture.
         /// </summary>
         /// <param name="name">Texture name.</param>
-        public void Load(String name)
+        public void Load(string name)
         {
             Name = name;
             m_Renderer.LoadTexture(this);

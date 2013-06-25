@@ -156,7 +156,7 @@ namespace Gwen.Control
         /// </summary>
         /// <param name="rowText">Text to search for (exact match).</param>
         /// <param name="clearOthers">Determines whether to deselect previously selected rows.</param>
-        public void SelectRows(String rowText, bool clearOthers = false)
+        public void SelectRows(string rowText, bool clearOthers = false)
         {
             var rows = m_Table.Children.OfType<ListBoxRow>().Where(x => x.Text == rowText);
             foreach (ListBoxRow row in rows)
@@ -171,7 +171,7 @@ namespace Gwen.Control
         /// <param name="pattern">Regex pattern to search for.</param>
         /// <param name="regexOptions">Regex options.</param>
         /// <param name="clearOthers">Determines whether to deselect previously selected rows.</param>
-        public void SelectRowsByRegex(String pattern, RegexOptions regexOptions = RegexOptions.None, bool clearOthers = false)
+        public void SelectRowsByRegex(string pattern, RegexOptions regexOptions = RegexOptions.None, bool clearOthers = false)
         {
             var rows = m_Table.Children.OfType<ListBoxRow>().Where(x => Regex.IsMatch(x.Text, pattern));
             foreach (ListBoxRow row in rows)
@@ -224,7 +224,7 @@ namespace Gwen.Control
         /// </summary>
         /// <param name="label">Row text.</param>
         /// <returns>Newly created control.</returns>
-        public ListBoxRow AddRow(String label)
+        public ListBoxRow AddRow(string label)
         {
             return AddRow(label, String.Empty);
         }
@@ -235,7 +235,7 @@ namespace Gwen.Control
         /// <param name="label">Row text.</param>
         /// <param name="name">Internal control name.</param>
         /// <returns>Newly created control.</returns>
-        public ListBoxRow AddRow(String label, String name)
+        public ListBoxRow AddRow(string label, string name)
         {
             return AddRow(label, name, null);
         }
@@ -247,7 +247,7 @@ namespace Gwen.Control
         /// <param name="name">Internal control name.</param>
         /// <param name="UserData">User data for newly created row</param>
         /// <returns>Newly created control.</returns>
-        public ListBoxRow AddRow(String label, String name, Object UserData)
+        public ListBoxRow AddRow(string label, string name, Object UserData)
         {
             ListBoxRow row = new ListBoxRow(this);
             m_Table.AddRow(row);

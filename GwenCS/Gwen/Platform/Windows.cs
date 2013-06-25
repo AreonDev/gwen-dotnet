@@ -12,16 +12,16 @@ namespace Gwen.Platform
     /// </summary>
     public static class Windows
     {
-        private const String FontRegKey = @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts";
+        private const string FontRegKey = @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts";
 
-        private static Dictionary<String, String> m_FontPaths;
+        private static Dictionary<string, string> m_FontPaths;
 
         /// <summary>
         /// Gets a font file path from font name.
         /// </summary>
         /// <param name="fontName">Font name.</param>
         /// <returns>Font file path.</returns>
-        public static String GetFontPath(String fontName)
+        public static string GetFontPath(string fontName)
         {
             // is this reliable? we rely on lazy jitting to not run win32 code on linux
             if (Environment.OSVersion.Platform != PlatformID.Win32NT)
@@ -39,17 +39,17 @@ namespace Gwen.Platform
         private static void InitFontPaths()
         {
             // very hacky but better than nothing
-            m_FontPaths = new Dictionary<String, String>();
-            String fontsDir = Environment.GetFolderPath(Environment.SpecialFolder.Fonts);
+            m_FontPaths = new Dictionary<string, string>();
+            string fontsDir = Environment.GetFolderPath(Environment.SpecialFolder.Fonts);
 
             RegistryKey key = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Default);
             RegistryKey subkey = key.OpenSubKey(FontRegKey);
-            foreach (String fontName in subkey.GetValueNames())
+            foreach (string fontName in subkey.GetValueNames())
             {
-                String fontFile = (String)subkey.GetValue(fontName);
+                string fontFile = (string)subkey.GetValue(fontName);
                 if (!fontName.EndsWith(" (TrueType)"))
                     continue;
-                String font = fontName.Replace(" (TrueType)", "");
+                string font = fontName.Replace(" (TrueType)", "");
                 m_FontPaths[font] = Path.Combine(fontsDir, fontFile);
             }
             key.Dispose();

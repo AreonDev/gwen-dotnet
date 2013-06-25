@@ -79,7 +79,7 @@ namespace Gwen.Skin
         /// </summary>
         /// <param name="faceName">Font name. Meaning can vary depending on the renderer.</param>
         /// <param name="size">Font size.</param>
-        public virtual void SetDefaultFont(String faceName, int size = 10)
+        public virtual void SetDefaultFont(string faceName, int size = 10)
         {
             m_DefaultFont.FaceName = faceName;
             m_DefaultFont.Size = size;

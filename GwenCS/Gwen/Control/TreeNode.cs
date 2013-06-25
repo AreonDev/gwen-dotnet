@@ -80,7 +80,7 @@ namespace Gwen.Control
         /// <summary>
         /// Node's label.
         /// </summary>
-        public String Text { get { return m_Title.Text; } set { m_Title.Text = value; } }
+        public string Text { get { return m_Title.Text; } set { m_Title.Text = value; } }
 
         /// <summary>
         /// Invoked when the node label has been pressed.

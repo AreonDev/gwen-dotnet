@@ -19,7 +19,7 @@ namespace Gwen.Control
         /// <summary>
         /// Window caption.
         /// </summary>
-        public String Title { get { return m_Title.Text; } set { m_Title.Text = value; } }
+        public string Title { get { return m_Title.Text; } set { m_Title.Text = value; } }
 
         /// <summary>
         /// Determines whether the window has close button.
@@ -55,7 +55,7 @@ namespace Gwen.Control
         /// <param name="parent">Parent control.</param>
         /// <param name="caption">Window caption.</param>
         /// <param name="modal">Determines whether the window should be modal.</param>
-        public WindowControl(Base parent, String title = "", bool modal = false)
+        public WindowControl(Base parent, string title = "", bool modal = false)
             : base(parent)
         {
             m_TitleBar = new Dragger(this);

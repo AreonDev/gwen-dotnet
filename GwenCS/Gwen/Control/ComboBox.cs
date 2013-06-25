@@ -75,7 +75,7 @@ namespace Gwen.Control
         /// <param name="label">Item label (displayed).</param>
         /// <param name="name">Item name.</param>
         /// <returns>Newly created control.</returns>
-        public virtual MenuItem AddItem(String label, String name = "", object UserData = null)
+        public virtual MenuItem AddItem(string label, string name = "", object UserData = null)
         {
             MenuItem item = m_Menu.AddItem(label, String.Empty);
             item.Name = name;

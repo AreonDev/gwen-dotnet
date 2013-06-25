@@ -200,7 +200,7 @@ namespace Gwen.Control
         /// </summary>
         /// <param name="textureName">Texture name. Null to remove.</param>
         /// <param name="center">Determines whether the image should be centered.</param>
-        public virtual void SetImage(String textureName, bool center = false)
+        public virtual void SetImage(string textureName, bool center = false)
         {
             if (String.IsNullOrEmpty(textureName))
             {
