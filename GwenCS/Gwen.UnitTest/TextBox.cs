@@ -34,8 +34,6 @@ namespace Gwen.UnitTest
 				textbox.SetText("Type something here");
 				textbox.SetPosition(220, 10);
 				textbox.SetSize(400, 150);
-				textbox.TextChanged += OnEdit;
-				textbox.SubmitPressed += OnSubmit;
 			}
 
 			{

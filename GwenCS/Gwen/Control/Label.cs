@@ -22,7 +22,7 @@ namespace Gwen.Control
         /// <summary>
         /// Text.
         /// </summary>
-        public string Text { get { return m_Text.String; } set { SetText(value); } }
+        public virtual string Text { get { return m_Text.String; } set { SetText(value); } }
 
         /// <summary>
         /// Font.
@@ -194,9 +194,9 @@ namespace Gwen.Control
         /// </summary>
         /// <param name="index">Character index.</param>
         /// <returns>Character coordinates (local).</returns>
-        public virtual Point GetCharacterPosition(int index, bool Multiline = false)
+        public virtual Point GetCharacterPosition(int index)
         {
-            Point p = m_Text.GetCharacterPosition(index, Multiline);
+            Point p = m_Text.GetCharacterPosition(index);
             return new Point(p.X + m_Text.X, p.Y + m_Text.Y);
         }
 

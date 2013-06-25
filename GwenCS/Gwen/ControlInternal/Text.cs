@@ -169,41 +169,21 @@ namespace Gwen.ControlInternal
         /// </summary>
         /// <param name="index">Character index.</param>
         /// <returns>Character position in local coordinates.</returns>
-        public Point GetCharacterPosition(int index, bool Multiline = false)
+        public Point GetCharacterPosition(int index)
         {
             if (Length == 0 || index == 0)
             {
                 return new Point(0, 0);
             }
 
-            if (!Multiline)
-            {
-                string sub = (TextOverride ?? String).Substring(0, index);
-                Point p = Skin.Renderer.MeasureText(Font, sub);
+			string sub = (TextOverride ?? String).Substring(0, index);
+			Point p = Skin.Renderer.MeasureText(Font, sub);
 
-                //if(p.Y >= Font.Size)
-                //	p = new Point(p.X, p.Y - Font.Size);
-                p.Y = 0;
+			//if(p.Y >= Font.Size)
+			//	p = new Point(p.X, p.Y - Font.Size);
+			p.Y = 0;
 
-                return p;
-            }
-            else
-            {
-                string str = (TextOverride ?? String).Substring(0, index);
-                int curr_line_begin = str.LastIndexOf('\n');
-                if (curr_line_begin == -1)
-                {
-                    curr_line_begin = 0;
-                }
-                int sizeofl = Skin.Renderer.MeasureText(Font, "l").X;
-                Point p = Skin.Renderer.MeasureText(Font, (str + "l").Substring(curr_line_begin, index - curr_line_begin));
-                //p.X -= sizeofl;
-
-                int numberofnewlines = str.Length - str.Replace("\n", "").Length;
-                p.Y = (Font.Size * (numberofnewlines));
-
-                return new Point(p.X, p.Y);
-            }
+			return p;
         }
 
         /// <summary>
@@ -230,5 +210,5 @@ namespace Gwen.ControlInternal
 
             return c;
         }
-    }
+	}
 }

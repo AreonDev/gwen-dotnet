@@ -11,8 +11,8 @@ namespace Gwen.Control
     {
         private bool m_SelectAll;
 
-        protected int m_CursorPos;
-        protected int m_CursorEnd;
+        private int m_CursorPos;
+        private int m_CursorEnd;
 
         protected Rectangle m_SelectionBounds;
         protected Rectangle m_CaretBounds;
@@ -30,17 +30,17 @@ namespace Gwen.Control
         /// <summary>
         /// Indicates whether the text has active selection.
         /// </summary>
-        public bool HasSelection { get { return m_CursorPos != m_CursorEnd; } }
+        public virtual bool HasSelection { get { return m_CursorPos != m_CursorEnd; } }
 
         /// <summary>
         /// Invoked when the text has changed.
         /// </summary>
-        public event GwenEventHandler TextChanged;
+        public GwenEventHandler TextChanged;
 
         /// <summary>
         /// Invoked when the submit key has been pressed.
         /// </summary>
-        public event GwenEventHandler SubmitPressed;
+        public GwenEventHandler SubmitPressed;
 
         /// <summary>
         /// Current cursor position (character index).
@@ -153,7 +153,7 @@ namespace Gwen.Control
         /// Inserts text at current cursor position, erasing selection if any.
         /// </summary>
         /// <param name="text">Text to insert.</param>
-        protected void InsertText(string text)
+        protected virtual void InsertText(string text)
         {
             // TODO: Make sure fits (implement maxlength)
 
