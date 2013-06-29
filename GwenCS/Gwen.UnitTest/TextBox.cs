@@ -31,7 +31,7 @@ namespace Gwen.UnitTest
 			/* Multiline Textbox */
 			{
 				Control.MultilineTextBox textbox = new Control.MultilineTextBox(this);
-				textbox.SetText("Type something here");
+				textbox.SetText("Type something here\nOr type something here\nWhicheverline you want to write on\nis fine with me.");
 				textbox.SetPosition(220, 10);
 				textbox.SetSize(400, 150);
 			}

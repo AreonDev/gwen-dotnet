@@ -35,12 +35,12 @@ namespace Gwen.Control
         /// <summary>
         /// Invoked when the text has changed.
         /// </summary>
-        public GwenEventHandler TextChanged;
+		public event GwenEventHandler TextChanged;
 
         /// <summary>
         /// Invoked when the submit key has been pressed.
         /// </summary>
-        public GwenEventHandler SubmitPressed;
+		public event GwenEventHandler SubmitPressed;
 
         /// <summary>
         /// Current cursor position (character index).
@@ -87,6 +87,7 @@ namespace Gwen.Control
         public TextBox(Base parent)
             : base(parent)
         {
+			AutoSizeToContents = false;
             SetSize(200, 20);
 
             MouseInputEnabled = true;
@@ -521,7 +522,7 @@ namespace Gwen.Control
                 return;
             }
 
-            int c = GetClosestCharacter(x, y);
+            int c = GetClosestCharacter(x, y).X;
 
             if (down)
             {
@@ -554,7 +555,7 @@ namespace Gwen.Control
             base.OnMouseMoved(x, y, dx, dy);
             if (InputHandler.MouseFocus != this) return;
 
-            int c = GetClosestCharacter(x, y);
+            int c = GetClosestCharacter(x, y).X;
 
             CursorPos = c;
         }

@@ -109,9 +109,9 @@ namespace Gwen.Control
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <returns></returns>
-        protected int GetClosestCharacter(int x, int y)
+        protected virtual Point GetClosestCharacter(int x, int y)
         { 
-            return m_Text.GetClosestCharacter(m_Text.CanvasPosToLocal(new Point(x, y))); 
+            return new Point(m_Text.GetClosestCharacter(m_Text.CanvasPosToLocal(new Point(x, y))), 0); 
         }
 
         /// <summary>
