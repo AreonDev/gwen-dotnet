@@ -797,26 +797,37 @@ namespace Gwen.Control
 			Point p = CanvasPosToLocal(new Point(px, py));
 			double distance = Double.MaxValue;
 			Point Best = new Point(0, 0);
-
 			string sub = String.Empty;
+
+			/* Find the appropriate Y row (always pick whichever y the mouse currently is on) */
 			for (int y = 0; y < m_TextLines.Count(); y++) {
-				for (int i = 0; i < y; i++) {
-					sub = Environment.NewLine;
+				sub += m_TextLines[y] + Environment.NewLine;
+				Point cp = Skin.Renderer.MeasureText(Font, sub);
+
+				double YDist = Math.Abs(cp.Y - p.Y);
+				if (YDist < distance) {
+					distance = YDist;
+					Best.Y = y;
 				}
-				for (int x = 0; x < m_TextLines[y].Length; x++) {
-					sub += m_TextLines[y][x]; //Add the next character
+			}
 
-					Point cp = Skin.Renderer.MeasureText(Font, sub);
+			/* Find the best X row, closest char */
+			sub = String.Empty;
+			distance = Double.MaxValue;
+			for (int x = 0; x <= m_TextLines[Best.Y].Count(); x++) {
+				if (x < m_TextLines[Best.Y].Count()) {
+					sub += m_TextLines[Best.Y][x];
+				} else {
+					sub += " ";
+				}
 
-					int XDiff = Math.Abs(cp.X - p.X); 
-					int YDiff = Math.Abs(cp.Y - p.Y);
-					double dist =  Math.Sqrt((XDiff*XDiff) + (YDiff*YDiff));
+				Point cp = Skin.Renderer.MeasureText(Font, sub);
 
-					if (dist > distance)
-						continue;
+				double XDiff = Math.Abs(cp.X - p.X); 
 
-					distance = dist;
-					Best = new Point(x, y);
+				if (XDiff < distance){
+					distance = XDiff;
+					Best.X = x;
 				}
 			}
 
