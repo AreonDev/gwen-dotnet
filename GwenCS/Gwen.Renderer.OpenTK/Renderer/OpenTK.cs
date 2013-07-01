@@ -428,6 +428,10 @@ namespace Gwen.Renderer
                 // not cached - create text renderer
                 Debug.Print(String.Format("RenderText: caching \"{0}\", {1}", text, font.FaceName));
 
+				Point TabSize = MeasureText(font, "    "); 
+				m_StringFormat.SetTabStops(0f, new float[] { TabSize.X });
+
+
                 Point size = MeasureText(font, text);
                 TextRenderer tr = new TextRenderer(size.X, size.Y, this);
                 tr.DrawString(text, sysFont, Brushes.White, Point.Empty, m_StringFormat); // renders string on the texture
