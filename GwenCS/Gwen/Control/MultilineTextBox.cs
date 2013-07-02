@@ -87,7 +87,10 @@ namespace Gwen.Control
 				if (m_TextLines == null || m_TextLines.Count() == 0) 
 					return new Point(0, 0);
 
-				int Y = m_CursorEnd.Y; //Y is always good
+				int Y = m_CursorEnd.Y;
+				Y = Math.Max(Y, 0);
+				Y = Math.Min(Y, m_TextLines.Count() - 1);
+
 				int X = m_CursorEnd.X; //X may be beyond the last character, but we will want to draw it at the end of line.
 				X = Math.Max(X, 0);
 				X = Math.Min(X, m_TextLines[Y].Length);
@@ -738,11 +741,21 @@ namespace Gwen.Control
 
 				m_TextLines[StartPoint.Y] = m_TextLines[StartPoint.Y].Remove(start, end - start);
 			} else {
-				m_TextLines[StartPoint.Y] = m_TextLines[StartPoint.Y].Remove(StartPoint.X); //Remove start
-				for (int i = 1; i < EndPoint.Y - StartPoint.Y; i++) {
-					m_TextLines.RemoveAt(StartPoint.Y + 1); //Remove middle
+				/* Remove Start */
+				if (StartPoint.X < m_TextLines[StartPoint.Y].Length) {
+					m_TextLines[StartPoint.Y] = m_TextLines[StartPoint.Y].Remove(StartPoint.X); 
 				}
-				m_TextLines[StartPoint.Y + 1] = m_TextLines[StartPoint.Y + 1].Remove(0, EndPoint.X); //Remove end
+
+				/* Remove Middle */
+				for (int i = 1; i < EndPoint.Y - StartPoint.Y; i++) {
+					m_TextLines.RemoveAt(StartPoint.Y + 1);
+				}
+
+				/* Remove End */
+				if (EndPoint.X < m_TextLines[StartPoint.Y + 1].Length) {
+					m_TextLines[StartPoint.Y] += m_TextLines[StartPoint.Y + 1].Substring(EndPoint.X);
+				}
+				m_TextLines.RemoveAt(StartPoint.Y + 1);
 			}
 
 			// Move the cursor to the start of the selection, 
