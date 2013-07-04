@@ -87,6 +87,51 @@ namespace Gwen.Control
         /// </summary>
         public Padding TextPadding { get { return m_TextPadding; } set { m_TextPadding = value; Invalidate(); InvalidateParent(); } }
 
+		public override event Base.GwenEventHandler<ClickedEventArgs> Clicked {
+			add {
+				base.Clicked += value;
+				MouseInputEnabled = ClickEventAssigned;
+			}
+			remove {
+				base.Clicked -= value;
+				MouseInputEnabled = ClickEventAssigned;
+			}
+		}
+
+		public override event Base.GwenEventHandler<ClickedEventArgs> DoubleClicked {
+			add {
+				base.DoubleClicked += value;
+				MouseInputEnabled = ClickEventAssigned;
+			}
+			remove {
+				base.DoubleClicked -= value;
+				MouseInputEnabled = ClickEventAssigned;
+			}
+		}
+
+		public override event Base.GwenEventHandler<ClickedEventArgs> RightClicked {
+			add {
+				base.RightClicked += value;
+				MouseInputEnabled = ClickEventAssigned;
+			}
+			remove {
+				base.RightClicked -= value;
+				MouseInputEnabled = ClickEventAssigned;
+			}
+		}
+
+		public override event Base.GwenEventHandler<ClickedEventArgs> DoubleRightClicked {
+			add {
+				base.DoubleRightClicked += value;
+				MouseInputEnabled = ClickEventAssigned;
+			}
+			remove {
+				base.DoubleRightClicked -= value;
+				MouseInputEnabled = ClickEventAssigned;
+			}
+		}
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Label"/> class.
         /// </summary>
@@ -96,7 +141,7 @@ namespace Gwen.Control
             m_Text = new Text(this);
             //m_Text.Font = Skin.DefaultFont;
 
-			MouseInputEnabled = true;
+			MouseInputEnabled = false;
             SetSize(100, 10);
             Alignment = Pos.Left | Pos.Top;
 

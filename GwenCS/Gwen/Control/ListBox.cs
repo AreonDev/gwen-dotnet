@@ -125,6 +125,7 @@ namespace Gwen.Control
         {
             m_SelectedRows = new List<ListBoxRow>();
 
+			MouseInputEnabled = true;
             EnableScroll(false, true);
             AutoHideBars = true;
             Margin = Margin.One;
