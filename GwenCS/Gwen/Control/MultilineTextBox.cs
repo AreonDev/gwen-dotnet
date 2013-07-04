@@ -189,6 +189,14 @@ namespace Gwen.Control
 			AddAccelerator("Ctrl + A", OnSelectAll);
         }
 
+		public string GetTextLine(int index) {
+			return m_TextLines[index];
+		}
+
+		public void SetTextLine(int index, string value) {
+			m_TextLines[index] = value;
+		}
+
 		/// <summary>
 		/// Refreshes the cursor location and selected area when the inner panel scrolls
 		/// </summary>
