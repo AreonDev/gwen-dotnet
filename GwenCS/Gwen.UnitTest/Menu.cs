@@ -1,5 +1,6 @@
 ﻿using System;
 using Gwen.Control;
+using System.Drawing;
 
 namespace Gwen.UnitTest
 {
@@ -14,7 +15,8 @@ namespace Gwen.UnitTest
 				lblClickMe.SetPosition(10, 30);
 				lblClickMe.RightClicked += delegate(Control.Base sender, ClickedEventArgs args) {
 					Control.Menu menu = new Control.Menu(this);
-					menu.SetPosition(args.X - parent.X, args.Y - parent.Y);
+					Point Local = this.CanvasPosToLocal(new Point(args.X, args.Y));
+					menu.SetPosition(Local.X, Local.Y);
 					menu.AddItem("Test");
 					menu.AddItem("Clickable").Clicked += delegate(Control.Base sender2, ClickedEventArgs args2) {
 						UnitPrint("Clickable item was clicked");

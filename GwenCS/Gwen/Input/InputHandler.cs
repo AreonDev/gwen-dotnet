@@ -286,8 +286,6 @@ namespace Gwen.Input
             }
 #endif
 
-			int RelativeX = MousePosition.X - HoveredControl.GlobalX;
-			int RelativeY = MousePosition.Y - HoveredControl.GlobalY;
             switch (mouseButton)
             {
                 case 0:
@@ -296,18 +294,18 @@ namespace Gwen.Input
                             return true;
 
                         if (isDoubleClick)
-							HoveredControl.InputMouseDoubleClickedLeft(RelativeX, RelativeY);
+							HoveredControl.InputMouseDoubleClickedLeft(MousePosition.X, MousePosition.Y);
                         else
-							HoveredControl.InputMouseClickedLeft(RelativeX, RelativeY, down);
+							HoveredControl.InputMouseClickedLeft(MousePosition.X, MousePosition.Y, down);
                         return true;
                     }
 
                 case 1: 
                     {
                         if (isDoubleClick)
-							HoveredControl.InputMouseDoubleClickedRight(RelativeX, RelativeY);
+							HoveredControl.InputMouseDoubleClickedRight(MousePosition.X, MousePosition.Y);
                         else
-							HoveredControl.InputMouseClickedRight(RelativeX, RelativeY, down);
+							HoveredControl.InputMouseClickedRight(MousePosition.X, MousePosition.Y, down);
                         return true;
                     }
             }
