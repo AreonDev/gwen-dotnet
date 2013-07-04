@@ -399,6 +399,9 @@ namespace Gwen.Renderer
                 return new Point(tex.Width, tex.Height);
             }
 
+			SizeF TabSize = m_Graphics.MeasureString("....", sysFont); //Spaces are not being picked up, let's just use .'s.
+			m_StringFormat.SetTabStops(0f, new float[] { TabSize.Width });
+
             SizeF size = m_Graphics.MeasureString(text, sysFont, Point.Empty, m_StringFormat);
 
             return new Point((int)Math.Round(size.Width), (int)Math.Round(size.Height));
@@ -427,10 +430,6 @@ namespace Gwen.Renderer
             {
                 // not cached - create text renderer
                 Debug.Print(String.Format("RenderText: caching \"{0}\", {1}", text, font.FaceName));
-
-				Point TabSize = MeasureText(font, "    "); 
-				m_StringFormat.SetTabStops(0f, new float[] { TabSize.X });
-
 
                 Point size = MeasureText(font, text);
                 TextRenderer tr = new TextRenderer(size.X, size.Y, this);

@@ -31,10 +31,11 @@ namespace Gwen.UnitTest
 			/* Multiline Textbox */
 			{
 				Control.MultilineTextBox textbox = new Control.MultilineTextBox(this);
+				textbox.Font = m_Font1;
 				textbox.AcceptTabs = true;
-				textbox.SetText("Type something here\nOr type something here\nWhicheverline you want to write on\nis fine with me.");
+				textbox.SetText("using System;\npublic class Test {\n\tpublic static void Main(){\n\t\tConsole.WriteLine(\"Hello World\");\n\t}\n}");
 				textbox.SetPosition(220, 10);
-				textbox.SetSize(400, 150);
+				textbox.SetSize(500, 150);
 			}
 
 			{

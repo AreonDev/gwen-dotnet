@@ -806,6 +806,7 @@ namespace Gwen.Control
 			}
 
 			Invalidate();
+			RefreshCursorBounds();
 		}
 
 		/// <summary>
@@ -871,6 +872,7 @@ namespace Gwen.Control
 			CursorPosition = c;
 
 			Invalidate();
+			RefreshCursorBounds();
 		}
 
 		protected virtual void MakeCaretVisible() {
@@ -923,6 +925,7 @@ namespace Gwen.Control
 			m_TextLines = new List<string>(Lines);
 
 			Invalidate();
+			RefreshCursorBounds();
 		}
 
 		/// <summary>
@@ -957,6 +960,10 @@ namespace Gwen.Control
 			Point p = new Point(Skin.Renderer.MeasureText(Font, CurrLine).X, Skin.Renderer.MeasureText(Font, sub).Y);
 
 			return new Point(p.X + m_Text.X, p.Y + m_Text.Y + TextPadding.Top);
+		}
+
+		protected override bool OnMouseWheeled(int delta) {
+			return m_ScrollControl.InputMouseWheeled(delta);
 		}
     }
 }
