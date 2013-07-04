@@ -773,16 +773,13 @@ namespace Gwen.Control
         /// <param name="child">Control to be added as a child.</param>
         public virtual void AddChild(Base child)
         {
-            if (m_InnerPanel != null)
-            {
-                m_InnerPanel.AddChild(child);
-                return;
-            }
-
-            m_Children.Add(child);
-            OnChildAdded(child);
-
-            child.m_ActualParent = this;
+			if (m_InnerPanel != null) {
+				m_InnerPanel.AddChild(child);
+			} else {
+				m_Children.Add(child);
+				child.m_ActualParent = this;
+			}
+			OnChildAdded(child);
         }
 
         /// <summary>

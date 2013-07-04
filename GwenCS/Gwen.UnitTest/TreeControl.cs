@@ -91,11 +91,15 @@ namespace Gwen.UnitTest
 				Control.TreeNode node = new TreeNode(ctrl);
 				node.Text = "First";
 
+				new TreeNode(node).Text = "2nd first";
+
 				node = new TreeNode(ctrl);
 				node.Text = "Second";
 
 				node = new TreeNode(node);
 				node.Text = "Other 2nd";
+
+				ctrl.ExpandAll();
 			}
 		}
 

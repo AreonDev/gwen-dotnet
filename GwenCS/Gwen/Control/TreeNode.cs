@@ -216,12 +216,6 @@ namespace Gwen.Control
         {
             TreeNode node = new TreeNode(this);
             node.Text = label;
-            node.TreeControl = m_TreeControl;
-
-            if (m_TreeControl != null)
-            {
-                m_TreeControl.OnNodeAdded(node);
-            }
 
             return node;
         }
@@ -335,6 +329,19 @@ namespace Gwen.Control
         {
             m_Title.SetImage(textureName);
         }
+
+		protected override void OnChildAdded(Base child) {
+			TreeNode node = child as TreeNode;
+			if (node != null) {
+				node.TreeControl = m_TreeControl;
+
+				if (m_TreeControl != null) {
+					m_TreeControl.OnNodeAdded(node);
+				}
+			}
+
+			base.OnChildAdded(child);
+		}
 
 		public override event GwenEventHandler<ClickedEventArgs> Clicked
         { 
