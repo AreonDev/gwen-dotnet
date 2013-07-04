@@ -17,12 +17,12 @@ namespace Gwen.Control
         /// <summary>
         /// Invoked when a tab has been added.
         /// </summary>
-        public event GwenEventHandler TabAdded;
+		public event GwenEventHandler<EventArgs> TabAdded;
 
         /// <summary>
         /// Invoked when a tab has been removed.
         /// </summary>
-        public event GwenEventHandler TabRemoved;
+		public event GwenEventHandler<EventArgs> TabRemoved;
 
         /// <summary>
         /// Determines if tabs can be reordered by dragging.
@@ -127,7 +127,7 @@ namespace Gwen.Control
             }
 
             if (TabAdded != null)
-                TabAdded.Invoke(this);
+                TabAdded.Invoke(this, EventArgs.Empty);
 
             Invalidate();
         }
@@ -141,7 +141,7 @@ namespace Gwen.Control
         /// Handler for tab selection.
         /// </summary>
         /// <param name="control">Event source (TabButton).</param>
-        internal virtual void OnTabPressed(Base control)
+		internal virtual void OnTabPressed(Base control, EventArgs args)
         {
             TabButton button = control as TabButton;
             if (null == button) return;
@@ -193,7 +193,7 @@ namespace Gwen.Control
             //TODO: Select a tab if any exist.
 
             if (TabRemoved != null)
-                TabRemoved.Invoke(this);
+				TabRemoved.Invoke(this, EventArgs.Empty);
 
             Invalidate();
         }
@@ -237,12 +237,12 @@ namespace Gwen.Control
             m_Scroll[1].SetPosition(m_Scroll[0].Right, 5);
         }
 
-        protected virtual void ScrollPressedLeft(Base control)
+        protected virtual void ScrollPressedLeft(Base control, EventArgs args)
         {
             m_ScrollOffset -= 120;
         }
 
-        protected virtual void ScrollPressedRight(Base control)
+        protected virtual void ScrollPressedRight(Base control, EventArgs args)
         {
             m_ScrollOffset += 120;
         }

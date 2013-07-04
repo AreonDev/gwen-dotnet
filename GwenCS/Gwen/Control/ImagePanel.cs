@@ -75,45 +75,6 @@ namespace Gwen.Control
         }
 
         /// <summary>
-        /// Invoked when the Image Panel is released.
-        /// </summary>
-        public event GwenEventHandler Clicked;
-
-        /// <summary>
-        /// "Clicks" the button.
-        /// </summary>
-        public virtual void Press(Base control = null)
-        {
-            OnClicked();
-        }
-
-        /// <summary>
-        /// Handler invoked on mouse click (left) event.
-        /// </summary>
-        /// <param name="x">X coordinate.</param>
-        /// <param name="y">Y coordinate.</param>
-        /// <param name="down">If set to <c>true</c> mouse button is down.</param>
-        protected override void OnMouseClickedLeft(int x, int y, bool down)
-        {
-            //base.OnMouseClickedLeft(x, y, down);
-            if (IsHovered && down)
-            {
-                OnClicked();
-            }
-
-            Redraw();
-        }
-
-        /// <summary>
-        /// Internal OnPressed implementation.
-        /// </summary>
-        protected virtual void OnClicked()
-        {
-            if (Clicked != null)
-                Clicked.Invoke(this);
-        }
-
-        /// <summary>
         /// Control has been clicked - invoked by input system. Windows use it to propagate activation.
         /// </summary>
         public override void Touch()
@@ -131,16 +92,8 @@ namespace Gwen.Control
         protected override bool OnKeySpace(bool down)
         {
             if (down)
-                OnClicked();
+                base.OnMouseClickedLeft(0, 0, true);
             return true;
-        }
-
-        /// <summary>
-        /// Default accelerator handler.
-        /// </summary>
-        protected override void OnAccelerator()
-        {
-            OnClicked();
         }
     }
 }

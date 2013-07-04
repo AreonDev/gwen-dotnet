@@ -20,7 +20,7 @@ namespace Gwen.Control
         /// <summary>
         /// Invoked when the bar is moved.
         /// </summary>
-        public event GwenEventHandler BarMoved;
+		public event GwenEventHandler<EventArgs> BarMoved;
 
         /// <summary>
         /// Bar size (in pixels).
@@ -81,7 +81,7 @@ namespace Gwen.Control
                 return false;
             m_ScrollAmount = value;
             Invalidate();
-            OnBarMoved(this);
+            OnBarMoved(this, EventArgs.Empty);
             return true;
         }
 
@@ -109,10 +109,10 @@ namespace Gwen.Control
         /// Handler for the BarMoved event.
         /// </summary>
         /// <param name="control">The control.</param>
-        protected virtual void OnBarMoved(Base control)
+		protected virtual void OnBarMoved(Base control, EventArgs args)
         {
             if (BarMoved != null)
-                BarMoved.Invoke(this);
+				BarMoved.Invoke(this, EventArgs.Empty);
         }
 
         protected virtual float CalculateScrolledAmount()

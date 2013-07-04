@@ -567,11 +567,11 @@ namespace Gwen.Renderer
             bmp.UnlockBits(data);
             bmp.Dispose();
 
-            //Must rebind previous texture, to ensure creating a texture doesn't mess with the render flow.
+            //[halfofastaple] Must rebind previous texture, to ensure creating a texture doesn't mess with the render flow.
             // Setting m_LastTextureID isn't working, for some reason (even if you always rebind the texture,
             // even if the previous one was the same), we are probably making draw calls where we shouldn't be?
             // Eventually the bug needs to be fixed (color picker in a window causes graphical errors), but for now,
-            // this is fine.  - halfofastaple
+            // this is fine.
             GL.BindTexture(TextureTarget.Texture2D, m_LastTextureID);
         }
 
@@ -608,15 +608,15 @@ namespace Gwen.Renderer
                 pixel = Color.FromArgb(data[offset + 3], data[offset + 0], data[offset + 1], data[offset + 2]);
             }
 
-            //Retrieving the entire texture for a single pixel read
+            //[???] Retrieving the entire texture for a single pixel read
             // is kind of a waste - maybe cache this pointer in the texture
             // data and then release later on? It's never called during runtime
             // - only during initialization.
 
-            //RE: It's not really a waste if it's only done once on load.
+            //[halfofastaple] RE: It's not really a waste if it's only done once on load.
             // Despite, it's worth looking into, just in case a user
             // wishes to hack their code together and use this function at
-            // runtime - halfofastaple
+            // runtime
             return pixel;
         }
     }

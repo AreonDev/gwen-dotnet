@@ -17,7 +17,7 @@ namespace Gwen.Control
         /// <summary>
         /// Invoked when the selected color has been changed.
         /// </summary>
-        public event GwenEventHandler ColorChanged;
+		public event GwenEventHandler<EventArgs> ColorChanged;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ColorLerpBox"/> class.
@@ -79,7 +79,7 @@ namespace Gwen.Control
             Invalidate();
 
             if (ColorChanged != null)
-                ColorChanged.Invoke(this);
+				ColorChanged.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>
@@ -106,7 +106,7 @@ namespace Gwen.Control
                     m_CursorPos.Y = Height;
 
                 if (ColorChanged != null)
-                    ColorChanged.Invoke(this);
+                    ColorChanged.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -118,6 +118,7 @@ namespace Gwen.Control
         /// <param name="down">If set to <c>true</c> mouse button is down.</param>
         protected override void OnMouseClickedLeft(int x, int y, bool down)
         {
+			base.OnMouseClickedLeft(x, y, down);
             m_Depressed = down;
             if (down)
                 InputHandler.MouseFocus = this;

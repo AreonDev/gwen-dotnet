@@ -16,7 +16,7 @@ namespace Gwen.Control
         /// <summary>
         /// Invoked when the selected color has been changed.
         /// </summary>
-        public event GwenEventHandler ColorChanged;
+		public event GwenEventHandler<EventArgs> ColorChanged;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ColorSlider"/> class.
@@ -95,6 +95,7 @@ namespace Gwen.Control
         /// <param name="down">If set to <c>true</c> mouse button is down.</param>
         protected override void OnMouseClickedLeft(int x, int y, bool down)
         {
+			base.OnMouseClickedLeft(x, y, down);
             m_Depressed = down;
             if (down)
                 InputHandler.MouseFocus = this;
@@ -124,7 +125,7 @@ namespace Gwen.Control
 
                 m_SelectedDist = cursorPos.Y;
                 if (ColorChanged != null)
-                    ColorChanged.Invoke(this);
+                    ColorChanged.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -141,7 +142,7 @@ namespace Gwen.Control
             m_SelectedDist = (int)(hsv.h / 360 * Height);
 
             if (ColorChanged != null)
-                ColorChanged.Invoke(this);
+                ColorChanged.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>

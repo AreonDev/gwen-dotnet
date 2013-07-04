@@ -176,13 +176,13 @@ namespace Gwen.UnitTest
             base.Dispose();
         }
 
-        void OnEdit(Base control)
+		void OnEdit(Base control, EventArgs args)
         {
             Control.TextBox box = control as Control.TextBox;
             UnitPrint(String.Format("TextBox: OnEdit: {0}", box.Text));
         }
 
-        void OnSubmit(Base control)
+		void OnSubmit(Base control, EventArgs args)
         {
             Control.TextBox box = control as Control.TextBox;
             UnitPrint(String.Format("TextBox: OnSubmit: {0}", box.Text));

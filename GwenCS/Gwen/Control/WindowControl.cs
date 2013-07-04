@@ -100,10 +100,10 @@ namespace Gwen.Control
 		}
 
 		public void Close() {
-			CloseButtonPressed(this);
+			CloseButtonPressed(this, EventArgs.Empty);
 		}
 
-        protected virtual void CloseButtonPressed(Base control)
+		protected virtual void CloseButtonPressed(Base control, EventArgs args)
         {
             IsHidden = true;
 

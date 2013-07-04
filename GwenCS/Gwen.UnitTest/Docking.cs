@@ -138,7 +138,7 @@ namespace Gwen.UnitTest
             return gb;
         }
 
-        void PaddingChanged(Base control)
+		void PaddingChanged(Base control, EventArgs args)
         {
             Control.Slider val = control as Control.Slider;
             int i = (int)val.Value;
@@ -146,7 +146,7 @@ namespace Gwen.UnitTest
             outer.Invalidate();
         }
 
-        void MarginChanged(Base control)
+		void MarginChanged(Base control, EventArgs args)
         {
             Base inner = control.UserData as Base;
             Control.Slider val = control as Control.Slider;
@@ -155,7 +155,7 @@ namespace Gwen.UnitTest
             outer.Invalidate();
         }
 
-        void WidthChanged(Base control)
+		void WidthChanged(Base control, EventArgs args)
         {
             Base inner = control.UserData as Base;
             Control.Slider val = control as Control.Slider;
@@ -163,7 +163,7 @@ namespace Gwen.UnitTest
             outer.Invalidate();
         }
 
-        void HeightChanged(Base control)
+		void HeightChanged(Base control, EventArgs args)
         {
             Base inner = control.UserData as Base;
             Control.Slider val = control as Control.Slider;
@@ -171,7 +171,7 @@ namespace Gwen.UnitTest
             outer.Invalidate();
         }
 
-        void DockChanged(Base control)
+		void DockChanged(Base control, EventArgs args)
         {
             Base inner = (Base) control.UserData;
             RadioButtonGroup rbg = (RadioButtonGroup) control;

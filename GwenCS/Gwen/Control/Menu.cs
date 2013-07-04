@@ -160,7 +160,7 @@ namespace Gwen.Control
         /// Mouse hover handler.
         /// </summary>
         /// <param name="control">Event source.</param>
-        protected virtual void OnHoverItem(Base control)
+		protected virtual void OnHoverItem(Base control, EventArgs args)
         {
             if (!ShouldHoverOpenMenu) return;
 

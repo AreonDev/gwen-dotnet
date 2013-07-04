@@ -19,7 +19,7 @@ namespace Gwen.Control
         /// <summary>
         /// Invoked when a property value has been changed.
         /// </summary>
-        public event GwenEventHandler ValueChanged;
+		public event GwenEventHandler<EventArgs> ValueChanged;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Properties"/> class.
@@ -55,7 +55,7 @@ namespace Gwen.Control
         /// Handles the splitter moved event.
         /// </summary>
         /// <param name="control">Event source.</param>
-        protected virtual void OnSplitterMoved(Base control)
+		protected virtual void OnSplitterMoved(Base control, EventArgs args)
         {
             InvalidateChildren();
         }
@@ -91,10 +91,10 @@ namespace Gwen.Control
             return row;
         }
 
-        private void OnRowValueChanged(Base control)
+		private void OnRowValueChanged(Base control, EventArgs args)
         {
             if (ValueChanged != null)
-                ValueChanged.Invoke(control);
+				ValueChanged.Invoke(control, EventArgs.Empty);
         }
 
         /// <summary>

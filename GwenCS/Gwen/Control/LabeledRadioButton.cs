@@ -9,7 +9,7 @@ namespace Gwen.Control
     public class LabeledRadioButton : Base
     {
         private readonly RadioButton m_RadioButton;
-        private readonly LabelClickable m_Label;
+        private readonly Label m_Label;
 
         /// <summary>
         /// Label text.
@@ -23,6 +23,7 @@ namespace Gwen.Control
         public LabeledRadioButton(Base parent)
             : base(parent)
         {
+			MouseInputEnabled = true;
             SetSize(100, 20);
 
             m_RadioButton = new RadioButton(this);
@@ -31,14 +32,12 @@ namespace Gwen.Control
             m_RadioButton.IsTabable = false;
             m_RadioButton.KeyboardInputEnabled = false;
 
-            m_Label = new LabelClickable(this);
+            m_Label = new Label(this);
             m_Label.Alignment = Pos.CenterV | Pos.Left;
             m_Label.Text = "Radio Button";
-            //m_Label.Dock = Pos.Fill;
-            m_Label.Clicked += m_RadioButton.Press;
+			m_Label.Clicked += delegate(Base control, ClickedEventArgs args) { m_RadioButton.Press(control); };
             m_Label.IsTabable = false;
             m_Label.KeyboardInputEnabled = false;
-            m_Label.AutoSizeToContents = true;
         }
 
         protected override void Layout(Skin.Base skin)

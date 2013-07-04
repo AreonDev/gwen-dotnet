@@ -35,7 +35,7 @@ namespace Gwen.UnitTest
             //this.DrawDebugOutlines = true;
         }
 
-        void OnChange(Base control)
+		void OnChange(Base control, EventArgs args)
         {
             RadioButtonGroup rbc = control as RadioButtonGroup;
             LabeledRadioButton rb = rbc.Selected;

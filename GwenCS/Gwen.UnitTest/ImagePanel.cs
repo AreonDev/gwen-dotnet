@@ -34,7 +34,7 @@ namespace Gwen.UnitTest
 			}
         }
 
-		void Image_Clicked(Base control) {
+		void Image_Clicked(Base control, EventArgs args) {
 			UnitPrint("Image: Clicked");
 		}
     }

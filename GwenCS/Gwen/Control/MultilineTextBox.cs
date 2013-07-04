@@ -50,7 +50,7 @@ namespace Gwen.Control
 		/// <summary>
 		/// Invoked when the text has changed.
 		/// </summary>
-		public event GwenEventHandler TextChanged;
+		public event GwenEventHandler<EventArgs> TextChanged;
 
 		/// <summary>
 		/// Get a point representing where the cursor physically appears on the screen.
@@ -174,12 +174,12 @@ namespace Gwen.Control
             m_ScrollControl.Margin = Margin.One;
             m_InnerPanel = m_ScrollControl;
             m_Text.Parent = m_InnerPanel;
-            m_ScrollControl.InnerPanel.BoundsChanged += new GwenEventHandler(ScrollChanged);
+            m_ScrollControl.InnerPanel.BoundsChanged += new GwenEventHandler<EventArgs>(ScrollChanged);
 
 
 			m_TextLines.Add(String.Empty);
 
-			//Todo halfofastaple: Figure out where these numbers come from. See if we can remove the magic numbers.
+			// [halfofastaple] TODO Figure out where these numbers come from. See if we can remove the magic numbers.
 			//	This should be as simple as 'm_ScrollControl.AutoSizeToContents = true' or 'm_ScrollControl.NoBounds()'
             m_ScrollControl.SetInnerSize(1000, 1000);
 
@@ -193,7 +193,7 @@ namespace Gwen.Control
 		/// Refreshes the cursor location and selected area when the inner panel scrolls
 		/// </summary>
 		/// <param name="control">The inner panel the text is embedded in</param>
-        private void ScrollChanged(Base control)
+        private void ScrollChanged(Base control, EventArgs args)
         {
             RefreshCursorBounds();
         }
@@ -204,7 +204,7 @@ namespace Gwen.Control
 		protected override void OnTextChanged() {
 			base.OnTextChanged();
 			if (TextChanged != null)
-				TextChanged.Invoke(this);
+				TextChanged.Invoke(this, EventArgs.Empty);
 		}
 
 		/// <summary>
@@ -354,8 +354,8 @@ namespace Gwen.Control
 		/// Handler for Paste event.
 		/// </summary>
 		/// <param name="from">Source control.</param>
-		protected override void OnPaste(Base from) {
-			base.OnPaste(from);
+		protected override void OnPaste(Base from, EventArgs args) {
+			base.OnPaste(from, args);
 			InsertText(Platform.Neutral.GetClipboardText());
 		}
 
@@ -363,9 +363,9 @@ namespace Gwen.Control
 		/// Handler for Copy event.
 		/// </summary>
 		/// <param name="from">Source control.</param>
-		protected override void OnCopy(Base from) {
+		protected override void OnCopy(Base from, EventArgs args) {
 			if (!HasSelection) return;
-			base.OnCopy(from);
+			base.OnCopy(from, args);
 
 			Platform.Neutral.SetClipboardText(GetSelection());
 		}
@@ -374,9 +374,9 @@ namespace Gwen.Control
 		/// Handler for Cut event.
 		/// </summary>
 		/// <param name="from">Source control.</param>
-		protected override void OnCut(Base from) {
+		protected override void OnCut(Base from, EventArgs args) {
 			if (!HasSelection) return;
-			base.OnCut(from);
+			base.OnCut(from, args);
 
 			Platform.Neutral.SetClipboardText(GetSelection());
 			EraseSelection();
@@ -387,7 +387,7 @@ namespace Gwen.Control
 		/// Handler for Select All event.
 		/// </summary>
 		/// <param name="from">Source control.</param>
-		protected override void OnSelectAll(Base from) {
+		protected override void OnSelectAll(Base from, EventArgs args) {
 			//base.OnSelectAll(from);
 			m_CursorEnd = new Point(0, 0);
 			m_CursorPos = new Point(m_TextLines.Last().Length, m_TextLines.Count());
@@ -402,7 +402,7 @@ namespace Gwen.Control
 		/// <param name="y">Y coordinate.</param>
 		protected override void OnMouseDoubleClickedLeft(int x, int y) {
 			//base.OnMouseDoubleClickedLeft(x, y);
-			OnSelectAll(this);
+			OnSelectAll(this, EventArgs.Empty);
 		}
 
 		/// <summary>
@@ -706,7 +706,7 @@ namespace Gwen.Control
 			return str;
 		}
 
-		//TODO halfofastaple Implement this and use it. The end user can work around not having it, but it is terribly convenient.
+		//[halfofastaple] TODO Implement this and use it. The end user can work around not having it, but it is terribly convenient.
 		//	See the delete key handler for help. Eventually, the delete key should use this.
 		///// <summary>
 		///// Deletes text.
@@ -776,7 +776,7 @@ namespace Gwen.Control
 		protected override void OnMouseClickedLeft(int x, int y, bool down) {
 			base.OnMouseClickedLeft(x, y, down);
 			if (m_SelectAll) {
-				OnSelectAll(this);
+				OnSelectAll(this, EventArgs.Empty);
 				//m_SelectAll = false;
 				return;
 			}

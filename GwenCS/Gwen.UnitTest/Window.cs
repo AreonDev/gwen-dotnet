@@ -25,7 +25,7 @@ namespace Gwen.UnitTest
             m_WindowCount = 1;
         }
 
-        void OpenWindow(Base control)
+		void OpenWindow(Base control, EventArgs args)
         {
             Control.WindowControl window = new Control.WindowControl(GetCanvas());
             window.Title = String.Format("Window {0}", m_WindowCount);
@@ -35,7 +35,7 @@ namespace Gwen.UnitTest
             m_WindowCount++;
         }
 
-        void OpenMsgbox(Base control)
+		void OpenMsgbox(Base control, EventArgs args)
         {
             MessageBox window = new MessageBox(GetCanvas(), String.Format("Window {0}   MessageBox window = new MessageBox(GetCanvas(), String.Format(  MessageBox window = new MessageBox(GetCanvas(), String.Format(", m_WindowCount));
             window.SetPosition(rand.Next(700), rand.Next(400));

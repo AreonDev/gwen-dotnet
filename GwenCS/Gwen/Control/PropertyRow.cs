@@ -16,7 +16,7 @@ namespace Gwen.Control
         /// <summary>
         /// Invoked when the property value has changed.
         /// </summary>
-        public event GwenEventHandler ValueChanged;
+        public event GwenEventHandler<EventArgs> ValueChanged;
 
         /// <summary>
         /// Indicates whether the property value is being edited.
@@ -104,10 +104,10 @@ namespace Gwen.Control
             }
         }
 
-        protected virtual void OnValueChanged(Base control)
+        protected virtual void OnValueChanged(Base control, EventArgs args)
         {
             if (ValueChanged != null)
-                ValueChanged.Invoke(this);
+				ValueChanged.Invoke(this, EventArgs.Empty);
         }
 
         private void OnEditingChanged()

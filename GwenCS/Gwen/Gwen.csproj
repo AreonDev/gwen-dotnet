@@ -75,6 +75,8 @@
     <Compile Include="Control\CollapsibleList.cs" />
     <Compile Include="Control\DockBase.cs" />
     <Compile Include="Control\DockedTabControl.cs" />
+    <Compile Include="Control\EventArguments\ClickedEventArgs.cs" />
+    <Compile Include="Control\EventArguments\ItemSelectedEventArgs.cs" />
     <Compile Include="Control\MultilineTextBox.cs" />
     <Compile Include="Control\VerticalSplitter.cs" />
     <Compile Include="Control\Layout\Positioner.cs" />
@@ -117,7 +119,6 @@
     <Compile Include="Control\HorizontalScrollBar.cs" />
     <Compile Include="Control\ImagePanel.cs" />
     <Compile Include="Control\Label.cs" />
-    <Compile Include="Control\LabelClickable.cs" />
     <Compile Include="Control\LabeledRadioButton.cs" />
     <Compile Include="Control\Layout\Splitter.cs" />
     <Compile Include="Control\Layout\Table.cs" />

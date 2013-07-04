@@ -15,39 +15,29 @@ namespace Gwen.Control
         private ImagePanel m_Image;
 
         /// <summary>
-        /// Invoked when the button is released.
-        /// </summary>
-        public event GwenEventHandler Clicked;
-
-        /// <summary>
         /// Invoked when the button is pressed.
         /// </summary>
-        public event GwenEventHandler Pressed;
+		public event GwenEventHandler<EventArgs> Pressed;
 
         /// <summary>
         /// Invoked when the button is released.
         /// </summary>
-        public event GwenEventHandler Released;
+		public event GwenEventHandler<EventArgs> Released;
 
         /// <summary>
         /// Invoked when the button's toggle state has changed.
         /// </summary>
-        public event GwenEventHandler Toggled;
+		public event GwenEventHandler<EventArgs> Toggled;
 
         /// <summary>
         /// Invoked when the button's toggle state has changed to On.
         /// </summary>
-        public event GwenEventHandler ToggledOn;
+		public event GwenEventHandler<EventArgs> ToggledOn;
 
         /// <summary>
         /// Invoked when the button's toggle state has changed to Off.
         /// </summary>
-        public event GwenEventHandler ToggledOff;
-
-        /// <summary>
-        /// Invoked when the button has been double clicked.
-        /// </summary>
-        public event GwenEventHandler DoubleClickedLeft;
+		public event GwenEventHandler<EventArgs> ToggledOff;
 
         /// <summary>
         /// Indicates whether the button is depressed.
@@ -83,17 +73,17 @@ namespace Gwen.Control
                 m_ToggleStatus = value;
 
                 if (Toggled != null)
-                    Toggled.Invoke(this);
+					Toggled.Invoke(this, EventArgs.Empty);
 
                 if (m_ToggleStatus)
                 {
                     if (ToggledOn != null)
-                        ToggledOn.Invoke(this);
+						ToggledOn.Invoke(this, EventArgs.Empty);
                 }
                 else
                 {
                     if (ToggledOff != null)
-                        ToggledOff.Invoke(this);
+						ToggledOff.Invoke(this, EventArgs.Empty);
                 }
 
                 Redraw();
@@ -107,6 +97,7 @@ namespace Gwen.Control
         public Button(Base parent)
             : base(parent)
         {
+			AutoSizeToContents = false;
             SetSize(100, 20);
             MouseInputEnabled = true;
             Alignment = Pos.Center;
@@ -163,7 +154,7 @@ namespace Gwen.Control
                 IsDepressed = true;
                 InputHandler.MouseFocus = this;
                 if (Pressed != null)
-                    Pressed.Invoke(this);
+                    Pressed.Invoke(this, EventArgs.Empty);
             }
             else
             {
@@ -175,7 +166,7 @@ namespace Gwen.Control
                 IsDepressed = false;
                 InputHandler.MouseFocus = null;
                 if (Released != null)
-                    Released.Invoke(this);
+					Released.Invoke(this, EventArgs.Empty);
             }
 
             Redraw();
@@ -191,8 +182,7 @@ namespace Gwen.Control
                 Toggle();
             }
 
-            if (Clicked != null)
-                Clicked.Invoke(this);
+			base.OnMouseClickedLeft(0, 0, true);
         }
         
         /// <summary>
@@ -310,9 +300,8 @@ namespace Gwen.Control
         /// <param name="y">Y coordinate.</param>
         protected override void OnMouseDoubleClickedLeft(int x, int y)
         {
+			base.OnMouseDoubleClickedLeft(x, y);
             OnMouseClickedLeft(x, y, true);
-            if (DoubleClickedLeft != null)
-                DoubleClickedLeft.Invoke(this);
         }
     }
 }

@@ -10,12 +10,12 @@ namespace Gwen.Control
         /// <summary>
         /// Invoked when an entry has been selected.
         /// </summary>
-        public event GwenEventHandler ItemSelected;
+        public event GwenEventHandler<ItemSelectedEventArgs> ItemSelected;
 
         /// <summary>
         /// Invoked when a category collapsed state has been changed (header button has been pressed).
         /// </summary>
-        public event GwenEventHandler CategoryCollapsed;
+        public event GwenEventHandler<EventArgs> CategoryCollapsed;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CollapsibleList"/> class.
@@ -23,6 +23,7 @@ namespace Gwen.Control
         /// <param name="parent">Parent control.</param>
         public CollapsibleList(Base parent) : base(parent)
         {
+			MouseInputEnabled = true;
             EnableScroll(false, true);
             AutoHideBars = true;
         }
@@ -105,26 +106,26 @@ namespace Gwen.Control
         /// Handler for ItemSelected event.
         /// </summary>
         /// <param name="control">Event source: <see cref="CollapsibleList"/>.</param>
-        protected virtual void OnCategorySelected(Base control)
+		protected virtual void OnCategorySelected(Base control, EventArgs args)
         {
             CollapsibleCategory cat = control as CollapsibleCategory;
             if (cat == null) return;
 
             if (ItemSelected != null)
-                ItemSelected.Invoke(this);
+                ItemSelected.Invoke(this, new ItemSelectedEventArgs(cat));
         }
 
         /// <summary>
         /// Handler for category collapsed event.
         /// </summary>
         /// <param name="control">Event source: <see cref="CollapsibleCategory"/>.</param>
-        protected virtual void OnCategoryCollapsed(Base control)
+        protected virtual void OnCategoryCollapsed(Base control, EventArgs args)
         {
             CollapsibleCategory cat = control as CollapsibleCategory;
             if (cat == null) return;
 
             if (CategoryCollapsed != null)
-                CategoryCollapsed.Invoke(control);
+                CategoryCollapsed.Invoke(control, EventArgs.Empty);
         }
     }
 }

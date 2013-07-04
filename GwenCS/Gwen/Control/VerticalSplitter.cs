@@ -16,17 +16,17 @@ namespace Gwen.Control
         /// <summary>
         /// Invoked when one of the panels has been zoomed (maximized).
         /// </summary>
-        public event GwenEventHandler PanelZoomed;
+		public event GwenEventHandler<EventArgs> PanelZoomed;
 
         /// <summary>
         /// Invoked when one of the panels has been unzoomed (restored).
         /// </summary>
-        public event GwenEventHandler PanelUnZoomed;
+		public event GwenEventHandler<EventArgs> PanelUnZoomed;
 
         /// <summary>
         /// Invoked when the zoomed panel has been changed.
         /// </summary>
-        public event GwenEventHandler ZoomChanged;
+		public event GwenEventHandler<EventArgs> ZoomChanged;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CrossSplitter"/> class.
@@ -95,7 +95,7 @@ namespace Gwen.Control
             m_HSplitter.MoveTo((Width - m_HSplitter.Width) * (m_HVal), m_HSplitter.Y);
         }
 
-        protected void OnHorizontalMoved(Base control)
+		protected void OnHorizontalMoved(Base control, EventArgs args)
         {
             m_HVal = CalculateValueHorizontal();
             Invalidate();
@@ -165,17 +165,17 @@ namespace Gwen.Control
         protected void OnZoomChanged()
         {
             if (ZoomChanged != null)
-                ZoomChanged.Invoke(this);
+				ZoomChanged.Invoke(this, EventArgs.Empty);
 
             if (m_ZoomedSection == -1)
             {
                 if (PanelUnZoomed != null)
-                    PanelUnZoomed.Invoke(this);
+					PanelUnZoomed.Invoke(this, EventArgs.Empty);
             }
             else
             {
                 if (PanelZoomed != null)
-                    PanelZoomed.Invoke(this);
+					PanelZoomed.Invoke(this, EventArgs.Empty);
             }
         }
 

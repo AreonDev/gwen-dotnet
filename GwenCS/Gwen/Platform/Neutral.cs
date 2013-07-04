@@ -83,12 +83,12 @@ namespace Gwen.Platform
         /// <returns>Time interval in seconds.</returns>
         public static float GetTimeInSeconds()
         {
-            //Note:
+            //[halfofastaple] Note:
             //  After 3.8 months, the difference in value will be greater than a second,
             //  which isn't a problem for most people (who will run this that long?), but
             //  if it is, we can convert this (and all timestamps that rely on this) to a double, 
             //  which will grow stale (time difference > 1s) after ~3,168,888 years 
-            //  (that's gotta be good enough, right?) - halfofastaple
+            //  (that's gotta be good enough, right?)
             //P.S. someone fix those numbers if I'm wrong.
             return (float)((DateTime.Now - m_FirstTime).TotalSeconds);
         }

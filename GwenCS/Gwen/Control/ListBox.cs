@@ -109,12 +109,12 @@ namespace Gwen.Control
         /// <summary>
         /// Invoked when a row has been selected.
         /// </summary>
-        public event GwenEventHandler RowSelected;
+        public event GwenEventHandler<ItemSelectedEventArgs> RowSelected;
 
         /// <summary>
         /// Invoked whan a row has beed unselected.
         /// </summary>
-        public event GwenEventHandler RowUnselected;
+        public event GwenEventHandler<ItemSelectedEventArgs> RowUnselected;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ListBox"/> class.
@@ -198,7 +198,7 @@ namespace Gwen.Control
             row.IsSelected = true;
             m_SelectedRows.Add(row);
             if (RowSelected != null)
-                RowSelected.Invoke(this);
+				RowSelected.Invoke(this, new ItemSelectedEventArgs(row));
         }
 
         /// <summary>
@@ -292,7 +292,7 @@ namespace Gwen.Control
             {
                 row.IsSelected = false;
                 if (RowUnselected != null)
-                    RowUnselected.Invoke(this);
+					RowUnselected.Invoke(this, new ItemSelectedEventArgs(row));
             }
             m_SelectedRows.Clear();
         }
@@ -307,18 +307,18 @@ namespace Gwen.Control
             m_SelectedRows.Remove(row);
 
             if (RowUnselected != null)
-                RowUnselected.Invoke(this);
+                RowUnselected.Invoke(this, new ItemSelectedEventArgs(row));
         }
 
         /// <summary>
         /// Handler for the row selection event.
         /// </summary>
         /// <param name="control">Event source.</param>
-        protected virtual void OnRowSelected(Base control)
+        protected virtual void OnRowSelected(Base control, ItemSelectedEventArgs args)
         {
             // [omeg] changed default behavior
             bool clear = false;// !InputHandler.InputHandler.IsShiftDown;
-            ListBoxRow row = control as ListBoxRow;
+			ListBoxRow row = args.SelectedItem as ListBoxRow;
             if (row == null)
                 return;
 
@@ -329,7 +329,7 @@ namespace Gwen.Control
             }
             else
             {
-                SelectRow(control, clear);
+                SelectRow(row, clear);
             }
         }
 
@@ -351,7 +351,7 @@ namespace Gwen.Control
             m_Table.SizeToContents(0); // autosize without constraints
         }
 
-        private void TableResized(Base control)
+        private void TableResized(Base control, EventArgs args)
         {
             if (m_SizeToContents)
             {

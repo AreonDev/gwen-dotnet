@@ -37,14 +37,14 @@ namespace Gwen.UnitTest
                 OpenWindow.SetPosition(10, 200);
                 OpenWindow.SetSize(200, 20);
                 OpenWindow.Text = "Open Window";
-                OpenWindow.Clicked += delegate(Base sender)
+				OpenWindow.Clicked += delegate(Base sender, ClickedEventArgs args)
                 {
                     Window.Show();
                 };
             }
         }
 
-        void ColorChanged(Base control)
+		void ColorChanged(Base control, EventArgs args)
         {
             IColorPicker picker = control as IColorPicker;
             Color c = picker.SelectedColor;

@@ -13,9 +13,10 @@ namespace Gwen.Control
         /// Initializes a new instance of the <see cref="GroupBox"/> class.
         /// </summary>
         /// <param name="parent">Parent control.</param>
-        public GroupBox(Base parent)
-            : base(parent)
+        public GroupBox(Base parent) : base(parent)
         {
+			AutoSizeToContents = false;
+
             // Set to true, because it's likely that our  
             // children will want mouse input, and they
             // can't get it without us..

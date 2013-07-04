@@ -140,12 +140,12 @@ namespace Gwen.Control
             m_InnerPanel.SetSize(width, height);
         }
 
-        protected virtual void VBarMoved(Base control)
+        protected virtual void VBarMoved(Base control, EventArgs args)
         {
             Invalidate();
         }
 
-        protected virtual void HBarMoved(Base control)
+        protected virtual void HBarMoved(Base control, EventArgs args)
         {
             Invalidate();
         }

@@ -85,13 +85,13 @@ namespace Gwen.Control
             }
         }
 
-        public virtual void NudgeUp(Base control)
+		public virtual void NudgeUp(Base control, EventArgs args)
         {
             if (!IsDisabled)
                 SetScrollAmount(ScrollAmount - NudgeAmount, true);
         }
 
-        public virtual void NudgeDown(Base control)
+		public virtual void NudgeDown(Base control, EventArgs args)
         {
             if (!IsDisabled)
                 SetScrollAmount(ScrollAmount + NudgeAmount, true);
@@ -130,6 +130,7 @@ namespace Gwen.Control
         /// <param name="down">If set to <c>true</c> mouse button is down.</param>
         protected override void OnMouseClickedLeft(int x, int y, bool down)
         {
+			base.OnMouseClickedLeft(x, y, down);
             if (down)
             {
                 m_Depressed = true;
@@ -139,9 +140,9 @@ namespace Gwen.Control
             {
                 Point clickPos = CanvasPosToLocal(new Point(x, y));
                 if (clickPos.Y < m_Bar.Y)
-                    NudgeUp(this);
+                    NudgeUp(this, EventArgs.Empty);
                 else if (clickPos.Y > m_Bar.Y + m_Bar.Height)
-                    NudgeDown(this);
+                    NudgeDown(this, EventArgs.Empty);
 
                 m_Depressed = false;
                 InputHandler.MouseFocus = null;
@@ -179,12 +180,12 @@ namespace Gwen.Control
         /// Handler for the BarMoved event.
         /// </summary>
         /// <param name="control">The control.</param>
-        protected override void OnBarMoved(Base control)
+		protected override void OnBarMoved(Base control, EventArgs args)
         {
             if (m_Bar.IsHeld)
             {
                 SetScrollAmount(CalculateScrolledAmount(), false);
-                base.OnBarMoved(control);
+				base.OnBarMoved(control, EventArgs.Empty);
             }
             else
                 InvalidateParent();

@@ -40,7 +40,7 @@ namespace Gwen.Control
         /// <summary>
         /// Invoked when the selected color has been changed.
         /// </summary>
-        public event GwenEventHandler ColorChanged;
+		public event GwenEventHandler<EventArgs> ColorChanged;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ColorPicker"/> class.
@@ -85,7 +85,7 @@ namespace Gwen.Control
             slider.ValueChanged += SlidersMoved;
         }
 
-        private void NumericTyped(Base control)
+		private void NumericTyped(Base control, EventArgs args)
         {
             TextBoxNumeric box = control as TextBoxNumeric;
             if (null == box)
@@ -160,10 +160,10 @@ namespace Gwen.Control
             disp.Color = SelectedColor;
 
             if (ColorChanged != null)
-                ColorChanged.Invoke(this);
+                ColorChanged.Invoke(this, EventArgs.Empty);
         }
 
-        private void SlidersMoved(Base control)
+        private void SlidersMoved(Base control, EventArgs args)
         {
             /*
             HorizontalSlider* redSlider		= gwen_cast<HorizontalSlider>(	FindChildByName( "RedSlider",   true ) );

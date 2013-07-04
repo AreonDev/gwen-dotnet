@@ -56,6 +56,7 @@ namespace Gwen.Control
         /// <param name="down">If set to <c>true</c> mouse button is down.</param>
         protected override void OnMouseClickedLeft(int x, int y, bool down)
         {
+			base.OnMouseClickedLeft(x, y, down);
             if (down)
             {
                 //IsSelected = true; // [omeg] ListBox manages that

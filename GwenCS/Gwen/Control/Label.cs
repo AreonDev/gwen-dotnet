@@ -96,11 +96,11 @@ namespace Gwen.Control
             m_Text = new Text(this);
             //m_Text.Font = Skin.DefaultFont;
 
-            MouseInputEnabled = false;
+			MouseInputEnabled = true;
             SetSize(100, 10);
             Alignment = Pos.Left | Pos.Top;
 
-            m_AutoSizeToContents = false;
+            m_AutoSizeToContents = true;
         }
 
         /// <summary>
@@ -127,8 +127,7 @@ namespace Gwen.Control
         /// <summary>
         /// Handler for text changed event.
         /// </summary>
-        protected virtual void OnTextChanged()
-        {}
+        protected virtual void OnTextChanged() {}
 
         /// <summary>
         /// Lays out the control's interior according to alignment, padding, dock etc.
@@ -207,5 +206,22 @@ namespace Gwen.Control
         protected override void Render(Skin.Base skin)
         {
         }
+
+		/// <summary>
+		/// Updates control colors.
+		/// </summary>
+		public override void UpdateColors() {
+			if (IsDisabled) {
+				TextColor = Skin.Colors.Button.Disabled;
+				return;
+			}
+
+			if (IsHovered && ClickEventAssigned) {
+				TextColor = Skin.Colors.Button.Hover;
+				return;
+			}
+
+			TextColor = Skin.Colors.Button.Normal;
+		}
     }
 }

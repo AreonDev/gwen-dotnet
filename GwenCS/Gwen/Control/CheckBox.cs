@@ -31,8 +31,7 @@ namespace Gwen.Control
             : base(parent)
         {
             SetSize(15, 15);
-            //m_Checked = true; // [omeg] why?!
-            //Toggle();
+			IsToggle = true;
         }
 
         /// <summary>
@@ -47,17 +46,17 @@ namespace Gwen.Control
         /// <summary>
         /// Invoked when the checkbox has been checked.
         /// </summary>
-        public event GwenEventHandler Checked;
+		public event GwenEventHandler<EventArgs> Checked;
 
         /// <summary>
         /// Invoked when the checkbox has been unchecked.
         /// </summary>
-        public event GwenEventHandler UnChecked;
+		public event GwenEventHandler<EventArgs> UnChecked;
 
         /// <summary>
         /// Invoked when the checkbox state has been changed.
         /// </summary>
-        public event GwenEventHandler CheckChanged;
+		public event GwenEventHandler<EventArgs> CheckChanged;
 
         /// <summary>
         /// Determines whether unchecking is allowed.
@@ -72,16 +71,16 @@ namespace Gwen.Control
             if (IsChecked)
             { 
                 if (Checked != null)
-                    Checked.Invoke(this);
+					Checked.Invoke(this, EventArgs.Empty);
             }
             else
             {
                 if (UnChecked != null)
-                    UnChecked.Invoke(this);
+					UnChecked.Invoke(this, EventArgs.Empty);
             }
 
             if (CheckChanged != null)
-                CheckChanged.Invoke(this);
+				CheckChanged.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>
@@ -107,7 +106,7 @@ namespace Gwen.Control
                 return;
             }
 
-            Toggle();
+			base.OnClicked();
         }
     }
 }

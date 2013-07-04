@@ -50,7 +50,8 @@ namespace Gwen.Control
         public ProgressBar(Base parent)
             : base(parent)
         {
-            MouseInputEnabled = false; // [omeg] what? was true
+			AutoSizeToContents = false;
+
             SetSize(128, 32);
             TextPadding = Padding.Three;
             IsHorizontal = true;

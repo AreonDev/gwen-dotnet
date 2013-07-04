@@ -123,7 +123,7 @@ namespace Gwen.Control
                 if (me + 1 < count)
                 {
                     var nextTab = Parent.Children[me + 1];
-                    TabControl.OnTabPressed(nextTab);
+                    TabControl.OnTabPressed(nextTab, EventArgs.Empty);
                     InputHandler.KeyboardFocus = nextTab;
                 }
             }
@@ -147,7 +147,7 @@ namespace Gwen.Control
                 if (me - 1 >= 0)
                 {
                     var prevTab = Parent.Children[me - 1];
-                    TabControl.OnTabPressed(prevTab);
+                    TabControl.OnTabPressed(prevTab, EventArgs.Empty);
                     InputHandler.KeyboardFocus = prevTab;
                 }
             }

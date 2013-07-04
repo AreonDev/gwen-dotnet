@@ -79,8 +79,8 @@ namespace Gwen.UnitTest
                     RegisterUnitTest("NumericUpDown", cat, test);
                     test = new Slider(m_Center);
                     RegisterUnitTest("Slider", cat, test);
-                    test = new MenuStrip(m_Center);
-                    RegisterUnitTest("MenuStrip", cat, test);
+                    test = new Menu(m_Center);
+                    RegisterUnitTest("Menu", cat, test);
                     test = new CrossSplitter(m_Center);
                     RegisterUnitTest("CrossSplitter", cat, test);
                 }
@@ -128,7 +128,7 @@ namespace Gwen.UnitTest
             btn.Clicked += OnCategorySelect;
         }
 
-        private void DebugCheckChanged(Base control)
+		private void DebugCheckChanged(Base control, EventArgs args)
         {
             if (m_DebugCheck.IsChecked)
                 m_Center.DrawDebugOutlines = true;
@@ -137,7 +137,7 @@ namespace Gwen.UnitTest
             Invalidate();
         }
 
-        private void OnCategorySelect(Base control)
+		private void OnCategorySelect(Base control, EventArgs args)
         {
             if (m_LastControl != null)
             {

@@ -52,7 +52,7 @@ namespace Gwen.UnitTest
             }
         }
 
-        void OnChanged(Base control)
+        void OnChanged(Base control, EventArgs args)
         {
             PropertyRow row = control as PropertyRow;
             UnitPrint(String.Format("Property changed: {0}", row.Value));

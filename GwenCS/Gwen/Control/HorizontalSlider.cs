@@ -36,9 +36,10 @@ namespace Gwen.Control
         /// <param name="down">If set to <c>true</c> mouse button is down.</param>
         protected override void OnMouseClickedLeft(int x, int y, bool down)
         {
+			base.OnMouseClickedLeft(x, y, down);
             m_SliderBar.MoveTo((int)(CanvasPosToLocal(new Point(x, y)).X - m_SliderBar.Width*0.5), m_SliderBar.Y);
             m_SliderBar.InputMouseClickedLeft(x, y, down);
-            OnMoved(m_SliderBar);
+            OnMoved(m_SliderBar, EventArgs.Empty);
         }
 
         /// <summary>

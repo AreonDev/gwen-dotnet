@@ -274,7 +274,7 @@ namespace Gwen.Control
             }
         }
 
-        protected virtual void OnTabRemoved(Base control)
+		protected virtual void OnTabRemoved(Base control, EventArgs args)
         {
             DoRedundancyCheck();
             DoConsolidateCheck();

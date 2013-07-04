@@ -23,7 +23,7 @@ namespace Gwen.Control.Layout
         /// <summary>
         /// Invoked when the row has been selected.
         /// </summary>
-        public event GwenEventHandler Selected;
+        public event GwenEventHandler<ItemSelectedEventArgs> Selected;
 
         /// <summary>
         /// Column count.
@@ -149,7 +149,7 @@ namespace Gwen.Control.Layout
         protected virtual void OnRowSelected()
         {
             if (Selected != null)
-                Selected.Invoke(this);
+                Selected.Invoke(this, new ItemSelectedEventArgs(this));
         }
 
         /// <summary>
@@ -213,7 +213,7 @@ namespace Gwen.Control.Layout
         /// Handler for Copy event.
         /// </summary>
         /// <param name="from">Source control.</param>
-        protected override void OnCopy(Base from)
+        protected override void OnCopy(Base from, EventArgs args)
         {
             Platform.Neutral.SetClipboardText(Text);
         }

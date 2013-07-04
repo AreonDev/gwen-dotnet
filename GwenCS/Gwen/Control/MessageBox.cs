@@ -13,7 +13,7 @@ namespace Gwen.Control
         /// <summary>
         /// Invoked when the message box has been dismissed.
         /// </summary>
-        public GwenEventHandler Dismissed;
+        public GwenEventHandler<EventArgs> Dismissed;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MessageBox"/> class.
@@ -31,7 +31,6 @@ namespace Gwen.Control
             m_Label.Margin = Margin.Five;
             m_Label.Dock = Pos.Top;
             m_Label.Alignment = Pos.Center;
-            m_Label.AutoSizeToContents = true;
 
             m_Button = new Button(m_InnerPanel);
             m_Button.Text = "OK"; // todo: parametrize buttons
@@ -43,10 +42,10 @@ namespace Gwen.Control
             Align.Center(this);
         }
 
-        private void DismissedHandler(Base control)
+		private void DismissedHandler(Base control, EventArgs args)
         {
             if (Dismissed != null)
-                Dismissed.Invoke(this);
+                Dismissed.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>

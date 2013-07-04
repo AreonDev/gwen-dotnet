@@ -19,7 +19,7 @@ namespace Gwen.Control.Property
         /// <summary>
         /// Invoked when the property value has been changed.
         /// </summary>
-        public event GwenEventHandler ValueChanged;
+		public event GwenEventHandler<EventArgs> ValueChanged;
 
         /// <summary>
         /// Property value (todo: always string, which is ugly. do something about it).
@@ -34,10 +34,10 @@ namespace Gwen.Control.Property
         protected virtual void DoChanged()
         {
             if (ValueChanged != null)
-                ValueChanged.Invoke(this);
+                ValueChanged.Invoke(this, EventArgs.Empty);
         }
 
-        protected virtual void OnValueChanged(Control.Base control)
+        protected virtual void OnValueChanged(Control.Base control, EventArgs args)
         {
             DoChanged();
         }

@@ -11,9 +11,10 @@ namespace Gwen.Control
         /// Initializes a new instance of the <see cref="StatusBar"/> class.
         /// </summary>
         /// <param name="parent">Parent control.</param>
-        public StatusBar(Base parent)
-            : base(parent)
+        public StatusBar(Base parent) : base(parent)
         {
+			AutoSizeToContents = false;
+
             Height = 22;
             Dock = Pos.Bottom;
             Padding = Padding.Two;

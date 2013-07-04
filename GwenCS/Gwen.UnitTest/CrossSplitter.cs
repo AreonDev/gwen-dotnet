@@ -94,7 +94,7 @@ namespace Gwen.UnitTest
             }
         }
 
-        void ZoomTest(Base control)
+		void ZoomTest(Base control, EventArgs args)
         {
             m_Splitter.Zoom(m_CurZoom);
             m_CurZoom++;
@@ -102,18 +102,18 @@ namespace Gwen.UnitTest
                 m_CurZoom = 0;
         }
 
-        void UnZoomTest(Base control)
+		void UnZoomTest(Base control, EventArgs args)
         {
             m_Splitter.UnZoom();
         }
 
-        void CenterPanels(Base control)
+		void CenterPanels(Base control, EventArgs args)
         {
             m_Splitter.CenterPanels();
             m_Splitter.UnZoom();
         }
 
-        void ToggleSplitters(Base control)
+		void ToggleSplitters(Base control, EventArgs args)
         {
             m_Splitter.SplittersVisible = !m_Splitter.SplittersVisible;
         }

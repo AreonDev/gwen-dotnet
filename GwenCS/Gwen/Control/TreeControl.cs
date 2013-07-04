@@ -86,7 +86,7 @@ namespace Gwen.Control
         /// Handler for node selected event.
         /// </summary>
         /// <param name="Control">Node selected.</param>
-        protected virtual void OnNodeSelected(Base Control)
+		protected virtual void OnNodeSelected(Base Control, EventArgs args)
         {
             if (!m_MultiSelect /*|| InputHandler.InputHandler.IsKeyDown(Key.Control)*/)
                 UnselectAll();

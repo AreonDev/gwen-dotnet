@@ -14,9 +14,9 @@ namespace Gwen.ControlInternal
         /// Initializes a new instance of the <see cref="PropertyRowLabel"/> class.
         /// </summary>
         /// <param name="parent">Parent control.</param>
-        public PropertyRowLabel(PropertyRow parent)
-            : base(parent)
+        public PropertyRowLabel(PropertyRow parent) : base(parent)
         {
+			AutoSizeToContents = false;
             Alignment = Pos.Left | Pos.CenterV;
             m_PropertyRow = parent;
         }

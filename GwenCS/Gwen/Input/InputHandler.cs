@@ -300,7 +300,7 @@ namespace Gwen.Input
                         return true;
                     }
 
-                case 1:
+                case 1: 
                     {
                         if (isDoubleClick)
                             HoveredControl.InputMouseDoubleClickedRight(MousePosition.X, MousePosition.Y);

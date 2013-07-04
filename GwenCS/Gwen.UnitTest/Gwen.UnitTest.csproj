@@ -62,7 +62,7 @@
     <Compile Include="ImagePanel.cs" />
     <Compile Include="Label.cs" />
     <Compile Include="ListBox.cs" />
-    <Compile Include="MenuStrip.cs" />
+    <Compile Include="Menu.cs" />
     <Compile Include="NumericUpDown.cs" />
     <Compile Include="ProgressBar.cs" />
     <Compile Include="Properties.cs" />

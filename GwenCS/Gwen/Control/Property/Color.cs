@@ -28,7 +28,7 @@ namespace Gwen.Control.Property
         /// Color-select button press handler.
         /// </summary>
         /// <param name="control">Event source.</param>
-        protected virtual void OnButtonPressed(Control.Base control)
+		protected virtual void OnButtonPressed(Control.Base control, EventArgs args)
         {
             Menu menu = new Menu(GetCanvas());
             menu.SetSize(256, 180);
@@ -51,7 +51,7 @@ namespace Gwen.Control.Property
         /// Color changed handler.
         /// </summary>
         /// <param name="control">Event source.</param>
-        protected virtual void OnColorChanged(Control.Base control)
+		protected virtual void OnColorChanged(Control.Base control, EventArgs args)
         {
             HSVColorPicker picker = control as HSVColorPicker;
             SetTextFromColor(picker.SelectedColor);

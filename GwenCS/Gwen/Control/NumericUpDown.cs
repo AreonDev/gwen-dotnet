@@ -59,7 +59,7 @@ namespace Gwen.Control
         /// <summary>
         /// Invoked when the value has been changed.
         /// </summary>
-        public event GwenEventHandler ValueChanged;
+		public event GwenEventHandler<EventArgs> ValueChanged;
 
         /// <summary>
         /// Handler for Up Arrow keyboard event.
@@ -70,7 +70,7 @@ namespace Gwen.Control
         /// </returns>
         protected override bool OnKeyUp(bool down)
         {
-            if (down) OnButtonUp(null);
+            if (down) OnButtonUp(null, EventArgs.Empty);
             return true;
         }
 
@@ -83,7 +83,7 @@ namespace Gwen.Control
         /// </returns>
         protected override bool OnKeyDown(bool down)
         {
-            if (down) OnButtonDown(null);
+            if (down) OnButtonDown(null, new ClickedEventArgs(0, 0, true));
             return true;
         }
 
@@ -91,7 +91,7 @@ namespace Gwen.Control
         /// Handler for the button up event.
         /// </summary>
         /// <param name="control">Event source.</param>
-        protected virtual void OnButtonUp(Base control)
+		protected virtual void OnButtonUp(Base control, EventArgs args)
         {
             Value = m_Value + 1;
         }
@@ -100,7 +100,7 @@ namespace Gwen.Control
         /// Handler for the button down event.
         /// </summary>
         /// <param name="control">Event source.</param>
-        protected virtual void OnButtonDown(Base control)
+        protected virtual void OnButtonDown(Base control, ClickedEventArgs args)
         {
             Value = m_Value - 1;
         }
@@ -146,7 +146,7 @@ namespace Gwen.Control
         {
             base.OnTextChanged();
             if (ValueChanged != null)
-                ValueChanged.Invoke(this);
+                ValueChanged.Invoke(this, EventArgs.Empty);
         }
     }
 }

@@ -25,7 +25,7 @@ namespace Gwen.Control
         /// <summary>
         /// Determines whether text should be selected when the control is focused.
         /// </summary>
-        public bool SelectAllOnFocus { get { return m_SelectAll; } set { m_SelectAll = value; if (value) OnSelectAll(this); } }
+        public bool SelectAllOnFocus { get { return m_SelectAll; } set { m_SelectAll = value; if (value) OnSelectAll(this, EventArgs.Empty); } }
 
         /// <summary>
         /// Indicates whether the text has active selection.
@@ -35,12 +35,12 @@ namespace Gwen.Control
         /// <summary>
         /// Invoked when the text has changed.
         /// </summary>
-		public event GwenEventHandler TextChanged;
+		public event GwenEventHandler<EventArgs> TextChanged;
 
         /// <summary>
         /// Invoked when the submit key has been pressed.
         /// </summary>
-		public event GwenEventHandler SubmitPressed;
+		public event GwenEventHandler<EventArgs> SubmitPressed;
 
         /// <summary>
         /// Current cursor position (character index).
@@ -130,7 +130,7 @@ namespace Gwen.Control
             if (m_CursorEnd > TextLength) m_CursorEnd = TextLength;
 
             if (TextChanged != null)
-                TextChanged.Invoke(this);
+                TextChanged.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>
@@ -235,9 +235,9 @@ namespace Gwen.Control
         /// Handler for Paste event.
         /// </summary>
         /// <param name="from">Source control.</param>
-        protected override void OnPaste(Base from)
+        protected override void OnPaste(Base from, EventArgs args)
         {
-            base.OnPaste(from);
+            base.OnPaste(from, args);
             InsertText(Platform.Neutral.GetClipboardText());
         }
 
@@ -245,10 +245,10 @@ namespace Gwen.Control
         /// Handler for Copy event.
         /// </summary>
         /// <param name="from">Source control.</param>
-        protected override void OnCopy(Base from)
+        protected override void OnCopy(Base from, EventArgs args)
         {
             if (!HasSelection) return;
-            base.OnCopy(from);
+            base.OnCopy(from, args);
 
             Platform.Neutral.SetClipboardText(GetSelection());
         }
@@ -257,10 +257,10 @@ namespace Gwen.Control
         /// Handler for Cut event.
         /// </summary>
         /// <param name="from">Source control.</param>
-        protected override void OnCut(Base from)
+        protected override void OnCut(Base from, EventArgs args)
         {
             if (!HasSelection) return;
-            base.OnCut(from);
+            base.OnCut(from, args);
 
             Platform.Neutral.SetClipboardText(GetSelection());
             EraseSelection();
@@ -270,7 +270,7 @@ namespace Gwen.Control
         /// Handler for Select All event.
         /// </summary>
         /// <param name="from">Source control.</param>
-        protected override void OnSelectAll(Base from)
+        protected override void OnSelectAll(Base from, EventArgs args)
         {
             //base.OnSelectAll(from);
             m_CursorEnd = 0;
@@ -287,7 +287,7 @@ namespace Gwen.Control
         protected override void OnMouseDoubleClickedLeft(int x, int y)
         {
             //base.OnMouseDoubleClickedLeft(x, y);
-            OnSelectAll(this);
+			OnSelectAll(this, EventArgs.Empty);
         }
 
         /// <summary>
@@ -517,7 +517,7 @@ namespace Gwen.Control
             base.OnMouseClickedLeft(x, y, down);
             if (m_SelectAll)
             {
-                OnSelectAll(this);
+                OnSelectAll(this, EventArgs.Empty);
                 //m_SelectAll = false;
                 return;
             }
@@ -602,7 +602,7 @@ namespace Gwen.Control
         protected virtual void OnReturn()
         {
             if (SubmitPressed != null)
-                SubmitPressed.Invoke(this);
+				SubmitPressed.Invoke(this, EventArgs.Empty);
         }
     }
 }

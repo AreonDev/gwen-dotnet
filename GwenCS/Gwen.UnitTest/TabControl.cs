@@ -52,7 +52,7 @@ namespace Gwen.UnitTest
             }
         }
 
-        void OnDockChange(Base control)
+		void OnDockChange(Base control, EventArgs args)
         {
             RadioButtonGroup rc = (RadioButtonGroup)control;
 

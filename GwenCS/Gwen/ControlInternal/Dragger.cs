@@ -24,7 +24,7 @@ namespace Gwen.ControlInternal
         /// <summary>
         /// Event invoked when the control position has been changed.
         /// </summary>
-        public event GwenEventHandler Dragged;
+		public event GwenEventHandler<EventArgs> Dragged;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Dragger"/> class.
@@ -81,7 +81,7 @@ namespace Gwen.ControlInternal
             //m_Target->SetPosition( p.x, p.y );
             m_Target.MoveTo(p.X, p.Y);
             if (Dragged != null)
-                Dragged.Invoke(this);
+				Dragged.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>

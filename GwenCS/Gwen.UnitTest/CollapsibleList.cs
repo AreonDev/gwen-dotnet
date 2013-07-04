@@ -50,13 +50,13 @@ namespace Gwen.UnitTest
             }
         }
 
-        void OnSelection(Base control)
+		void OnSelection(Base control, EventArgs args)
         {
             Control.CollapsibleList list = control as Control.CollapsibleList;
             UnitPrint(String.Format("CollapsibleList: Selected: {0}", list.GetSelectedButton().Text));
         }
 
-        void OnCollapsed(Base control)
+		void OnCollapsed(Base control, EventArgs args)
         {
             Control.CollapsibleCategory cat = control as Control.CollapsibleCategory;
             UnitPrint(String.Format("CollapsibleCategory: CategoryCollapsed: {0} {1}", cat.Text, cat.IsCollapsed));

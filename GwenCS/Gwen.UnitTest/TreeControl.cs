@@ -84,30 +84,30 @@ namespace Gwen.UnitTest
             }
         }
 
-        void NodeCollapsed(Base control)
+		void NodeCollapsed(Base control, EventArgs args)
         {
             TreeNode node = control as TreeNode;
             UnitPrint(String.Format("Node collapsed: {0}", node.Text));
         }
 
-        void NodeExpanded(Base control)
+		void NodeExpanded(Base control, EventArgs args)
         {
             TreeNode node = control as TreeNode;
             UnitPrint(String.Format("Node expanded: {0}", node.Text));
         }
 
-        void NodeSelected(Base control)
+		void NodeSelected(Base control, EventArgs args)
         {
             TreeNode node = control as TreeNode;
             UnitPrint(String.Format("Node selected: {0}", node.Text));
         }
 
-        void NodeClicked(Base control) {
+		void NodeClicked(Base control, EventArgs args) {
             TreeNode node = control as TreeNode;
             UnitPrint(String.Format("Node clicked: {0}", node.Text));
         }
 
-        void NodeDoubleClicked(Base control) {
+		void NodeDoubleClicked(Base control, EventArgs args) {
             TreeNode node = control as TreeNode;
             UnitPrint(String.Format("Node double clicked: {0}", node.Text));
         }

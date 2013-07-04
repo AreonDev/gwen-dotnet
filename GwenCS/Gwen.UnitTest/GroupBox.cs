@@ -20,7 +20,6 @@ namespace Gwen.UnitTest
                 gb.Text = "With Label (autosized)";
                 gb.SetPosition(250, 10);
                 Control.Label label = new Control.Label(gb);
-                label.AutoSizeToContents = true;
                 label.Text = "I'm a label";
             }
 
@@ -30,7 +29,6 @@ namespace Gwen.UnitTest
                 gb.Text = "With Label (autosized)";
                 gb.SetPosition(250, 50);
                 Control.Label label = new Control.Label(gb);
-                label.AutoSizeToContents = true;
                 label.Text = "I'm a label. I'm a really long label!";
             }
 
@@ -40,11 +38,9 @@ namespace Gwen.UnitTest
                 gb.Text = "Two docked Labels (autosized)";
                 gb.SetPosition(250, 100);
                 Control.Label label1 = new Control.Label(gb);
-                label1.AutoSizeToContents = true;
                 label1.Text = "I'm a label";
                 label1.Dock = Pos.Top;
                 Control.Label label2 = new Control.Label(gb);
-                label2.AutoSizeToContents = true;
                 label2.Text = "I'm a label. I'm a really long label!";
                 label2.Dock = Pos.Top;
             }

@@ -55,32 +55,32 @@ namespace Gwen.UnitTest
             Align.PlaceDownLeft(buttonH, buttonG, 10);
         }
 
-        private void onButtonAc(Base control)
+		private void onButtonAc(Base control, EventArgs args)
         {
             UnitPrint("Button: Clicked");
         }
 
-        private void onButtonAp(Base control)
+		private void onButtonAp(Base control, EventArgs args)
         {
             UnitPrint("Button: Pressed");
         }
 
-        private void onButtonAr(Base control)
+		private void onButtonAr(Base control, EventArgs args)
         {
             UnitPrint("Button: Released");
         }
 
-        private void onToggle(Base control)
+		private void onToggle(Base control, EventArgs args)
         {
             UnitPrint("Button: Toggled");
         }
 
-        private void onToggleOn(Base control)
+		private void onToggleOn(Base control, EventArgs args)
         {
             UnitPrint("Button: OnToggleOn");
         }
 
-        private void onToggleOff(Base control)
+		private void onToggleOff(Base control, EventArgs args)
         {
             UnitPrint("Button: ToggledOff");
         }

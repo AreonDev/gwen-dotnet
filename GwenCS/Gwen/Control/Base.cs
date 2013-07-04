@@ -15,12 +15,12 @@ namespace Gwen.Control
     /// </summary>
     public class Base : IDisposable
     {
-        // this REALLY needs to be replaced with control-specific events
         /// <summary>
         /// Delegate used for all control event handlers.
         /// </summary>
         /// <param name="control">Event source.</param>
-        public delegate void GwenEventHandler(Base control);
+		/// <param name="args" >Additional arguments. May be empty (EventArgs.Empty).</param>
+		public delegate void GwenEventHandler<in T>(Base sender, T arguments) where T : System.EventArgs;
 
         private bool m_Disposed;
 
@@ -81,22 +81,51 @@ namespace Gwen.Control
         /// <summary>
         /// Invoked when mouse pointer enters the control.
         /// </summary>
-        public event GwenEventHandler HoverEnter;
+		public event GwenEventHandler<EventArgs> HoverEnter;
 
         /// <summary>
         /// Invoked when mouse pointer leaves the control.
         /// </summary>
-        public event GwenEventHandler HoverLeave;
+		public event GwenEventHandler<EventArgs> HoverLeave;
 
         /// <summary>
         /// Invoked when control's bounds have been changed.
         /// </summary>
-        public event GwenEventHandler BoundsChanged;
+		public event GwenEventHandler<EventArgs> BoundsChanged;
+
+		/// <summary>
+		/// Invoked when the control has been left-clicked.
+		/// </summary>
+		public virtual event GwenEventHandler<ClickedEventArgs> Clicked;
+
+		/// <summary>
+		/// Invoked when the control has been double-left-clicked.
+		/// </summary>
+		public virtual event GwenEventHandler<ClickedEventArgs> DoubleClicked;
+
+		/// <summary>
+		/// Invoked when the control has been right-clicked.
+		/// </summary>
+		public virtual event GwenEventHandler<ClickedEventArgs> RightClicked;
+
+		/// <summary>
+		/// Invoked when the control has been double-right-clicked.
+		/// </summary>
+		public virtual event GwenEventHandler<ClickedEventArgs> DoubleRightClicked;
+
+		/// <summary>
+		/// Returns true if any on click events are set.
+		/// </summary>
+		internal bool ClickEventAssigned {
+			get {
+				return Clicked != null || RightClicked != null || DoubleClicked != null || DoubleRightClicked != null;
+			}
+		}
 
         /// <summary>
         /// Accelerator map.
         /// </summary>
-        private readonly Dictionary<string, GwenEventHandler> m_Accelerators;
+        private readonly Dictionary<string, GwenEventHandler<EventArgs>> m_Accelerators;
 
         public const int MaxCoord = 4096; // added here from various places in code
 
@@ -413,7 +442,7 @@ namespace Gwen.Control
         public Base(Base parent = null)
         {
             m_Children = new List<Base>();
-            m_Accelerators = new Dictionary<string, GwenEventHandler>();
+            m_Accelerators = new Dictionary<string, GwenEventHandler<EventArgs>>();
 
             Parent = parent;
 
@@ -536,7 +565,7 @@ namespace Gwen.Control
         /// Default accelerator handler.
         /// </summary>
         /// <param name="control">Event source.</param>
-        private void DefaultAcceleratorHandler(Base control)
+        private void DefaultAcceleratorHandler(Base control, EventArgs args)
         {
             OnAccelerator();
         }
@@ -572,7 +601,6 @@ namespace Gwen.Control
         public virtual void SetToolTipText(string text)
         {
             Label tooltip = new Label(this);
-            tooltip.AutoSizeToContents = true;
             tooltip.Text = text;
             tooltip.TextColorOverride = Skin.Colors.TooltipText;
             tooltip.Padding = new Padding(5, 3, 5, 3);
@@ -912,7 +940,7 @@ namespace Gwen.Control
             OnBoundsChanged(oldBounds);
 
             if (BoundsChanged != null)
-                BoundsChanged.Invoke(this);
+                BoundsChanged.Invoke(this, EventArgs.Empty);
 
             return true;
         }
@@ -1223,7 +1251,8 @@ namespace Gwen.Control
         /// <param name="down">If set to <c>true</c> mouse button is down.</param>
         protected virtual void OnMouseClickedLeft(int x, int y, bool down)
         {
-
+			if (down && Clicked != null)
+				Clicked(this, new ClickedEventArgs(x, y, down));
         }
 
         /// <summary>
@@ -1242,7 +1271,8 @@ namespace Gwen.Control
         /// <param name="down">If set to <c>true</c> mouse button is down.</param>
         protected virtual void OnMouseClickedRight(int x, int y, bool down)
         {
-
+			if (down && RightClicked != null)
+				RightClicked(this, new ClickedEventArgs(x, y, down));
         }
 
         /// <summary>
@@ -1260,7 +1290,13 @@ namespace Gwen.Control
         /// <param name="y">Y coordinate.</param>
         protected virtual void OnMouseDoubleClickedLeft(int x, int y)
         {
-            OnMouseClickedLeft(x, y, true); // [omeg] should this be called?
+			// [omeg] should this be called?
+			// [halfofastaple] Maybe. Technically, a double click is still technically a single click. However, this shouldn't be called here, and
+			//					Should be called by the event handler.
+            OnMouseClickedLeft(x, y, true);
+
+			if (DoubleClicked != null)
+				DoubleClicked(this, new ClickedEventArgs(x, y, true));
         }
 
         /// <summary>
@@ -1278,7 +1314,11 @@ namespace Gwen.Control
         /// <param name="y">Y coordinate.</param>
         protected virtual void OnMouseDoubleClickedRight(int x, int y)
         {
-            OnMouseClickedRight(x, y, true); // [omeg] should this be called?
+			// [halfofastaple] See: OnMouseDoubleClicked for discussion on triggering single clicks in a double click event
+            OnMouseClickedRight(x, y, true);
+
+			if (DoubleRightClicked != null)
+				DoubleRightClicked(this, new ClickedEventArgs(x, y, true));
         }
 
         /// <summary>
@@ -1295,7 +1335,7 @@ namespace Gwen.Control
         protected virtual void OnMouseEntered()
         {
             if (HoverEnter != null)
-                HoverEnter.Invoke(this);
+				HoverEnter.Invoke(this, EventArgs.Empty);
 
             if (ToolTip != null)
                 Gwen.ToolTip.Enable(this);
@@ -1319,7 +1359,7 @@ namespace Gwen.Control
         protected virtual void OnMouseLeft()
         {
             if (HoverLeave != null)
-                HoverLeave.Invoke(this);
+				HoverLeave.Invoke(this, EventArgs.Empty);
 
             if (ToolTip != null)
                 Gwen.ToolTip.Disable(this);
@@ -1760,7 +1800,7 @@ namespace Gwen.Control
             {
                 if (m_Accelerators.ContainsKey(accelerator))
                 {
-                    m_Accelerators[accelerator].Invoke(this);
+					m_Accelerators[accelerator].Invoke(this, EventArgs.Empty);
                     return true;
                 }
             }
@@ -1773,7 +1813,7 @@ namespace Gwen.Control
         /// </summary>
         /// <param name="accelerator">Accelerator text.</param>
         /// <param name="handler">Handler.</param>
-        public void AddAccelerator(string accelerator, GwenEventHandler handler)
+        public void AddAccelerator(string accelerator, GwenEventHandler<EventArgs> handler)
         {
             accelerator = accelerator.Trim().ToUpperInvariant();
             m_Accelerators[accelerator] = handler;
@@ -1980,7 +2020,7 @@ namespace Gwen.Control
         /// Handler for Paste event.
         /// </summary>
         /// <param name="from">Source control.</param>
-        protected virtual void OnPaste(Base from)
+        protected virtual void OnPaste(Base from, EventArgs args)
         {
         }
 
@@ -1988,7 +2028,7 @@ namespace Gwen.Control
         /// Handler for Copy event.
         /// </summary>
         /// <param name="from">Source control.</param>
-        protected virtual void OnCopy(Base from)
+        protected virtual void OnCopy(Base from, EventArgs args)
         {
         }
 
@@ -1996,7 +2036,7 @@ namespace Gwen.Control
         /// Handler for Cut event.
         /// </summary>
         /// <param name="from">Source control.</param>
-        protected virtual void OnCut(Base from)
+		protected virtual void OnCut(Base from, EventArgs args)
         {
         }
 
@@ -2004,28 +2044,28 @@ namespace Gwen.Control
         /// Handler for Select All event.
         /// </summary>
         /// <param name="from">Source control.</param>
-        protected virtual void OnSelectAll(Base from)
+		protected virtual void OnSelectAll(Base from, EventArgs args)
         {
         }
 
         internal void InputCopy(Base from)
         {
-            OnCopy(from);
+            OnCopy(from, EventArgs.Empty);
         }
 
         internal void InputPaste(Base from)
         {
-            OnPaste(from);
+			OnPaste(from, EventArgs.Empty);
         }
 
         internal void InputCut(Base from)
         {
-            OnCut(from);
+			OnCut(from, EventArgs.Empty);
         }
 
         internal void InputSelectAll(Base from)
         {
-            OnSelectAll(from);
+			OnSelectAll(from, EventArgs.Empty);
         }
 
         /// <summary>

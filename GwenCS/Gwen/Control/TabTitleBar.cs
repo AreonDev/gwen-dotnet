@@ -10,6 +10,7 @@ namespace Gwen.Control
     {
         public TabTitleBar(Base parent) : base(parent)
         {
+			AutoSizeToContents = false;
             MouseInputEnabled = true;
             TextPadding = new Padding(5, 2, 5, 2);
             Padding = new Padding(1, 2, 1, 2);

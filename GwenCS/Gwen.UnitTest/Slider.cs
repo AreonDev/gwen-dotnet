@@ -49,7 +49,7 @@ namespace Gwen.UnitTest
             }
         }
 
-        void SliderMoved(Base control)
+		void SliderMoved(Base control, EventArgs args)
         {
             Control.Slider slider = control as Control.Slider;
             UnitPrint(String.Format("Slider moved: ValueChanged: {0}", slider.Value));

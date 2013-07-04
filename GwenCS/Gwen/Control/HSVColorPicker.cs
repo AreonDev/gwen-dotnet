@@ -17,7 +17,7 @@ namespace Gwen.Control
         /// <summary>
         /// Invoked when the selected color has changed.
         /// </summary>
-        public event GwenEventHandler ColorChanged;
+		public event GwenEventHandler<EventArgs> ColorChanged;
 
         /// <summary>
         /// The "before" color.
@@ -109,7 +109,7 @@ namespace Gwen.Control
             SetColor(DefaultColor);
         }
 
-        private void NumericTyped(Base control)
+		private void NumericTyped(Base control, EventArgs args)
         {
             TextBoxNumeric box = control as TextBoxNumeric;
             if (null == box) return;
@@ -144,10 +144,9 @@ namespace Gwen.Control
 
         private void UpdateControls(Color color)
         {
-            // TODO: Make this code safer.
-            // This code SHOULD (in theory) never crash/not work as intended, but referencing children by their name is unsafe.
-            // Instead, a direct reference to their objects should be maintained. Worst case scenario, we grab the wrong "RedBox".
-            // - halfofastaple
+            // [???] TODO: Make this code safer.
+			// [halfofastaple] This code SHOULD (in theory) never crash/not work as intended, but referencing children by their name is unsafe.
+            //		Instead, a direct reference to their objects should be maintained. Worst case scenario, we grab the wrong "RedBox".
 
             TextBoxNumeric redBox = FindChildByName("RedBox", false) as TextBoxNumeric;
             if (redBox != null)
@@ -164,7 +163,7 @@ namespace Gwen.Control
             m_After.Color = color;
 
             if (ColorChanged != null)
-                ColorChanged.Invoke(this);
+				ColorChanged.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>
@@ -185,13 +184,13 @@ namespace Gwen.Control
             m_After.Color = color;
         }
 
-        private void ColorBoxChanged(Base control)
+		private void ColorBoxChanged(Base control, EventArgs args)
         {
             UpdateControls(SelectedColor);
             Invalidate();
         }
 
-        private void ColorSliderChanged(Base control)
+		private void ColorSliderChanged(Base control, EventArgs args)
         {
             if (m_LerpBox != null)
                 m_LerpBox.SetColor(m_ColorSlider.SelectedColor, true);

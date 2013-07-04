@@ -103,7 +103,17 @@ namespace Gwen.Input
             if (args is MouseButtonEventArgs)
             {
                 MouseButtonEventArgs ev = args as MouseButtonEventArgs;
-                return m_Canvas.Input_MouseButton((int) ev.Button, ev.IsPressed);
+
+				/* We can not simply cast ev.Button to an int, as 1 is middle click, not right click. */
+				int ButtonID = -1; //Do not trigger event.
+
+				if (ev.Button == MouseButton.Left)
+					ButtonID = 0;
+				else if (ev.Button == MouseButton.Right)
+					ButtonID = 1;
+
+				if (ButtonID != -1) //We only care about left and right click for now
+					return m_Canvas.Input_MouseButton(ButtonID, ev.IsPressed);
             }
 
             if (args is MouseWheelEventArgs)

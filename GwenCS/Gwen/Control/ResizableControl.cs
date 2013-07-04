@@ -20,7 +20,7 @@ namespace Gwen.Control
         /// <summary>
         /// Invoked when the control has been resized.
         /// </summary>
-        public event GwenEventHandler Resized;
+		public event GwenEventHandler<EventArgs> Resized;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ResizableControl"/> class.
@@ -86,10 +86,10 @@ namespace Gwen.Control
         /// Handler for the resized event.
         /// </summary>
         /// <param name="control">Event source.</param>
-        protected virtual void OnResized(Base control)
+		protected virtual void OnResized(Base control, EventArgs args)
         {
             if (Resized != null)
-                Resized.Invoke(this);
+				Resized.Invoke(this, EventArgs.Empty);
         }
 
         protected Resizer GetResizer(int i)
@@ -166,7 +166,7 @@ namespace Gwen.Control
         public override bool SetSize(int width, int height) {
             bool Changed = base.SetSize(width, height);
             if (Changed) {
-                OnResized(this);
+				OnResized(this, EventArgs.Empty);
             }
             return Changed;
         }

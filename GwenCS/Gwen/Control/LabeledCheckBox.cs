@@ -8,22 +8,22 @@ namespace Gwen.Control
     public class LabeledCheckBox : Base
     {
         private readonly CheckBox m_CheckBox;
-        private readonly LabelClickable m_Label;
+        private readonly Label m_Label;
 
         /// <summary>
         /// Invoked when the control has been checked.
         /// </summary>
-        public event GwenEventHandler Checked;
+        public event GwenEventHandler<EventArgs> Checked;
 
         /// <summary>
         /// Invoked when the control has been unchecked.
         /// </summary>
-        public event GwenEventHandler UnChecked;
+        public event GwenEventHandler<EventArgs> UnChecked;
 
         /// <summary>
         /// Invoked when the control's check has been changed.
         /// </summary>
-        public event GwenEventHandler CheckChanged;
+        public event GwenEventHandler<EventArgs> CheckChanged;
 
         /// <summary>
         /// Indicates whether the control is checked.
@@ -49,9 +49,9 @@ namespace Gwen.Control
             m_CheckBox.IsTabable = false;
             m_CheckBox.CheckChanged += OnCheckChanged;
 
-            m_Label = new LabelClickable(this);
+            m_Label = new Label(this);
             m_Label.Dock = Pos.Fill;
-            m_Label.Clicked += m_CheckBox.Press;
+			m_Label.Clicked += delegate(Base Control, ClickedEventArgs args) { m_CheckBox.Press(Control); };
             m_Label.IsTabable = false;
 
             IsTabable = false;
@@ -60,21 +60,21 @@ namespace Gwen.Control
         /// <summary>
         /// Handler for CheckChanged event.
         /// </summary>
-        protected virtual void OnCheckChanged(Base control)
+        protected virtual void OnCheckChanged(Base control, EventArgs Args)
         {
             if (m_CheckBox.IsChecked)
             {
                 if (Checked != null)
-                    Checked.Invoke(this);
+					Checked.Invoke(this, EventArgs.Empty);
             }
             else
             {
                 if (UnChecked != null)
-                    UnChecked.Invoke(this);
+					UnChecked.Invoke(this, EventArgs.Empty);
             }
 
             if (CheckChanged != null)
-                CheckChanged.Invoke(this);
+				CheckChanged.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>

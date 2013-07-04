@@ -45,17 +45,17 @@ namespace Gwen.Control
                 m_Checked = value;
 
                 if (CheckChanged != null)
-                    CheckChanged.Invoke(this);
+                    CheckChanged.Invoke(this, EventArgs.Empty);
 
                 if (value)
                 {
                     if (Checked != null)
-                        Checked.Invoke(this);
+						Checked.Invoke(this, EventArgs.Empty);
                 }
                 else
                 {
                     if (UnChecked != null)
-                        UnChecked.Invoke(this);
+						UnChecked.Invoke(this, EventArgs.Empty);
                 }
             }
         }
@@ -90,22 +90,22 @@ namespace Gwen.Control
         /// <summary>
         /// Invoked when the item is selected.
         /// </summary>
-        public event GwenEventHandler Selected;
+		public event GwenEventHandler<ItemSelectedEventArgs> Selected;
 
         /// <summary>
         /// Invoked when the item is checked.
         /// </summary>
-        public event GwenEventHandler Checked;
+		public event GwenEventHandler<EventArgs> Checked;
 
         /// <summary>
         /// Invoked when the item is unchecked.
         /// </summary>
-        public event GwenEventHandler UnChecked;
+		public event GwenEventHandler<EventArgs> UnChecked;
 
         /// <summary>
         /// Invoked when the item's check value is changed.
         /// </summary>
-        public event GwenEventHandler CheckChanged;
+        public event GwenEventHandler<EventArgs> CheckChanged;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MenuItem"/> class.
@@ -157,7 +157,7 @@ namespace Gwen.Control
             {
                 IsChecked = !IsChecked;
                 if (Selected != null)
-                    Selected.Invoke(this);
+					Selected.Invoke(this, new ItemSelectedEventArgs(this));
                 GetCanvas().CloseMenus();
             }
             base.OnClicked();
@@ -222,7 +222,7 @@ namespace Gwen.Control
             }
         }
 
-        public MenuItem SetAction(GwenEventHandler handler)
+        public MenuItem SetAction(GwenEventHandler<EventArgs> handler)
         {
             if (m_Accelerator != null)
             {

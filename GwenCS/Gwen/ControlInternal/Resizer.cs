@@ -15,7 +15,7 @@ namespace Gwen.ControlInternal
         /// <summary>
         /// Invoked when the control has been resized.
         /// </summary>
-        public event GwenEventHandler Resized;
+        public event GwenEventHandler<EventArgs> Resized;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Resizer"/> class.
@@ -116,7 +116,7 @@ namespace Gwen.ControlInternal
             m_Target.SetBounds(bounds);
 
             if (Resized != null)
-                Resized.Invoke(this);
+                Resized.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>

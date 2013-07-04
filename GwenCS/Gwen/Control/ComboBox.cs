@@ -16,7 +16,7 @@ namespace Gwen.Control
         /// <summary>
         /// Invoked when the selected item has changed.
         /// </summary>
-        public event GwenEventHandler ItemSelected;
+        public event GwenEventHandler<ItemSelectedEventArgs> ItemSelected;
 
         /// <summary>
         /// Indicates whether the combo menu is open.
@@ -59,7 +59,7 @@ namespace Gwen.Control
                 if (value != null && value.Parent == m_Menu)
                 {
                     m_SelectedItem = value;
-                    OnItemSelected(m_SelectedItem);
+                    OnItemSelected(m_SelectedItem, new ItemSelectedEventArgs(value));
                 }
             }
         }
@@ -83,7 +83,7 @@ namespace Gwen.Control
             item.UserData = UserData;
 
             if (m_SelectedItem == null)
-                OnItemSelected(item);
+                OnItemSelected(item, new ItemSelectedEventArgs(null));
 
             return item;
         }
@@ -122,6 +122,8 @@ namespace Gwen.Control
             {
                 Open();
             }
+
+			base.OnClicked();
         }
 
         /// <summary>
@@ -137,7 +139,7 @@ namespace Gwen.Control
         /// Internal handler for item selected event.
         /// </summary>
         /// <param name="control">Event source.</param>
-        protected virtual void OnItemSelected(Base control)
+		protected virtual void OnItemSelected(Base control, ItemSelectedEventArgs args)
         {
             if (!IsDisabled)
             {
@@ -150,7 +152,7 @@ namespace Gwen.Control
                 m_Menu.IsHidden = true;
 
                 if (ItemSelected != null)
-                    ItemSelected.Invoke(this);
+                    ItemSelected.Invoke(this, args);
 
                 Focus();
                 Invalidate();
@@ -227,7 +229,7 @@ namespace Gwen.Control
             {
                 var it = m_Menu.Children.FindIndex(x => x == m_SelectedItem);
                 if (it + 1 < m_Menu.Children.Count)
-                    OnItemSelected(m_Menu.Children[it + 1]);
+                    OnItemSelected(this, new ItemSelectedEventArgs(m_Menu.Children[it + 1]));
             }
             return true;
         }
@@ -245,7 +247,7 @@ namespace Gwen.Control
             {
                 var it = m_Menu.Children.FindLastIndex(x => x == m_SelectedItem);
                 if (it - 1 >= 0)
-                    OnItemSelected(m_Menu.Children[it - 1]);
+                    OnItemSelected(this, new ItemSelectedEventArgs(m_Menu.Children[it - 1]));
             }
             return true;
         }

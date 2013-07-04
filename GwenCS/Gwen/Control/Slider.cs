@@ -57,7 +57,7 @@ namespace Gwen.Control
         /// <summary>
         /// Invoked when the value has been changed.
         /// </summary>
-        public event GwenEventHandler ValueChanged;
+		public event GwenEventHandler<EventArgs> ValueChanged;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Slider"/> class.
@@ -177,7 +177,7 @@ namespace Gwen.Control
             
         }
 
-        protected virtual void OnMoved(Base control)
+		protected virtual void OnMoved(Base control, EventArgs args)
         {
             SetValueInternal(CalculateValue());
         }
@@ -204,7 +204,7 @@ namespace Gwen.Control
             {
                 m_Value = val;
                 if (ValueChanged != null)
-                    ValueChanged.Invoke(this);
+					ValueChanged.Invoke(this, EventArgs.Empty);
             }
 
             UpdateBarFromValue();

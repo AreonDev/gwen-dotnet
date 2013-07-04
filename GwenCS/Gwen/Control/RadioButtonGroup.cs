@@ -33,7 +33,7 @@ namespace Gwen.Control
         /// <summary>
         /// Invoked when the selected option has changed.
         /// </summary>
-        public event GwenEventHandler SelectionChanged;
+        public event GwenEventHandler<ItemSelectedEventArgs> SelectionChanged;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RadioButtonGroup"/> class.
@@ -42,10 +42,10 @@ namespace Gwen.Control
         /// <param name="label">Label for the outlining GroupBox.</param>
         public RadioButtonGroup(Base parent) : base(parent)
         {
+			AutoSizeToContents = true;
             IsTabable = false;
             KeyboardInputEnabled = true;
             Text = String.Empty;
-            AutoSizeToContents = true;
         }
 
         /// <summary>
@@ -83,7 +83,7 @@ namespace Gwen.Control
         /// Handler for the option change.
         /// </summary>
         /// <param name="fromPanel">Event source.</param>
-        protected virtual void OnRadioClicked(Base fromPanel)
+		protected virtual void OnRadioClicked(Base fromPanel, EventArgs args)
         {
             RadioButton @checked = fromPanel as RadioButton;
             foreach (LabeledRadioButton rb in Children.OfType<LabeledRadioButton>()) // todo: optimize
@@ -94,7 +94,7 @@ namespace Gwen.Control
                     rb.RadioButton.IsChecked = false;
             }
 
-            OnChanged();
+            OnChanged(m_Selected);
         }
         /*
         /// <summary>
@@ -115,10 +115,10 @@ namespace Gwen.Control
             InvalidateParent();
         }
         */
-        protected virtual void OnChanged()
+        protected virtual void OnChanged(Base NewTarget)
         {
             if (SelectionChanged != null)
-                SelectionChanged.Invoke(this);
+				SelectionChanged.Invoke(this, new ItemSelectedEventArgs(NewTarget));
         }
 
         /// <summary>

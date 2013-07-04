@@ -144,14 +144,13 @@ namespace Gwen.UnitTest
 
                 Control.CheckBox Multiline = new Control.CheckBox(this);
                 Multiline.SetPosition(10, 405);
-                Multiline.CheckChanged += delegate(Base sender)
+				Multiline.CheckChanged += delegate(Base sender, EventArgs args)
                 {
                     ctrl.AllowMultiSelect = Multiline.IsChecked;
                 };
 
                 Control.Label lblml = new Control.Label(this);
                 lblml.Text = "Enable MultiSelect";
-                lblml.AutoSizeToContents = true;
                 lblml.SetPosition(30, 405);
 
 
@@ -161,7 +160,7 @@ namespace Gwen.UnitTest
                     TriangleButton.SetPosition(100, 320);
                     TriangleButton.Text = "Row";
                     TriangleButton.Width = 100;
-                    TriangleButton.Clicked += delegate(Base sender)
+                    TriangleButton.Clicked += delegate(Base sender, ClickedEventArgs args)
                     {
                         ctrl.SelectedRow = Row;
                     };
@@ -173,7 +172,7 @@ namespace Gwen.UnitTest
                     TestBtn.SetPosition(100, 340);
                     TestBtn.Text = "Text";
                     TestBtn.Width = 100;
-                    TestBtn.Clicked += delegate(Base sender)
+                    TestBtn.Clicked += delegate(Base sender, ClickedEventArgs args)
                     {
                         ctrl.SelectByText("Text");
                     };
@@ -185,7 +184,7 @@ namespace Gwen.UnitTest
                     TestBtn.SetPosition(100, 360);
                     TestBtn.Text = "Name";
                     TestBtn.Width = 100;
-                    TestBtn.Clicked += delegate(Base sender)
+                    TestBtn.Clicked += delegate(Base sender, ClickedEventArgs args)
                     {
                         ctrl.SelectByName("Name");
                     };
@@ -197,7 +196,7 @@ namespace Gwen.UnitTest
                     TestBtn.SetPosition(100, 380);
                     TestBtn.Text = "UserData";
                     TestBtn.Width = 100;
-                    TestBtn.Clicked += delegate(Base sender)
+                    TestBtn.Clicked += delegate(Base sender, ClickedEventArgs args)
                     {
                         ctrl.SelectByUserData(12);
                     };
@@ -205,13 +204,13 @@ namespace Gwen.UnitTest
             }
         }
 
-        void RowSelected(Base control)
+		void RowSelected(Base control, EventArgs args)
         {
             Control.ListBox list = control as Control.ListBox;
             UnitPrint(String.Format("ListBox: RowSelected: {0} [{1}]", list.SelectedRows.Last().Text, list[list.SelectedRowIndex].Text));
         }
 
-        void RowUnSelected(Base control)
+		void RowUnSelected(Base control, EventArgs args)
         {
             // todo: how to determine which one was unselected (store somewhere)
             // or pass row as the event param?

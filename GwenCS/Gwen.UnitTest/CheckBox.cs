@@ -32,17 +32,17 @@ namespace Gwen.UnitTest
             Align.PlaceDownLeft(check2, labeled2, 20);
         }
 
-        void OnChecked(Base control)
+		void OnChecked(Base control, EventArgs args)
         {
             UnitPrint("CheckBox: Checked");
         }
 
-        void OnCheckChanged(Base control)
+		void OnCheckChanged(Base control, EventArgs args)
         {
             UnitPrint("CheckBox: CheckChanged");
         }
 
-        void OnUnchecked(Base control)
+		void OnUnchecked(Base control, EventArgs args)
         {
             UnitPrint("CheckBox: UnChecked");
         }

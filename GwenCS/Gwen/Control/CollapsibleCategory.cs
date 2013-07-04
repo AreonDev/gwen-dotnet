@@ -24,12 +24,12 @@ namespace Gwen.Control
         /// <summary>
         /// Invoked when an entry has been selected.
         /// </summary>
-        public event GwenEventHandler Selected;
+		public event GwenEventHandler<ItemSelectedEventArgs> Selected;
 
         /// <summary>
         /// Invoked when the category collapsed state has been changed (header button has been pressed).
         /// </summary>
-        public event GwenEventHandler Collapsed;
+		public event GwenEventHandler<EventArgs> Collapsed;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CollapsibleCategory"/> class.
@@ -71,17 +71,17 @@ namespace Gwen.Control
         /// Handler for header button toggle event.
         /// </summary>
         /// <param name="control">Source control.</param>
-        protected virtual void OnHeaderToggle(Base control)
+		protected virtual void OnHeaderToggle(Base control, EventArgs args)
         {
             if (Collapsed != null)
-                Collapsed.Invoke(this);
+				Collapsed.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>
         /// Handler for Selected event.
         /// </summary>
         /// <param name="control">Event source.</param>
-        protected virtual void OnSelected(Base control)
+		protected virtual void OnSelected(Base control, EventArgs args)
         {
             CategoryButton child = control as CategoryButton;
             if (child == null) return;
@@ -98,7 +98,7 @@ namespace Gwen.Control
             child.ToggleState = true;
 
             if (Selected != null)
-                Selected.Invoke(this);
+                Selected.Invoke(this, new ItemSelectedEventArgs(control));
         }
 
         /// <summary>
