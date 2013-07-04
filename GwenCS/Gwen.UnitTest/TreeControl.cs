@@ -40,6 +40,7 @@ namespace Gwen.UnitTest
                 {
                     Control.TreeNode click = node.AddNode("Single Click");
                     click.Clicked += NodeClicked;
+					click.RightClicked += NodeClicked;
 
                     click = node.AddNode("Double Click");
                     click.DoubleClicked += NodeDoubleClicked;
@@ -102,12 +103,12 @@ namespace Gwen.UnitTest
             UnitPrint(String.Format("Node selected: {0}", node.Text));
         }
 
-		void NodeClicked(Base control, EventArgs args) {
+		void NodeClicked(Base control, ClickedEventArgs args) {
             TreeNode node = control as TreeNode;
-            UnitPrint(String.Format("Node clicked: {0}", node.Text));
+            UnitPrint(String.Format("Node clicked: {0} @({1}, {2})", node.Text, args.X, args.Y));
         }
 
-		void NodeDoubleClicked(Base control, EventArgs args) {
+		void NodeDoubleClicked(Base control, ClickedEventArgs args) {
             TreeNode node = control as TreeNode;
             UnitPrint(String.Format("Node double clicked: {0}", node.Text));
         }

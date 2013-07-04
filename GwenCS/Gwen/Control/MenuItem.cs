@@ -147,7 +147,7 @@ namespace Gwen.Control
         /// <summary>
         /// Internal OnPressed implementation.
         /// </summary>
-        protected override void OnClicked()
+        protected override void OnClicked(int x, int y)
         {
             if (m_Menu != null)
             {
@@ -160,7 +160,7 @@ namespace Gwen.Control
 					Selected.Invoke(this, new ItemSelectedEventArgs(this));
                 GetCanvas().CloseMenus();
             }
-            base.OnClicked();
+            base.OnClicked(x, y);
         }
 
         /// <summary>

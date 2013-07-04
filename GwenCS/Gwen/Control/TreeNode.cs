@@ -357,5 +357,25 @@ namespace Gwen.Control
 				m_Title.DoubleClicked -= delegate(Base sender, ClickedEventArgs args) { value(this, args); };
             }
         }
+
+		public override event GwenEventHandler<ClickedEventArgs> RightClicked {
+			add {
+				m_Title.RightClicked += delegate(Base sender, ClickedEventArgs args) { value(this, args); };
+			}
+			remove {
+				m_Title.RightClicked -= delegate(Base sender, ClickedEventArgs args) { value(this, args); };
+			}
+		}
+
+		public override event GwenEventHandler<ClickedEventArgs> DoubleRightClicked {
+			add {
+				if (value != null) {
+					m_Title.DoubleRightClicked += delegate(Base sender, ClickedEventArgs args) { value(this, args); };
+				}
+			}
+			remove {
+				m_Title.DoubleRightClicked -= delegate(Base sender, ClickedEventArgs args) { value(this, args); };
+			}
+		}
     }
 }

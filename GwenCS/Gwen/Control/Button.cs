@@ -117,7 +117,7 @@ namespace Gwen.Control
         /// </summary>
         public virtual void Press(Base control = null)
         {
-            OnClicked();
+            OnClicked(0, 0);
         }
 
         /// <summary>
@@ -160,7 +160,7 @@ namespace Gwen.Control
             {
                 if (IsHovered && m_Depressed)
                 {
-                    OnClicked();
+                    OnClicked(x, y);
                 }
 
                 IsDepressed = false;
@@ -175,14 +175,14 @@ namespace Gwen.Control
         /// <summary>
         /// Internal OnPressed implementation.
         /// </summary>
-        protected virtual void OnClicked()
+        protected virtual void OnClicked(int x, int y)
         {
             if (IsToggle)
             {
                 Toggle();
             }
 
-			base.OnMouseClickedLeft(0, 0, true);
+			base.OnMouseClickedLeft(x, y, true);
         }
         
         /// <summary>
@@ -239,7 +239,7 @@ namespace Gwen.Control
         protected override bool OnKeySpace(bool down)
         {
             if (down)
-                OnClicked();
+                OnClicked(0, 0);
             return true;
         }
 
@@ -248,7 +248,7 @@ namespace Gwen.Control
         /// </summary>
         protected override void OnAccelerator()
         {
-            OnClicked();
+            OnClicked(0, 0);
         }
 
         /// <summary>

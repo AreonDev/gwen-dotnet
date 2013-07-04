@@ -406,6 +406,37 @@ namespace Gwen.Control
         /// </summary>
         public int Y { get { return m_Bounds.Y; } set { SetPosition(X, value); } }
 
+
+		/// <summary>
+		/// Returns the global X location of this control, relative to the top left corner of the screen.
+		/// </summary>
+		internal virtual int GlobalX {
+			get {
+				if (Parent == null) {
+					return X;
+				} else if (Parent.GetType() == typeof(ScrollControl)){
+					return X + ((ScrollControl)Parent).HorizontalScroll + Parent.GlobalX;
+				} else {
+					return X + Parent.GlobalX;
+				}
+			}
+		}
+
+		/// <summary>
+		/// Returns the global Y location of this control, relative to the top left corner of the screen.
+		/// </summary>
+		internal virtual int GlobalY {
+			get {
+				if (Parent == null) {
+					return Y;
+				} else if (Parent.m_InnerPanel != null && Parent.m_InnerPanel.GetType() == typeof(ScrollControl)) {
+					return Y + ((ScrollControl)Parent.m_InnerPanel).VerticalScroll + Parent.GlobalY;
+				} else {
+					return Y + Parent.GlobalY;
+				}
+			}
+		}
+
         // todo: Bottom/Right includes margin but X/Y not?
 
         public int Width { get { return m_Bounds.Width; } set { SetSize(value, Height); } }
@@ -2174,5 +2205,5 @@ namespace Gwen.Control
                 child.Y = Math.Max(0, child.Y);
             }
         }
-    }
+	}
 }

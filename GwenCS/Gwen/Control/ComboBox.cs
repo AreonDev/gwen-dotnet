@@ -106,7 +106,7 @@ namespace Gwen.Control
         /// <summary>
         /// Internal Pressed implementation.
         /// </summary>
-        protected override void OnClicked()
+        protected override void OnClicked(int x, int y)
         {
             if (IsOpen)
             {
@@ -123,7 +123,7 @@ namespace Gwen.Control
                 Open();
             }
 
-			base.OnClicked();
+			base.OnClicked(x, y);
         }
 
         /// <summary>
