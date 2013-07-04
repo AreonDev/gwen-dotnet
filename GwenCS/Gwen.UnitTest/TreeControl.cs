@@ -6,84 +6,98 @@ namespace Gwen.UnitTest
     public class TreeControl : GUnit
     {
         public TreeControl(Base parent)
-            : base(parent)
-        {
-            /* Simple Tree Control */
-            {
-                Control.TreeControl ctrl = new Control.TreeControl(this);
+            : base(parent) {
+			/* Simple Tree Control */
+			{
+				Control.TreeControl ctrl = new Control.TreeControl(this);
 
-                ctrl.AddNode("Node One");
-                Control.TreeNode node = ctrl.AddNode("Node Two");
-                {
-                    node.AddNode("Node Two Inside");
+				ctrl.AddNode("Node One");
+				Control.TreeNode node = ctrl.AddNode("Node Two");
+				{
+					node.AddNode("Node Two Inside");
 
-                    node.AddNode("Eyes");
-                    {
-                        node.AddNode("Brown").AddNode("Node Two Inside").AddNode("Eyes").AddNode("Brown");
-                    }
+					node.AddNode("Eyes");
+					{
+						node.AddNode("Brown").AddNode("Node Two Inside").AddNode("Eyes").AddNode("Brown");
+					}
 
-                    Control.TreeNode imgnode = node.AddNode("Image");
-                    imgnode.SetImage("test16.png");
+					Control.TreeNode imgnode = node.AddNode("Image");
+					imgnode.SetImage("test16.png");
 
-                    imgnode = node.AddNode("Image_Kids");
-                    imgnode.SetImage("test16.png");
-                    {
-                        imgnode.AddNode("Kid1");
-                        imgnode.AddNode("Kid2");
-                    }
+					imgnode = node.AddNode("Image_Kids");
+					imgnode.SetImage("test16.png");
+					{
+						imgnode.AddNode("Kid1");
+						imgnode.AddNode("Kid2");
+					}
 
-                    node.AddNode("Nodes");
-                }
-                ctrl.AddNode("Node Three");
+					node.AddNode("Nodes");
+				}
+				ctrl.AddNode("Node Three");
 
-                node = ctrl.AddNode("Clickables");
-                {
-                    Control.TreeNode click = node.AddNode("Single Click");
-                    click.Clicked += NodeClicked;
+				node = ctrl.AddNode("Clickables");
+				{
+					Control.TreeNode click = node.AddNode("Single Click");
+					click.Clicked += NodeClicked;
 					click.RightClicked += NodeClicked;
 
-                    click = node.AddNode("Double Click");
-                    click.DoubleClicked += NodeDoubleClicked;
-                }
+					click = node.AddNode("Double Click");
+					click.DoubleClicked += NodeDoubleClicked;
+				}
 
 
-                ctrl.SetBounds(30, 30, 200, 200);
-                ctrl.ExpandAll();
+				ctrl.SetBounds(30, 30, 200, 200);
+				ctrl.ExpandAll();
 
-                ctrl.Selected += NodeSelected;
-                ctrl.Expanded += NodeExpanded;
-                ctrl.Collapsed += NodeCollapsed;
-            }
+				ctrl.Selected += NodeSelected;
+				ctrl.Expanded += NodeExpanded;
+				ctrl.Collapsed += NodeCollapsed;
+			}
 
-            /* Scrollable Tree Control */
-            {
-                Control.TreeControl ctrl = new Control.TreeControl(this);
+			/* Scrollable Tree Control */
+			{
+				Control.TreeControl ctrl = new Control.TreeControl(this);
 
-                ctrl.AllowMultiSelect = true;
+				ctrl.AllowMultiSelect = true;
 
-                ctrl.AddNode("Node One");
-                Control.TreeNode node = ctrl.AddNode("Node Two");
-                node.AddNode("Node Two Inside");
-                node.AddNode("Eyes");
-                Control.TreeNode nodeTwo = node.AddNode("Brown").AddNode("Node Two Inside").AddNode("Eyes");
-                nodeTwo.AddNode("Brown");
-                nodeTwo.AddNode("Green");
-                nodeTwo.AddNode("Slime");
-                nodeTwo.AddNode("Grass");
-                nodeTwo.AddNode("Pipe");
-                node.AddNode("More");
-                node.AddNode("Nodes");
+				ctrl.AddNode("Node One");
+				Control.TreeNode node = ctrl.AddNode("Node Two");
+				node.AddNode("Node Two Inside");
+				node.AddNode("Eyes");
+				Control.TreeNode nodeTwo = node.AddNode("Brown").AddNode("Node Two Inside").AddNode("Eyes");
+				nodeTwo.AddNode("Brown");
+				nodeTwo.AddNode("Green");
+				nodeTwo.AddNode("Slime");
+				nodeTwo.AddNode("Grass");
+				nodeTwo.AddNode("Pipe");
+				node.AddNode("More");
+				node.AddNode("Nodes");
 
-                ctrl.AddNode("Node Three");
+				ctrl.AddNode("Node Three");
 
-                ctrl.SetBounds(240, 30, 200, 200);
-                ctrl.ExpandAll();
+				ctrl.SetBounds(240, 30, 200, 200);
+				ctrl.ExpandAll();
 
-                ctrl.Selected += NodeSelected;
-                ctrl.Expanded += NodeExpanded;
-                ctrl.Collapsed += NodeCollapsed;
-            }
-        }
+				ctrl.Selected += NodeSelected;
+				ctrl.Expanded += NodeExpanded;
+				ctrl.Collapsed += NodeCollapsed;
+			}
+
+			/* Normal Tree Control (without using the AddNode function */
+			{
+				Control.TreeControl ctrl = new Control.TreeControl(this);
+				ctrl.SetBounds(30, 240, 200, 200);
+
+				Control.TreeNode node = new TreeNode(ctrl);
+				node.Text = "First";
+
+				node = new TreeNode(ctrl);
+				node.Text = "Second";
+
+				node = new TreeNode(node);
+				node.Text = "Other 2nd";
+			}
+		}
 
 		void NodeCollapsed(Base control, EventArgs args)
         {

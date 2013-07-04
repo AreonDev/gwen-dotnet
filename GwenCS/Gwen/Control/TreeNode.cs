@@ -135,9 +135,11 @@ namespace Gwen.Control
             m_InnerPanel.Margin = new Margin(TreeIndentation, 1, 0, 0);
             m_InnerPanel.Hide();
 
-            m_Root = false;
+			m_Root = parent is TreeControl;
             m_Selected = false;
             m_Selectable = true;
+
+			Dock = Pos.Top;
         }
 
         /// <summary>
@@ -214,8 +216,6 @@ namespace Gwen.Control
         {
             TreeNode node = new TreeNode(this);
             node.Text = label;
-            node.Dock = Pos.Top;
-            node.IsRoot = this is TreeControl;
             node.TreeControl = m_TreeControl;
 
             if (m_TreeControl != null)

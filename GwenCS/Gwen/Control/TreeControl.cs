@@ -42,6 +42,8 @@ namespace Gwen.Control
             m_InnerPanel = m_ScrollControl;
 
             m_ScrollControl.SetInnerSize(1000, 1000); // todo: why such arbitrary numbers?
+
+			Dock = Pos.None;
         }
 
         /// <summary>
