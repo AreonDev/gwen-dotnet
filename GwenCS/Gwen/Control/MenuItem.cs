@@ -114,7 +114,8 @@ namespace Gwen.Control
         public MenuItem(Base parent)
             : base(parent)
         {
-            m_OnStrip = false;
+			AutoSizeToContents = true;
+			m_OnStrip = false;
             IsTabable = false;
             IsCheckable = false;
             IsChecked = false;

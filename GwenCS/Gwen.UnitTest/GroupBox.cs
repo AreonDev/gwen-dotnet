@@ -103,7 +103,10 @@ namespace Gwen.UnitTest
                 gb9.Dock = Pos.Bottom;
                 gb9.Padding = Gwen.Padding.Five;
                 gb9.AutoSizeToContents = true;
+
+				
             }
+		
             
             // at the end to apply to all children
             DrawDebugOutlines = true;

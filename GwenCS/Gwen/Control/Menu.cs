@@ -205,5 +205,20 @@ namespace Gwen.Control
             divider.Dock = Pos.Top;
             divider.Margin = new Margin(IconMarginDisabled ? 0 : 24, 0, 4, 0);
         }
+
+		public override bool SizeToChildren(bool width = true, bool height = true)
+		{
+			base.SizeToChildren(width, height);
+			if (width) {
+				int MaxWidth = this.Width;
+				foreach (Base child in Children) {
+					if (child.Width > MaxWidth) {
+						MaxWidth = child.Width;
+					}
+				}
+				this.SetSize(MaxWidth, Height);
+			}
+			return true;
+		}
     }
 }
