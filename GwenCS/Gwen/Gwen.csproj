@@ -75,6 +75,7 @@
     <Compile Include="Control\CollapsibleList.cs" />
     <Compile Include="Control\DockBase.cs" />
     <Compile Include="Control\DockedTabControl.cs" />
+    <Compile Include="Control\EnumRadioButtonGroup.cs" />
     <Compile Include="Control\EventArguments\ClickedEventArgs.cs" />
     <Compile Include="Control\EventArguments\ItemSelectedEventArgs.cs" />
     <Compile Include="Control\MultilineTextBox.cs" />

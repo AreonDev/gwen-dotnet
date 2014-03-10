@@ -5,6 +5,13 @@ namespace Gwen.UnitTest
 {
     public class RadioButton : GUnit
     {
+        enum Choices
+        {
+            OptionA,
+            DoorB,
+            HallC
+        }
+
         public RadioButton(Base parent)
             : base(parent)
         {
@@ -32,10 +39,18 @@ namespace Gwen.UnitTest
             rb3.Text = "\u0627\u0644\u0622\u0646 \u0644\u062D\u0636\u0648\u0631";
             rb3.SetPosition(300, 50);
 
+            {
+                EnumRadioButtonGroup<Choices> erbg = new EnumRadioButtonGroup<Choices>(this);
+                erbg.SetPosition(10, 100);
+                erbg.SelectedValue = Choices.HallC;
+            }
+
+
             //this.DrawDebugOutlines = true;
+
         }
 
-		void OnChange(Base control, EventArgs args)
+        void OnChange(Base control, EventArgs args)
         {
             RadioButtonGroup rbc = control as RadioButtonGroup;
             LabeledRadioButton rb = rbc.Selected;

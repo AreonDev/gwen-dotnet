@@ -42,7 +42,7 @@ namespace Gwen.Control
         /// <param name="label">Label for the outlining GroupBox.</param>
         public RadioButtonGroup(Base parent) : base(parent)
         {
-			AutoSizeToContents = true;
+            AutoSizeToContents = true;
             IsTabable = false;
             KeyboardInputEnabled = true;
             Text = String.Empty;
@@ -83,7 +83,7 @@ namespace Gwen.Control
         /// Handler for the option change.
         /// </summary>
         /// <param name="fromPanel">Event source.</param>
-		protected virtual void OnRadioClicked(Base fromPanel, EventArgs args)
+        protected virtual void OnRadioClicked(Base fromPanel, EventArgs args)
         {
             RadioButton @checked = fromPanel as RadioButton;
             foreach (LabeledRadioButton rb in Children.OfType<LabeledRadioButton>()) // todo: optimize
@@ -118,7 +118,7 @@ namespace Gwen.Control
         protected virtual void OnChanged(Base NewTarget)
         {
             if (SelectionChanged != null)
-				SelectionChanged.Invoke(this, new ItemSelectedEventArgs(NewTarget));
+                SelectionChanged.Invoke(this, new ItemSelectedEventArgs(NewTarget));
         }
 
         /// <summary>

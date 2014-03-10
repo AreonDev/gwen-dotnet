@@ -103,7 +103,7 @@ namespace Gwen.UnitTest
             Align.PlaceRightBottom(height, l_height);
 
             Control.RadioButtonGroup dock = new RadioButtonGroup(gb);
-			dock.Text = "Dock";
+            dock.Text = "Dock";
             dock.UserData = subject; // store control that we are controlling
             dock.AddOption("Left");
             dock.AddOption("Top");
@@ -138,7 +138,7 @@ namespace Gwen.UnitTest
             return gb;
         }
 
-		void PaddingChanged(Base control, EventArgs args)
+        void PaddingChanged(Base control, EventArgs args)
         {
             Control.Slider val = control as Control.Slider;
             int i = (int)val.Value;
@@ -146,7 +146,7 @@ namespace Gwen.UnitTest
             outer.Invalidate();
         }
 
-		void MarginChanged(Base control, EventArgs args)
+        void MarginChanged(Base control, EventArgs args)
         {
             Base inner = control.UserData as Base;
             Control.Slider val = control as Control.Slider;
@@ -155,7 +155,7 @@ namespace Gwen.UnitTest
             outer.Invalidate();
         }
 
-		void WidthChanged(Base control, EventArgs args)
+        void WidthChanged(Base control, EventArgs args)
         {
             Base inner = control.UserData as Base;
             Control.Slider val = control as Control.Slider;
@@ -163,7 +163,7 @@ namespace Gwen.UnitTest
             outer.Invalidate();
         }
 
-		void HeightChanged(Base control, EventArgs args)
+        void HeightChanged(Base control, EventArgs args)
         {
             Base inner = control.UserData as Base;
             Control.Slider val = control as Control.Slider;
@@ -171,7 +171,7 @@ namespace Gwen.UnitTest
             outer.Invalidate();
         }
 
-		void DockChanged(Base control, EventArgs args)
+        void DockChanged(Base control, EventArgs args)
         {
             Base inner = (Base) control.UserData;
             RadioButtonGroup rbg = (RadioButtonGroup) control;
