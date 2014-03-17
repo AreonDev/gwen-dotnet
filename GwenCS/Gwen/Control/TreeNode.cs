@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Gwen.ControlInternal;
+using System.Collections.Generic;
 
 namespace Gwen.Control
 {
@@ -382,6 +383,26 @@ namespace Gwen.Control
 			}
 			remove {
 				m_Title.DoubleRightClicked -= delegate(Base sender, ClickedEventArgs args) { value(this, args); };
+			}
+		}
+
+		public IEnumerable<TreeNode> SelectedChildren
+		{
+			get {
+				List<TreeNode> Trees = new List<TreeNode>();
+
+				foreach (Base child in Children) {
+					TreeNode node = child as TreeNode;
+					if (node == null)
+						continue;
+					Trees.AddRange(node.SelectedChildren);
+				}
+
+				if (this.IsSelected) {
+					Trees.Add(this);
+				}
+
+				return Trees;
 			}
 		}
     }
